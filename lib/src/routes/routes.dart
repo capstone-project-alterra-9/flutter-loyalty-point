@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../view/auth/login/login_view.dart';
 import '../view/auth/register/register_view.dart';
@@ -9,6 +10,15 @@ import '../view/reedem/reedem_view.dart';
 import '../view/reedem_product_detail/reedem_product_detail_view.dart';
 import '../view/splash/splash_view.dart';
 import '../view/transaction_detail/transaction_detail_view.dart';
+import '../view_model/auth/login/login_view_model.dart';
+import '../view_model/auth/register/register_view_model.dart';
+import '../view_model/history/history_view_model.dart';
+import '../view_model/home/home_view_model.dart';
+import '../view_model/onboarding/onboarding_view_model.dart';
+import '../view_model/reedem/reedem_view_model.dart';
+import '../view_model/reedem_product_detail/reedem_product_detail_view_model.dart';
+import '../view_model/splash/splash_view_model.dart';
+import '../view_model/transaction_detail/transaction_detail_view_model.dart';
 
 class Routes {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -21,7 +31,10 @@ class Routes {
         {
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return LoginView();
+              return ChangeNotifierProvider(
+                create: (context) => LoginViewModel(context),
+                child: LoginView(),
+              );
             },
           );
         }
@@ -31,7 +44,10 @@ class Routes {
         {
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return RegisterView();
+              return ChangeNotifierProvider(
+                create: (context) => RegisterViewModel(context),
+                child: RegisterView(),
+              );
             },
           );
         }
@@ -41,7 +57,10 @@ class Routes {
         {
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return HistoryView();
+              return ChangeNotifierProvider(
+                create: (context) => HistoryViewModel(context),
+                child: HistoryView(),
+              );
             },
           );
         }
@@ -51,7 +70,10 @@ class Routes {
         {
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return HomeView();
+              return ChangeNotifierProvider(
+                create: (context) => HomeViewModel(context),
+                child: HomeView(),
+              );
             },
           );
         }
@@ -61,7 +83,10 @@ class Routes {
         {
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return OnboardingView();
+              return ChangeNotifierProvider(
+                create: (context) => OnboardingViewModel(context),
+                child: OnboardingView(),
+              );
             },
           );
         }
@@ -71,7 +96,10 @@ class Routes {
         {
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return ReedemView();
+              return ChangeNotifierProvider(
+                create: (context) => ReedemViewModel(context),
+                child: ReedemView(),
+              );
             },
           );
         }
@@ -81,7 +109,10 @@ class Routes {
         {
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return ReedemProductDetailView();
+              return ChangeNotifierProvider(
+                create: (context) => ReedemProductDetailViewModel(context),
+                child: ReedemProductDetailView(),
+              );
             },
           );
         }
@@ -91,7 +122,10 @@ class Routes {
         {
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return SplashView();
+              return ChangeNotifierProvider(
+                create: (context) => SplashViewModel(context),
+                child: SplashView(),
+              );
             },
           );
         }
@@ -101,7 +135,10 @@ class Routes {
         {
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return TransactionDetailView();
+              return ChangeNotifierProvider(
+                create: (context) => TransactionDetailViewModel(context),
+                child: TransactionDetailView(),
+              );
             },
           );
         }
