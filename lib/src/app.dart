@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'routes/routes.dart';
-import 'view/splash/splash_view.dart';
+import 'views/splash/splash_view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

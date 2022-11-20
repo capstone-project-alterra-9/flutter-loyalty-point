@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../view/auth/login/login_view.dart';
-import '../view/auth/register/register_view.dart';
-import '../view/history/history_view.dart';
-import '../view/home/home_view.dart';
-import '../view/onboarding/onboarding_view.dart';
-import '../view/reedem/reedem_view.dart';
-import '../view/reedem_product_detail/reedem_product_detail_view.dart';
-import '../view/splash/splash_view.dart';
-import '../view/transaction_detail/transaction_detail_view.dart';
-import '../view_model/auth/login/login_view_model.dart';
-import '../view_model/auth/register/register_view_model.dart';
-import '../view_model/history/history_view_model.dart';
-import '../view_model/home/home_view_model.dart';
-import '../view_model/onboarding/onboarding_view_model.dart';
-import '../view_model/reedem/reedem_view_model.dart';
-import '../view_model/reedem_product_detail/reedem_product_detail_view_model.dart';
-import '../view_model/splash/splash_view_model.dart';
-import '../view_model/transaction_detail/transaction_detail_view_model.dart';
+import '../views/auth/login/login_view.dart';
+import '../views/auth/register/register_view.dart';
+import '../views/history/history_view.dart';
+import '../views/home/home_view.dart';
+import '../views/onboarding/onboarding_view.dart';
+import '../views/reedem/reedem_view.dart';
+import '../views/reedem_product_detail/reedem_product_detail_view.dart';
+import '../views/splash/splash_view.dart';
+import '../views/transaction_detail/transaction_detail_view.dart';
+import '../view_models/auth/login/login_view_model.dart';
+import '../view_models/auth/register/register_view_model.dart';
+import '../view_models/history/history_view_model.dart';
+import '../view_models/home/home_view_model.dart';
+import '../view_models/onboarding/onboarding_view_model.dart';
+import '../view_models/reedem/reedem_view_model.dart';
+import '../view_models/reedem_product_detail/reedem_product_detail_view_model.dart';
+import '../view_models/splash/splash_view_model.dart';
+import '../view_models/transaction_detail/transaction_detail_view_model.dart';
 
 class Routes {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
