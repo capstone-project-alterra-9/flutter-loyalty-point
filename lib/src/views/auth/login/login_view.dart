@@ -113,11 +113,9 @@ class _LoginViewState extends State<LoginView> {
 
                 // button login section
                 ElevatedButton(
-                  onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    LoginView.routeName,
-                    (route) => false,
-                  ),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {}
+                  },
                   child: const Text("Login"),
                 ),
                 const SizedBox(height: 20),
