@@ -94,10 +94,15 @@ class Routes {
       // reedem section
       case ReedemView.routeName:
         {
+          String args = settings.arguments as String;
+
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
-                create: (context) => ReedemViewModel(context),
+                create: (context) => ReedemViewModel(
+                  context,
+                  categoryProduct: args,
+                ),
                 child: ReedemView(),
               );
             },
