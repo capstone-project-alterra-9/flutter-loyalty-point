@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_detail_helper.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_helper.dart';
 import 'package:provider/provider.dart';
 
 import '../views/auth/login/login_view.dart';
@@ -95,14 +96,15 @@ class Routes {
       // reedem section
       case ReedemView.routeName:
         {
-          String args = settings.arguments as String;
+          ArgsReedemProductHelper args =
+              settings.arguments as ArgsReedemProductHelper;
 
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => ReedemViewModel(
                   context,
-                  categoryProduct: args,
+                  args: args,
                 ),
                 child: ReedemView(),
               );
