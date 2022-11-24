@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_detail_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_helper.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_detail_helper.dart';
 import 'package:provider/provider.dart';
 
 import '../views/auth/login/login_view.dart';
@@ -147,10 +148,16 @@ class Routes {
       // transaction detail section
       case TransactionDetailView.routeName:
         {
+          ArgsTransactionDetailHelper args =
+              settings.arguments as ArgsTransactionDetailHelper;
+
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
-                create: (context) => TransactionDetailViewModel(context),
+                create: (context) => TransactionDetailViewModel(
+                  context,
+                  args: args,
+                ),
                 child: TransactionDetailView(),
               );
             },
