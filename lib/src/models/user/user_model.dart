@@ -1,39 +1,25 @@
 class UserModel {
-  UserModel({
+  const UserModel({
     required this.id,
     required this.username,
     required this.email,
-    required this.namaUser,
-    required this.totalPoin,
+    required this.point,
+    required this.status,
   });
 
-  String id;
-  String username;
-  String email;
-  String namaUser;
-  String totalPoin;
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json["ID"],
+      username: json["username"],
+      email: json["email"],
+      point: json["point"],
+      status: json["status"],
+    );
+  }
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        id: json["id"],
-        username: json["username"],
-        email: json["email"],
-        namaUser: json["nama_user"],
-        totalPoin: json["total_poin"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "username": username,
-        "email": email,
-        "nama_user": namaUser,
-        "total_poin": totalPoin,
-      };
+  final int id;
+  final String username;
+  final String email;
+  final int point;
+  final String status;
 }
-
-// {
-//         "id":"",
-//         "username":"",
-//         "email":"",
-//         "nama_user":"",
-//         "total_poin":""
-// }

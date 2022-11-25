@@ -1,0 +1,11 @@
+{
+    "message": "message",
+    "data": {
+        "ID": 1,
+        "username": "username",
+        "email": "email",
+        "password": "password",
+        "point": 100000,
+        "status": "active"
+    }
+}

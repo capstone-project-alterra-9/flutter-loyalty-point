@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_detail_helper.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_helper.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_detail_helper.dart';
 import 'package:provider/provider.dart';
 
 import '../views/auth/login/login_view.dart';
@@ -94,10 +97,16 @@ class Routes {
       // reedem section
       case ReedemView.routeName:
         {
+          ArgsReedemProductHelper args =
+              settings.arguments as ArgsReedemProductHelper;
+
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
-                create: (context) => ReedemViewModel(context),
+                create: (context) => ReedemViewModel(
+                  context,
+                  args: args,
+                ),
                 child: ReedemView(),
               );
             },
@@ -107,10 +116,16 @@ class Routes {
       // reedem product detail section
       case ReedemProductDetailView.routeName:
         {
+          ArgsReedemProductDetailHelper args =
+              settings.arguments as ArgsReedemProductDetailHelper;
+
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
-                create: (context) => ReedemProductDetailViewModel(context),
+                create: (context) => ReedemProductDetailViewModel(
+                  context,
+                  args: args,
+                ),
                 child: ReedemProductDetailView(),
               );
             },
@@ -133,10 +148,16 @@ class Routes {
       // transaction detail section
       case TransactionDetailView.routeName:
         {
+          ArgsTransactionDetailHelper args =
+              settings.arguments as ArgsTransactionDetailHelper;
+
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
-                create: (context) => TransactionDetailViewModel(context),
+                create: (context) => TransactionDetailViewModel(
+                  context,
+                  args: args,
+                ),
                 child: TransactionDetailView(),
               );
             },
