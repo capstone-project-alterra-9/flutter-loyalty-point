@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loyalty_point/src/views/home/bottomnav_view.dart';
+import 'package:flutter_loyalty_point/src/views/profile/profile_view.dart';
+import 'package:flutter_loyalty_point/src/views/qr/qr_view.dart';
 import 'package:provider/provider.dart';
 
 import '../views/auth/login/login_view.dart';
@@ -74,6 +77,36 @@ class Routes {
                 create: (context) => HomeViewModel(context),
                 child: HomeView(),
               );
+            },
+          );
+        }
+
+      // bottom navigation section
+      case BottomNavView.routeName:
+        {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return BottomNavView();
+            },
+          );
+        }
+
+      // bottom navigation section
+      case ProfileView.routeName:
+        {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return ProfileView();
+            },
+          );
+        }
+
+      // bottom navigation section
+      case QrView.routeName:
+        {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return QrView();
             },
           );
         }
