@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loyalty_point/src/views/auth/login/login_view.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -46,8 +47,7 @@ class _RegisterViewState extends State<RegisterView> {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: ListView(
               children: [
                 // text login section
                 const Text("Register"),
@@ -133,7 +133,9 @@ class _RegisterViewState extends State<RegisterView> {
                   children: [
                     const Text("Have an account? "),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(LoginView.routeName);
+                      },
                       child: const Text("Login here"),
                     ),
                     const SizedBox(height: 20),

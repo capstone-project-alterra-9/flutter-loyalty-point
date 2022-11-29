@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loyalty_point/src/views/home/bottomnav_view.dart';
+import 'package:flutter_loyalty_point/src/views/profile/profile_view.dart';
+import 'package:flutter_loyalty_point/src/views/qr/qr_view.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_detail_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_detail_helper.dart';
@@ -11,6 +14,7 @@ import '../views/home/home_view.dart';
 import '../views/onboarding/onboarding_view.dart';
 import '../views/reedem/reedem_view.dart';
 import '../views/reedem_product_detail/reedem_product_detail_view.dart';
+import '../views/reedem_status/redeem_status_view.dart';
 import '../views/splash/splash_view.dart';
 import '../views/transaction_detail/transaction_detail_view.dart';
 import '../view_models/auth/login/login_view_model.dart';
@@ -81,6 +85,36 @@ class Routes {
           );
         }
 
+      // bottom navigation section
+      case BottomNavView.routeName:
+        {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return BottomNavView();
+            },
+          );
+        }
+
+      // bottom navigation section
+      case ProfileView.routeName:
+        {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return ProfileView();
+            },
+          );
+        }
+
+      // bottom navigation section
+      case QrView.routeName:
+        {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return QrView();
+            },
+          );
+        }
+
       // onboarding section
       case OnboardingView.routeName:
         {
@@ -128,6 +162,26 @@ class Routes {
                 ),
                 child: ReedemProductDetailView(),
               );
+            },
+          );
+        }
+
+      // reedem status
+      case RedeemStatusView.routeName:
+        {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return RedeemStatusView();
+            },
+          );
+        }
+
+      // reedem status
+      case RedeemStatusView.routeName:
+        {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return RedeemStatusView();
             },
           );
         }
