@@ -1,0 +1,8 @@
+{
+    "message": "message",
+    "data": {
+        "username": "username",
+        "email": "email",
+        "password": "password"
+    }
+}
