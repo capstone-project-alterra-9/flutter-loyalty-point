@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loyalty_point/src/models/auth/data_request_register_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/auth/register/register_view_model.dart';
 import 'package:flutter_loyalty_point/src/views/auth/login/login_view.dart';
+import 'package:provider/provider.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -121,7 +124,13 @@ class _RegisterViewState extends State<RegisterView> {
                 // button register section
                 ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {}
+                    if (_formKey.currentState!.validate()) {
+                      Provider.of<RegisterViewModel>(context, listen: false)
+                          .submit(DataRequestRegisterModel(
+                              username: _usernameController.text,
+                              email: _emailController.text,
+                              password: _passwordController.text));
+                    }
                   },
                   child: const Text("Register"),
                 ),

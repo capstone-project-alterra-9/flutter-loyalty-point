@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loyalty_point/src/models/auth/data_request_login_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/auth/login/login_view_model.dart';
 import 'package:flutter_loyalty_point/src/views/auth/register/register_view.dart';
 import 'package:flutter_loyalty_point/src/views/home/bottomnav_view.dart';
+import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -116,7 +119,12 @@ class _LoginViewState extends State<LoginView> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Navigator.of(context).pushNamed(BottomNavView.routeName);
+                      Provider.of<LoginViewModel>(context, listen: false)
+                          .submit(
+                        DataRequestLoginModel(
+                            username: _usernameController.text,
+                            password: _passwordController.text),
+                      );
                     }
                   },
                   child: const Text("Login"),
