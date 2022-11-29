@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_loyalty_point/src/views/home/bottomnav_view.dart';
+import 'package:flutter_loyalty_point/src/views/reedem/widget/emptylist_view.dart';
+import 'package:flutter_loyalty_point/src/views/reedem/widget/reedemlist_view.dart';
+import 'package:flutter_loyalty_point/src/views/reedem_product_detail/reedem_product_detail_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ReedemView extends StatelessWidget {
@@ -19,6 +23,11 @@ class ReedemView extends StatelessWidget {
         ),
         centerTitle: true,
         backgroundColor: Colors.grey[50],
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(BottomNavView.routeName);
+            },
+            icon: Icon(Icons.arrow_back)),
       ),
       body: Container(
         child: Stack(
@@ -40,26 +49,9 @@ class ReedemView extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  Expanded(
-                    child: ListView.builder(
-                        itemCount: 6,
-                        itemBuilder: (context, index) {
-                          return Container(
-                              padding:
-                                  const EdgeInsets.fromLTRB(10, 10, 20, 10),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20)),
-                              margin: const EdgeInsets.only(bottom: 10),
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    "assets/images/list_paket_data.png",
-                                    width: 150,
-                                  )
-                                ],
-                              ));
-                        }),
+                  RedeemListView(),
+                  const SizedBox(
+                    height: 100,
                   ),
                 ],
               ),
@@ -72,21 +64,25 @@ class ReedemView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                    color: Colors.white,
-                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromRGBO(156, 194, 155, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100),
-                        ),
+                  color: Colors.white,
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(156, 194, 155, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
                       ),
-                      onPressed: () {},
-                      child: Text(
-                        "Next",
-                        style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
-                      ),
-                    )),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(ReedemProductDetailView.routeName);
+                    },
+                    child: Text(
+                      "Next",
+                      style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
               ],
             )
           ],

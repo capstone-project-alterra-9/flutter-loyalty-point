@@ -11,6 +11,7 @@ import '../views/home/home_view.dart';
 import '../views/onboarding/onboarding_view.dart';
 import '../views/reedem/reedem_view.dart';
 import '../views/reedem_product_detail/reedem_product_detail_view.dart';
+import '../views/reedem_status/redeem_status_view.dart';
 import '../views/splash/splash_view.dart';
 import '../views/transaction_detail/transaction_detail_view.dart';
 import '../view_models/auth/login/login_view_model.dart';
@@ -145,6 +146,19 @@ class Routes {
               return ChangeNotifierProvider(
                 create: (context) => ReedemProductDetailViewModel(context),
                 child: ReedemProductDetailView(),
+              );
+            },
+          );
+        }
+
+      // reedem status
+      case RedeemStatusView.routeName:
+        {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return ChangeNotifierProvider(
+                create: (context) => ReedemProductDetailViewModel(context),
+                child: RedeemStatusView(),
               );
             },
           );

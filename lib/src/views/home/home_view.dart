@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_loyalty_point/src/views/history/history_view.dart';
 import 'package:flutter_loyalty_point/src/views/reedem/reedem_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -369,7 +370,9 @@ class HomeView extends StatelessWidget {
                 ),
                 Expanded(
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).pushNamed(HistoryView.routeName);
+                    },
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                       decoration: BoxDecoration(
