@@ -2,6 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_detail_helper.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_helper.dart';
+import 'package:flutter_loyalty_point/src/utils/types/category_product_type.dart';
+import 'package:flutter_loyalty_point/src/views/history/history_view.dart';
+import 'package:flutter_loyalty_point/src/views/reedem/reedem_view.dart';
+import 'package:flutter_loyalty_point/src/views/reedem_product_detail/reedem_product_detail_view.dart';
 
 import '../../models/product/product_model.dart';
 import '../../models/product/response_get_product_list_model.dart';
@@ -85,4 +91,18 @@ class HomeViewModel extends ChangeNotifier {
       rethrow;
     }
   }
+
+  void toReedem(ArgsReedemProductHelper args) => Navigator.pushNamed(
+        context,
+        ReedemView.routeName,
+        arguments: args,
+      );
+
+  void toHistory() => Navigator.pushNamed(context, HistoryView.routeName);
+
+  void toReedemProduct(ArgsReedemProductHelper args) => Navigator.pushNamed(
+        context,
+        ReedemView.routeName,
+        arguments: args,
+      );
 }
