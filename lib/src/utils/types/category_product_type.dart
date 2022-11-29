@@ -1,1 +1,1 @@
-enum CategoryProductType { pulsa, paketData, eMoney }
+enum CategoryProductType { credits, dataQuota, eMoney }

@@ -5,8 +5,10 @@ import 'package:flutter/services.dart';
 
 import '../../models/product/product_model.dart';
 import '../../models/product/response_get_product_list_model.dart';
+import '../../utils/helper/args_reedem_product_detail_helper.dart';
 import '../../utils/helper/args_reedem_product_helper.dart';
 import '../../utils/types/view_state_type.dart';
+import '../../views/reedem_product_detail/reedem_product_detail_view.dart';
 
 class ReedemViewModel extends ChangeNotifier {
   ReedemViewModel(this.context, {required this.args}) {
@@ -53,4 +55,17 @@ class ReedemViewModel extends ChangeNotifier {
       rethrow;
     }
   }
+
+  void tapProduct(int productId) {
+    args.productId = productId;
+
+    notifyListeners();
+  }
+
+  void toReedemProductDetail(ArgsReedemProductDetailHelper args) =>
+      Navigator.pushNamed(
+        context,
+        ReedemProductDetailView.routeName,
+        arguments: args,
+      );
 }
