@@ -13,12 +13,12 @@ class RegisterViewModel extends ChangeNotifier {
 
   final BuildContext context;
 
-  void onSubmitRegister(DataRequestRegisterModel data) async {
+  void submit(DataRequestRegisterModel data) async {
     final LoginViewModel login = LoginViewModel(context);
 
     try {
       // todo: change request after integration with api
-      // do login to server
+      // do request
       final String response = await rootBundle.loadString(
         'assets/json/dummy_data_response_register.json',
       );
@@ -27,7 +27,7 @@ class RegisterViewModel extends ChangeNotifier {
       ResponseRegisterModel.fromJson(jsonDecode(response));
 
       // because the response has no token, do login request
-      login.onSubmitLogin(
+      login.submit(
         DataRequestLoginModel(
           username: data.username,
           password: data.password,

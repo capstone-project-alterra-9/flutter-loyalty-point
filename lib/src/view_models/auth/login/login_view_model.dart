@@ -13,12 +13,12 @@ class LoginViewModel extends ChangeNotifier {
 
   final BuildContext context;
 
-  void onSubmitLogin(DataRequestLoginModel data) async {
+  void submit(DataRequestLoginModel data) async {
     final NavigatorState navigator = Navigator.of(context);
 
     try {
       // todo: change request after integration with api
-      // do login request
+      // do request
       final String response = await rootBundle.loadString(
         'assets/json/dummy_data_response_login.json',
       );
