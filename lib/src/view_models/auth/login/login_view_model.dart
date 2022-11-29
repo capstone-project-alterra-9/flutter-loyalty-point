@@ -33,7 +33,7 @@ class LoginViewModel extends ChangeNotifier {
       await prefs.setString('token', result.data.token);
 
       // navigate to home when login success
-      navigator.pushNamed(HomeView.routeName);
+      navigator.pushNamedAndRemoveUntil(HomeView.routeName, (route) => false);
 
       //
     } on DioError catch (e) {
