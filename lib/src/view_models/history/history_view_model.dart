@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 
 import '../../models/transaction/response_get_transaction_list.dart';
 import '../../models/transaction/transaction_model.dart';
+import '../../utils/helper/args_transaction_detail_helper.dart';
 import '../../utils/types/view_state_type.dart';
+import '../../views/transaction_detail/transaction_detail_view.dart';
 
 class HistoryViewModel extends ChangeNotifier {
   HistoryViewModel(this.context) {
@@ -51,4 +53,11 @@ class HistoryViewModel extends ChangeNotifier {
       rethrow;
     }
   }
+
+  void toTransactionDetail(ArgsTransactionDetailHelper args) =>
+      Navigator.pushNamed(
+        context,
+        TransactionDetailView.routeName,
+        arguments: args,
+      );
 }
