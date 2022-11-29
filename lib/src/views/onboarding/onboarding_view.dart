@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loyalty_point/src/view_models/onboarding/onboarding_view_model.dart';
 import 'package:flutter_loyalty_point/src/views/auth/login/login_view.dart';
 import 'package:flutter_loyalty_point/src/views/auth/register/register_view.dart';
+import 'package:provider/provider.dart';
 
 class OnboardingView extends StatelessWidget {
   const OnboardingView({super.key});
@@ -20,22 +22,18 @@ class OnboardingView extends StatelessWidget {
 
             // button login section
             ElevatedButton(
-              onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                context,
-                LoginView.routeName,
-                (route) => false,
-              ),
+              onPressed: () =>
+                  Provider.of<OnboardingViewModel>(context, listen: false)
+                      .toLogin(),
               child: const Text("Login"),
             ),
             const SizedBox(height: 20),
 
             // button register section
             ElevatedButton(
-              onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                context,
-                RegisterView.routeName,
-                (route) => false,
-              ),
+              onPressed: () =>
+                  Provider.of<OnboardingViewModel>(context, listen: false)
+                      .toRegister(),
               child: const Text("Register"),
             ),
             const SizedBox(height: 20),
