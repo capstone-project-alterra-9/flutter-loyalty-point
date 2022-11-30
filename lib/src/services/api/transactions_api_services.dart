@@ -1,20 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_loyalty_point/src/configs/api/api_config.dart';
-import 'package:flutter_loyalty_point/src/utils/helper/query_params_product_list_api_service_helper.dart';
+import 'package:flutter_loyalty_point/src/models/transaction/data_request_add_transaction.dart';
 import 'package:flutter_loyalty_point/src/utils/types/request_method_type.dart';
 import 'package:flutter_loyalty_point/src/utils/urls.dart';
 
-class ProductsAPIServices {
+class TransactionsAPIServices {
   final APIConfig _apiConfig = APIConfig();
 
-  Future<Response> getProductList({
-    required QueryParamsProductListApiServiceHelper queryParams,
-  }) async {
+  Future<Response> getTransactionHistoryList() async {
     try {
       Response response = await _apiConfig.request(
         method: RequestMethodType.get,
-        path: Urls.getProductListPathApi,
-        queryParameters: queryParams.toJson(),
+        path: Urls.getTransactionHistoryListPathApi,
         withToken: true,
       );
 
@@ -24,13 +21,14 @@ class ProductsAPIServices {
     }
   }
 
-  Future<Response> getProduct({
-    required String productId,
+  Future<Response> createTransaction({
+    required DataRequestAddTransaction data,
   }) async {
     try {
       Response response = await _apiConfig.request(
-        method: RequestMethodType.get,
-        path: Urls.getProductPathApi(productId),
+        method: RequestMethodType.post,
+        path: Urls.createTransactionPathApi,
+        data: data.toJson(),
         withToken: true,
       );
 

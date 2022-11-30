@@ -11,6 +11,6 @@ class Urls {
   static const String getProductListPathApi = '/products';
 
   // transaction path api
-  static const String getTransactionListPathApi = '/transactions';
+  static const String getTransactionHistoryListPathApi = '/history';
   static const String createTransactionPathApi = '/transactions';
 }
