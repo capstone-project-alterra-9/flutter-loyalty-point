@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/views/home/bottomnav_view.dart';
-import 'package:flutter_loyalty_point/src/views/home/home_view.dart';
 
 import 'routes/routes.dart';
 import 'views/splash/splash_view.dart';
@@ -11,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: HomeView.routeName,
+      initialRoute: BottomNavView.routeName,
       onGenerateRoute: Routes.onGenerateRoute,
       debugShowCheckedModeBanner: false,
     );
