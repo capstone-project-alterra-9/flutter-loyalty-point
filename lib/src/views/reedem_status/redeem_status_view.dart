@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_loyalty_point/src/views/home/bottomnav_view.dart';
+import 'package:flutter_loyalty_point/src/views/widgets/bottomnav_widget.dart';
 import 'package:flutter_loyalty_point/src/views/home/home_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,7 +16,7 @@ class _RedeemStatusViewState extends State<RedeemStatusView> {
   void initState() {
     Future.delayed(Duration(seconds: 3), (() {
       Navigator.of(context)
-          .pushNamedAndRemoveUntil(BottomNavView.routeName, (route) => false);
+          .pushNamedAndRemoveUntil(HomeView.routeName, (route) => false);
     }));
     super.initState();
   }

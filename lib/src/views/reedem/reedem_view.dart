@@ -1,18 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_loyalty_point/src/views/home/bottomnav_view.dart';
+import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/reedem/reedem_view_model.dart';
+import 'package:flutter_loyalty_point/src/views/home/home_view.dart';
+import 'package:flutter_loyalty_point/src/views/widgets/bottomnav_widget.dart';
 import 'package:flutter_loyalty_point/src/views/reedem/widget/emptylist_view.dart';
 import 'package:flutter_loyalty_point/src/views/reedem/widget/reedemlist_view.dart';
 import 'package:flutter_loyalty_point/src/views/reedem_product_detail/reedem_product_detail_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-class ReedemView extends StatelessWidget {
+class ReedemView extends StatefulWidget {
   const ReedemView({super.key});
 
   static const String routeName = "/reedem";
 
   @override
+  State<ReedemView> createState() => _ReedemViewState();
+}
+
+class _ReedemViewState extends State<ReedemView> {
+  @override
+  void initState() {
+    Provider.of<ReedemViewModel>(context, listen: false);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final List<ProductModel> listReedemProduct =
+        Provider.of<ReedemViewModel>(context).productList;
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
@@ -24,10 +41,11 @@ class ReedemView extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.grey[50],
         leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(BottomNavView.routeName);
-            },
-            icon: Icon(Icons.arrow_back)),
+          onPressed: () {
+            Navigator.of(context).pushNamed(HomeView.routeName);
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
       ),
       body: Container(
         child: Stack(
