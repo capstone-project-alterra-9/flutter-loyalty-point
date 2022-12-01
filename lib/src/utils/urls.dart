@@ -1,6 +1,8 @@
+import 'package:flutter_loyalty_point/src/utils/env/env.dart';
+
 class Urls {
-  static const String baseUrl = "";
-  static const String baseUrlApi = "$baseUrl/api";
+  static String baseUrl = Env.apiServerBaseUrl;
+  static String baseUrlApi = "$baseUrl/api";
 
   // auth path api
   static const String registerPathApi = '/register';
