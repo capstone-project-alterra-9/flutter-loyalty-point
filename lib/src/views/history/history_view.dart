@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loyalty_point/src/views/widgets/bottomnav_widget.dart';
 import 'package:flutter_loyalty_point/src/views/transaction_detail/transaction_detail_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,6 +11,8 @@ class HistoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar:
+          const BottomNavWidget(routeName: HistoryView.routeName),
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
@@ -19,6 +22,7 @@ class HistoryView extends StatelessWidget {
         ),
         centerTitle: true,
         backgroundColor: Colors.grey[50],
+        automaticallyImplyLeading: false,
       ),
       body: ListView.builder(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),

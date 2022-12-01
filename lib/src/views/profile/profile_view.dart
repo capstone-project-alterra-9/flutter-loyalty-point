@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/views/auth/login/login_view.dart';
+import 'package:flutter_loyalty_point/src/views/widgets/bottomnav_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileView extends StatefulWidget {
@@ -14,6 +15,8 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar:
+          const BottomNavWidget(routeName: ProfileView.routeName),
       appBar: AppBar(
         backgroundColor: Colors.grey[50],
         title: ListTile(

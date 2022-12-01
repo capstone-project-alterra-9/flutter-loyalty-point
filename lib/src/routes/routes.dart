@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_loyalty_point/src/views/home/bottomnav_view.dart';
+import 'package:flutter_loyalty_point/src/views/widgets/bottomnav_widget.dart';
 import 'package:flutter_loyalty_point/src/views/profile/profile_view.dart';
 import 'package:flutter_loyalty_point/src/views/qr/qr_view.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_detail_helper.dart';
@@ -81,16 +81,6 @@ class Routes {
                 create: (context) => HomeViewModel(context),
                 child: HomeView(),
               );
-            },
-          );
-        }
-
-      // bottom navigation section
-      case BottomNavView.routeName:
-        {
-          return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) {
-              return BottomNavView();
             },
           );
         }
