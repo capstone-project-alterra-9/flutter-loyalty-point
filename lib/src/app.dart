@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: BottomNavView.routeName,
+      initialRoute: SplashView.routeName,
       onGenerateRoute: Routes.onGenerateRoute,
       debugShowCheckedModeBanner: false,
     );
