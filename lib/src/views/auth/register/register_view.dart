@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/models/auth/data_request_register_model.dart';
+import 'package:flutter_loyalty_point/src/utils/extensions/string_extension.dart';
 import 'package:flutter_loyalty_point/src/view_models/auth/register/register_view_model.dart';
 import 'package:flutter_loyalty_point/src/views/auth/login/login_view.dart';
 import 'package:provider/provider.dart';
@@ -76,7 +77,9 @@ class _RegisterViewState extends State<RegisterView> {
                         decoration: const InputDecoration(
                           label: Text('Username'),
                         ),
-                        validator: (value) => value == '' ? "Not Valid!" : null,
+                        validator: (value) => value.toString().isValidUsername()
+                            ? null
+                            : "Must be at least 3 characters",
                       ),
                       const SizedBox(height: 20),
 
@@ -87,7 +90,9 @@ class _RegisterViewState extends State<RegisterView> {
                         decoration: const InputDecoration(
                           label: Text('Email'),
                         ),
-                        validator: (value) => value == '' ? "Not Valid!" : null,
+                        validator: (value) => value.toString().isValidEmail()
+                            ? null
+                            : 'Invalid Email!',
                       ),
                       const SizedBox(height: 20),
 
@@ -106,13 +111,17 @@ class _RegisterViewState extends State<RegisterView> {
                               }),
                               icon: Icon(
                                 _obscureText
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
                               ),
                             ),
                           ),
                         ),
+                        validator: (value) => value.toString().isValidPassword()
+                            ? null
+                            : "Must be at least 6 characters",
                       ),
+
                       const SizedBox(height: 20),
 
                       //  end form section
