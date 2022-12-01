@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/models/auth/data_request_login_model.dart';
+import 'package:flutter_loyalty_point/src/utils/extensions/string_extension.dart';
+import 'package:flutter_loyalty_point/src/utils/urls.dart';
 import 'package:flutter_loyalty_point/src/view_models/auth/login/login_view_model.dart';
 import 'package:flutter_loyalty_point/src/views/auth/register/register_view.dart';
 import 'package:flutter_loyalty_point/src/views/home/bottomnav_view.dart';
@@ -17,7 +19,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   late final GlobalKey<FormState> _formKey;
 
-  late final TextEditingController _usernameController;
+  late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
 
   bool _obscureText = true;
@@ -28,7 +30,7 @@ class _LoginViewState extends State<LoginView> {
 
     _formKey = GlobalKey<FormState>();
 
-    _usernameController = TextEditingController();
+    _emailController = TextEditingController();
     _passwordController = TextEditingController();
   }
 
@@ -36,7 +38,7 @@ class _LoginViewState extends State<LoginView> {
   void dispose() {
     super.dispose();
 
-    _usernameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
   }
 
@@ -67,14 +69,16 @@ class _LoginViewState extends State<LoginView> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      // textfield username
+                      // textfield email
                       TextFormField(
-                        controller: _usernameController,
-                        keyboardType: TextInputType.text,
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
-                          label: Text('Username'),
+                          label: Text('Email'),
                         ),
-                        validator: (value) => value == '' ? "Not Valid!" : null,
+                        validator: (value) => value.toString().isValidEmail()
+                            ? null
+                            : 'Invalid Email!',
                       ),
                       const SizedBox(height: 20),
 
@@ -99,6 +103,9 @@ class _LoginViewState extends State<LoginView> {
                             ),
                           ),
                         ),
+                        validator: (value) => value.toString().isValidPassword()
+                            ? null
+                            : "Must be at least 6 characters",
                       ),
                       const SizedBox(height: 20),
 
@@ -122,7 +129,7 @@ class _LoginViewState extends State<LoginView> {
                       Provider.of<LoginViewModel>(context, listen: false)
                           .submit(
                         DataRequestLoginModel(
-                            username: _usernameController.text,
+                            email: _emailController.text,
                             password: _passwordController.text),
                       );
                     }
