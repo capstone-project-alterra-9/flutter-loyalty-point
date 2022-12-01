@@ -4,7 +4,7 @@ import 'package:flutter_loyalty_point/src/utils/helper/query_params_product_list
 import 'package:flutter_loyalty_point/src/utils/types/request_method_type.dart';
 import 'package:flutter_loyalty_point/src/utils/urls.dart';
 
-class ProductsAPIServices {
+class ProductsAPIService {
   final APIConfig _apiConfig = APIConfig();
 
   Future<Response> getProductList({

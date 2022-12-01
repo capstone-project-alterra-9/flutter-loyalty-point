@@ -4,7 +4,7 @@ import 'package:flutter_loyalty_point/src/models/transaction/data_request_add_tr
 import 'package:flutter_loyalty_point/src/utils/types/request_method_type.dart';
 import 'package:flutter_loyalty_point/src/utils/urls.dart';
 
-class TransactionsAPIServices {
+class TransactionsAPIService {
   final APIConfig _apiConfig = APIConfig();
 
   Future<Response> getTransactionHistoryList() async {
