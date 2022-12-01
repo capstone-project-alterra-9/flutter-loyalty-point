@@ -1,11 +1,11 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_loyalty_point/src/models/auth/data_request_login_model.dart';
 import 'package:flutter_loyalty_point/src/models/auth/data_request_register_model.dart';
 import 'package:flutter_loyalty_point/src/models/auth/response_register_model.dart';
+import 'package:flutter_loyalty_point/src/models/response_error_model.dart';
+import 'package:flutter_loyalty_point/src/services/api/auth_api_service.dart';
+import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
 import 'package:flutter_loyalty_point/src/view_models/auth/login/login_view_model.dart';
 
 class RegisterViewModel extends ChangeNotifier {
@@ -13,36 +13,45 @@ class RegisterViewModel extends ChangeNotifier {
 
   final BuildContext context;
 
+  ViewStateType get loginListState => _registerListState;
+  ViewStateType _registerListState = ViewStateType.none;
+
+  void _changeRegisterListState(ViewStateType state) {
+    _registerListState = state;
+    notifyListeners();
+  }
+
   void submit(DataRequestRegisterModel data) async {
     final LoginViewModel login = LoginViewModel(context);
+    _changeRegisterListState(ViewStateType.loading);
 
     try {
-      // todo: change request after integration with api
       // do request
-      final String response = await rootBundle.loadString(
-        'assets/json/dummy_data_response_register.json',
-      );
+      final Response response = await AuthAPIService().register(data: data);
 
       // change request response to model class
-      ResponseRegisterModel.fromJson(jsonDecode(response));
+      ResponseRegisterModel.fromJson(response.data);
 
       // because the response has no token, do login request
       login.submit(
         DataRequestLoginModel(
-          username: data.username,
+          email: data.email,
           password: data.password,
         ),
       );
 
-      //
+      _changeRegisterListState(ViewStateType.none);
     } on DioError catch (e) {
       // showing error with snackbar
       if (e.response != null) {
+        String message = ResponseErrorModel.fromJson(e.response!.data).message;
+
         ScaffoldMessenger.of(context).showSnackBar(
-          // todo: change value after integration with api
-          const SnackBar(content: Text("error")),
+          SnackBar(content: Text(message)),
         );
       }
+
+      _changeRegisterListState(ViewStateType.error);
     }
   }
 }

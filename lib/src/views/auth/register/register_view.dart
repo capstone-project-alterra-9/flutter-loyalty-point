@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/models/auth/data_request_register_model.dart';
+import 'package:flutter_loyalty_point/src/utils/extensions/string_extension.dart';
 import 'package:flutter_loyalty_point/src/view_models/auth/register/register_view_model.dart';
 import 'package:flutter_loyalty_point/src/views/auth/login/login_view.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -101,7 +102,9 @@ class _RegisterViewState extends State<RegisterView> {
                             hintStyle: GoogleFonts.poppins(),
                           ),
                           validator: (value) =>
-                              value == '' ? "Not Valid!" : null,
+                              value.toString().isValidUsername()
+                                  ? null
+                                  : "Must be at least 3 characters",
                         ),
                         const SizedBox(height: 15),
 
@@ -119,8 +122,9 @@ class _RegisterViewState extends State<RegisterView> {
                             ),
                             hintStyle: GoogleFonts.poppins(),
                           ),
-                          validator: (value) =>
-                              value == '' ? "Not Valid!" : null,
+                          validator: (value) => value.toString().isValidEmail()
+                              ? null
+                              : 'Invalid Email!',
                         ),
                         const SizedBox(height: 15),
 
@@ -155,7 +159,9 @@ class _RegisterViewState extends State<RegisterView> {
                             hintStyle: GoogleFonts.poppins(),
                           ),
                           validator: (value) =>
-                              value == '' ? "Mohon isi password" : null,
+                              value.toString().isValidPassword()
+                                  ? null
+                                  : "Must be at least 6 characters",
                         ),
                         const SizedBox(height: 10),
 
