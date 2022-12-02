@@ -13,17 +13,17 @@ class RegisterViewModel extends ChangeNotifier {
 
   final BuildContext context;
 
-  ViewStateType get loginListState => _registerListState;
-  ViewStateType _registerListState = ViewStateType.none;
+  ViewStateType get registerState => _registerState;
+  ViewStateType _registerState = ViewStateType.none;
 
-  void _changeRegisterListState(ViewStateType state) {
-    _registerListState = state;
+  void _changeRegisterState(ViewStateType state) {
+    _registerState = state;
     notifyListeners();
   }
 
   void submit(DataRequestRegisterModel data) async {
     final LoginViewModel login = LoginViewModel(context);
-    _changeRegisterListState(ViewStateType.loading);
+    _changeRegisterState(ViewStateType.loading);
 
     try {
       // do request
@@ -40,7 +40,7 @@ class RegisterViewModel extends ChangeNotifier {
         ),
       );
 
-      _changeRegisterListState(ViewStateType.none);
+      _changeRegisterState(ViewStateType.none);
     } on DioError catch (e) {
       // showing error with snackbar
       if (e.response != null) {
@@ -51,7 +51,7 @@ class RegisterViewModel extends ChangeNotifier {
         );
       }
 
-      _changeRegisterListState(ViewStateType.error);
+      _changeRegisterState(ViewStateType.error);
     }
   }
 }

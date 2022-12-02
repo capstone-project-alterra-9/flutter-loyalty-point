@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/views/auth/login/login_view.dart';
 import 'package:flutter_loyalty_point/src/views/widgets/bottomnav_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileView extends StatefulWidget {
   static const routeName = "/profile";
@@ -259,7 +260,12 @@ class _ProfileViewState extends State<ProfileView> {
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
+                    // ? move to view model
+                    final SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    prefs.clear();
+
                     Navigator.of(context).pushNamed(LoginView.routeName);
                   },
                   child: Text(
