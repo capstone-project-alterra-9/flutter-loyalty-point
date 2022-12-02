@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../../../models/product/product_model.dart';
+import '../../../view_models/reedem/reedem_view_model.dart';
 
 class RedeemListView extends StatelessWidget {
   const RedeemListView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final List<ProductModel> listReedemProduct =
+        Provider.of<ReedemViewModel>(context).productList;
     return Expanded(
       child: ListView.builder(
-          itemCount: 6,
+          itemCount: listReedemProduct.length,
           itemBuilder: (context, index) {
             return Container(
                 padding: const EdgeInsets.fromLTRB(10, 10, 20, 10),
@@ -25,8 +31,8 @@ class RedeemListView extends StatelessWidget {
                 margin: const EdgeInsets.only(bottom: 10),
                 child: Row(
                   children: [
-                    Image.asset(
-                      "assets/images/list_paket_data.png",
+                    Image.network(
+                      listReedemProduct[index].image,
                       width: 150,
                     ),
                     const SizedBox(
@@ -36,7 +42,7 @@ class RedeemListView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Paket Data 3GB",
+                          listReedemProduct[index].name,
                           style: GoogleFonts.poppins(
                               color: const Color.fromARGB(255, 0, 0, 0),
                               fontWeight: FontWeight.w500),
@@ -45,7 +51,7 @@ class RedeemListView extends StatelessWidget {
                           height: 18,
                         ),
                         Text(
-                          "500 POIN",
+                          "${listReedemProduct[index].price.toString()} Poin",
                           style: GoogleFonts.poppins(
                               color: const Color.fromARGB(255, 0, 0, 0),
                               fontWeight: FontWeight.w700),

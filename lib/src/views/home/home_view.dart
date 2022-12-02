@@ -224,7 +224,16 @@ class HomeView extends StatelessWidget {
                                     ),
                                     Expanded(
                                       child: InkWell(
-                                        onTap: () {},
+                                        onTap: () {
+                                          context
+                                              .read<HomeViewModel>()
+                                              .toReedem(
+                                                ArgsReedemProductHelper(
+                                                    categoryProductType:
+                                                        CategoryProductType
+                                                            .dataQuota),
+                                              );
+                                        },
                                         child: Container(
                                           padding: const EdgeInsets.all(10),
                                           decoration: BoxDecoration(
@@ -265,7 +274,16 @@ class HomeView extends StatelessWidget {
                                     ),
                                     Expanded(
                                       child: InkWell(
-                                        onTap: () {},
+                                        onTap: () {
+                                          context
+                                              .read<HomeViewModel>()
+                                              .toReedem(
+                                                ArgsReedemProductHelper(
+                                                    categoryProductType:
+                                                        CategoryProductType
+                                                            .eMoney),
+                                              );
+                                        },
                                         child: Container(
                                           padding: const EdgeInsets.all(10),
                                           decoration: BoxDecoration(
@@ -387,7 +405,7 @@ class HomeView extends StatelessWidget {
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                      Navigator.of(context).pushNamed(HistoryView.routeName);
+                      context.read<HomeViewModel>().toHistory();
                     },
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
