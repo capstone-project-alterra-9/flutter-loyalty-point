@@ -154,8 +154,7 @@ class _LoginViewState extends State<LoginView> {
                       switch (value.loginState) {
                         case ViewStateType.loading:
                           {
-                            return const SizedBox(
-                              height: 44,
+                            return const Center(
                               child: CircularProgressIndicator.adaptive(),
                             );
                           }

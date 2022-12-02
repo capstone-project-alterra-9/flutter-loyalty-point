@@ -154,8 +154,7 @@ class _RegisterViewState extends State<RegisterView> {
                       switch (value.registerState) {
                         case ViewStateType.loading:
                           {
-                            return const SizedBox(
-                              height: 44,
+                            return const Center(
                               child: CircularProgressIndicator.adaptive(),
                             );
                           }
