@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/models/auth/data_request_register_model.dart';
+import 'package:flutter_loyalty_point/src/styles/styles.dart';
 import 'package:flutter_loyalty_point/src/utils/extensions/string_extension.dart';
+import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
 import 'package:flutter_loyalty_point/src/view_models/auth/register/register_view_model.dart';
 import 'package:flutter_loyalty_point/src/views/auth/login/login_view.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class RegisterView extends StatefulWidget {
@@ -52,35 +53,35 @@ class _RegisterViewState extends State<RegisterView> {
         body: SafeArea(
           child: Center(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // text login section
-                  Text(
+                  const Text(
                     "Register",
-                    style: GoogleFonts.poppins(fontSize: 16),
+                    style: TextStyle(fontSize: 20),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 16),
 
                   // text title section
-                  Text(
+                  const Text(
                     "Create Your Account",
-                    style: GoogleFonts.poppins(
-                        fontSize: 28, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontSize: 32),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 4),
 
                   // text subtitle section
-                  Text(
+                  const Text(
                     "Please register below",
-                    style: GoogleFonts.poppins(fontSize: 13),
+                    style: TextStyle(fontSize: 12),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 32),
+
                   // form section
                   Form(
                     key: _formKey,
@@ -90,37 +91,21 @@ class _RegisterViewState extends State<RegisterView> {
                         TextFormField(
                           controller: _usernameController,
                           keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            contentPadding: const EdgeInsets.only(
-                                top: 10, bottom: 10, left: 10, right: 10),
-                            label: Text(
-                              'Username',
-                              style: GoogleFonts.poppins(),
-                            ),
-                            hintStyle: GoogleFonts.poppins(),
+                          decoration: Styles.textFieldAuth.copyWith(
+                            label: const Text('Username'),
                           ),
                           validator: (value) =>
                               value.toString().isValidUsername()
                                   ? null
                                   : "Must be at least 3 characters",
                         ),
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 20),
 
                         TextFormField(
                           controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            contentPadding: const EdgeInsets.only(
-                                top: 10, bottom: 10, left: 10, right: 10),
-                            label: Text(
-                              'Email',
-                              style: GoogleFonts.poppins(),
-                            ),
-                            hintStyle: GoogleFonts.poppins(),
+                          decoration: Styles.textFieldAuth.copyWith(
+                            label: const Text('Email'),
                           ),
                           validator: (value) => value.toString().isValidEmail()
                               ? null
@@ -133,88 +118,95 @@ class _RegisterViewState extends State<RegisterView> {
                           controller: _passwordController,
                           keyboardType: TextInputType.text,
                           obscureText: _obscureText,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            contentPadding: const EdgeInsets.only(
-                                top: 10, bottom: 10, left: 10, right: 10),
-                            label: Text(
-                              'Password',
-                              style: GoogleFonts.poppins(),
-                            ),
-                            suffixIcon: Padding(
-                              padding: const EdgeInsets.all(0.0),
-                              child: IconButton(
-                                onPressed: () => setState(() {
-                                  _obscureText = !_obscureText;
-                                }),
-                                icon: Icon(
-                                  _obscureText
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                ),
+                          decoration: Styles.textFieldAuth.copyWith(
+                            label: const Text('Password'),
+                            suffixIcon: IconButton(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
+                              splashRadius: 24,
+                              onPressed: () => setState(() {
+                                _obscureText = !_obscureText;
+                              }),
+                              icon: Icon(
+                                _obscureText
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Styles.colorBlack400,
                               ),
                             ),
-                            hintStyle: GoogleFonts.poppins(),
                           ),
                           validator: (value) =>
                               value.toString().isValidPassword()
                                   ? null
                                   : "Must be at least 6 characters",
                         ),
-                        const SizedBox(height: 10),
 
                         //  end form section
                       ],
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 20),
 
                   // button register section
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        Provider.of<RegisterViewModel>(context, listen: false)
-                            .submit(DataRequestRegisterModel(
-                                username: _usernameController.text,
-                                email: _emailController.text,
-                                password: _passwordController.text));
+                  Consumer<RegisterViewModel>(
+                    builder: (context, value, child) {
+                      switch (value.registerState) {
+                        case ViewStateType.loading:
+                          {
+                            return const Center(
+                              child: CircularProgressIndicator.adaptive(),
+                            );
+                          }
+                        default:
+                          {
+                            return ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  Provider.of<RegisterViewModel>(context,
+                                          listen: false)
+                                      .submit(
+                                    DataRequestRegisterModel(
+                                      username: _usernameController.text,
+                                      email: _emailController.text,
+                                      password: _passwordController.text,
+                                    ),
+                                  );
+                                }
+                              },
+                              style: Styles.primaryButton.copyWith(
+                                minimumSize: const MaterialStatePropertyAll(
+                                  Size.fromHeight(44),
+                                ),
+                              ),
+                              child: const Text("Register"),
+                            );
+                          }
                       }
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(156, 194, 155, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                    ),
-                    child: Text("Register",
-                        style:
-                            GoogleFonts.poppins(fontWeight: FontWeight.w500)),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 32),
 
                   // link to register
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Have an account? ",
-                        style: GoogleFonts.poppins(fontSize: 13),
+                        style: TextStyle(fontSize: 12),
                         textAlign: TextAlign.center,
                       ),
                       InkWell(
                         onTap: () {
                           Navigator.of(context).pushNamed(LoginView.routeName);
                         },
-                        child: Text(
+                        child: const Text(
                           "Login here",
-                          style: GoogleFonts.poppins(
-                              fontSize: 13, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
                         ),
                       ),
-                      const SizedBox(height: 20),
                     ],
                   ),
 

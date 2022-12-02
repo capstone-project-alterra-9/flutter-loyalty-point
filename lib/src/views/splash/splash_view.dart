@@ -12,12 +12,20 @@ class SplashView extends StatelessWidget {
     context.read<SplashViewModel>();
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/images/splash_screen.png"),
-              fit: BoxFit.cover),
-        ),
+        height: double.infinity,
         width: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/splash_background.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Image.asset(
+            "assets/images/jokomart_logo.png",
+            height: 74,
+          ),
+        ),
       ),
     );
   }

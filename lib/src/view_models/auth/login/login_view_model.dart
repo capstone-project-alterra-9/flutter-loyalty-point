@@ -13,17 +13,17 @@ class LoginViewModel extends ChangeNotifier {
 
   final BuildContext context;
 
-  ViewStateType get loginListState => _loginListState;
-  ViewStateType _loginListState = ViewStateType.none;
+  ViewStateType get loginState => _loginState;
+  ViewStateType _loginState = ViewStateType.none;
 
-  void _changeLoginListState(ViewStateType state) {
-    _loginListState = state;
+  void _changeLoginState(ViewStateType state) {
+    _loginState = state;
     notifyListeners();
   }
 
   void submit(DataRequestLoginModel data) async {
     final NavigatorState navigator = Navigator.of(context);
-    _changeLoginListState(ViewStateType.loading);
+    _changeLoginState(ViewStateType.loading);
 
     try {
       // do request
@@ -38,12 +38,11 @@ class LoginViewModel extends ChangeNotifier {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('token', result.data.token);
       await prefs.setString('refreshToken', result.data.refreshToken);
-      await prefs.setBool('isNewUser', false);
 
       // navigate to home when login success
       navigator.pushNamedAndRemoveUntil(HomeView.routeName, (route) => false);
 
-      _changeLoginListState(ViewStateType.none);
+      _changeLoginState(ViewStateType.none);
     } on DioError catch (e) {
       // showing error with snackbar
       if (e.response != null) {
@@ -55,6 +54,6 @@ class LoginViewModel extends ChangeNotifier {
       }
     }
 
-    _changeLoginListState(ViewStateType.error);
+    _changeLoginState(ViewStateType.error);
   }
 }
