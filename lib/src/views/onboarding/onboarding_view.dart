@@ -14,9 +14,13 @@ class OnboardingView extends StatelessWidget {
       body: Stack(
         children: [
           // background section
-          Image.asset(
-            "assets/images/onboarding_background.jpg",
-            fit: BoxFit.cover,
+          SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: Image.asset(
+              "assets/images/onboarding_background.jpg",
+              fit: BoxFit.cover,
+            ),
           ),
 
           // gradient section
