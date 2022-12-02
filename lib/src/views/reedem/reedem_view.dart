@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_helper.dart';
+import 'package:flutter_loyalty_point/src/utils/types/category_product_type.dart';
 import 'package:flutter_loyalty_point/src/view_models/reedem/reedem_view_model.dart';
 import 'package:flutter_loyalty_point/src/views/home/home_view.dart';
 import 'package:flutter_loyalty_point/src/views/widgets/bottomnav_widget.dart';
@@ -21,12 +23,6 @@ class ReedemView extends StatefulWidget {
 
 class _ReedemViewState extends State<ReedemView> {
   @override
-  void initState() {
-    Provider.of<ReedemViewModel>(context, listen: false);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final List<ProductModel> listReedemProduct =
         Provider.of<ReedemViewModel>(context).productList;
@@ -34,7 +30,7 @@ class _ReedemViewState extends State<ReedemView> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
-          "Pulsa/Paket Data",
+          "Pulsa",
           style: GoogleFonts.poppins(
               fontWeight: FontWeight.w500, color: Colors.black),
         ),
@@ -67,7 +63,9 @@ class _ReedemViewState extends State<ReedemView> {
                   const SizedBox(
                     height: 8,
                   ),
-                  RedeemListView(),
+                  listReedemProduct.isNotEmpty
+                      ? const RedeemListView()
+                      : const EmptyListView(),
                   const SizedBox(
                     height: 100,
                   ),
