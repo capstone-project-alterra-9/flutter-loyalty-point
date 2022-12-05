@@ -1,8 +1,8 @@
 {
-    "message": "message",
+    "message": "succes register user",
     "data": {
-        "username": "username",
-        "email": "email",
-        "password": "password"
+        "username": "test",
+        "email": "testmail01@gmail.com",
+        "password": "testpassword01"
     }
 }
