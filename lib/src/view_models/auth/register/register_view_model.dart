@@ -13,14 +13,23 @@ class RegisterViewModel extends ChangeNotifier {
 
   final BuildContext context;
 
-  ViewStateType get registerState => _registerState;
+  // register view state
   ViewStateType _registerState = ViewStateType.none;
-
+  ViewStateType get registerState => _registerState;
   void _changeRegisterState(ViewStateType state) {
     _registerState = state;
     notifyListeners();
   }
 
+  // obscure text password
+  bool _obscureText = true;
+  bool get obscureText => _obscureText;
+  void changeObscureText() {
+    _obscureText = !_obscureText;
+    notifyListeners();
+  }
+
+  // handle button submit (register)
   void submit(DataRequestRegisterModel data) async {
     final LoginViewModel login = LoginViewModel(context);
     _changeRegisterState(ViewStateType.loading);

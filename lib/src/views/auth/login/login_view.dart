@@ -23,8 +23,6 @@ class _LoginViewState extends State<LoginView> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
 
-  bool _obscureText = true;
-
   @override
   void initState() {
     super.initState();
@@ -99,32 +97,32 @@ class _LoginViewState extends State<LoginView> {
                         const SizedBox(height: 20),
 
                         // textfield password
-                        TextFormField(
-                          controller: _passwordController,
-                          keyboardType: TextInputType.text,
-                          obscureText: _obscureText,
-                          decoration: Styles.textFieldAuth.copyWith(
-                            label: const Text('Password'),
-                            suffixIcon: IconButton(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                              ),
-                              splashRadius: 24,
-                              onPressed: () => setState(() {
-                                _obscureText = !_obscureText;
-                              }),
-                              icon: Icon(
-                                _obscureText
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                                color: Styles.colorBlack400,
+                        Consumer<LoginViewModel>(
+                          builder: (context, value, child) => TextFormField(
+                            controller: _passwordController,
+                            keyboardType: TextInputType.text,
+                            obscureText: value.obscureText,
+                            decoration: Styles.textFieldAuth.copyWith(
+                              label: const Text('Password'),
+                              suffixIcon: IconButton(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                ),
+                                splashRadius: 24,
+                                onPressed: value.changeObscureText,
+                                icon: Icon(
+                                  value.obscureText
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: Styles.colorBlack400,
+                                ),
                               ),
                             ),
+                            validator: (value) =>
+                                value.toString().isValidPassword()
+                                    ? null
+                                    : "Must be at least 6 characters",
                           ),
-                          validator: (value) =>
-                              value.toString().isValidPassword()
-                                  ? null
-                                  : "Must be at least 6 characters",
                         ),
 
                         //  end form section
