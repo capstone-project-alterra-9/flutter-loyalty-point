@@ -16,14 +16,14 @@ class SplashView extends StatelessWidget {
         width: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/splash_background.jpg"),
+            image: AssetImage("assets/images/background_splash.jpg"),
             fit: BoxFit.cover,
           ),
         ),
         child: Center(
           child: Image.asset(
-            "assets/images/jokomart_logo.png",
-            height: 74,
+            "assets/images/logo_light_app.png",
+            height: 58,
           ),
         ),
       ),

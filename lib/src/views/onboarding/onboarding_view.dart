@@ -18,7 +18,7 @@ class OnboardingView extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             child: Image.asset(
-              "assets/images/onboarding_background.jpg",
+              "assets/images/background_onboarding.jpg",
               fit: BoxFit.cover,
             ),
           ),
