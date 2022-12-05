@@ -65,14 +65,12 @@ class TransactionDetailView extends StatelessWidget {
                   ),
                   const Text(
                     "Tanggal :",
-                    style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(
                     height: 9,
                   ),
                   Text(
                     "Order ID : ${dataTransaksi.transaction.id.toString()}",
-                    style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
