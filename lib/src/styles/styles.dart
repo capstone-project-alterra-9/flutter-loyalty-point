@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Styles {
+  static const Color colorBackground = Color(0xffF9F9F9);
+
   static const Color colorWhite = Color(0xffffffff);
 
   static const Color colorBlack50 = Color(0xffE6E6E6);
@@ -42,6 +44,7 @@ class Styles {
 
   static ButtonStyle secondaryButton = ElevatedButton.styleFrom(
     backgroundColor: Colors.transparent,
+    foregroundColor: colorGreen500,
     padding: const EdgeInsets.symmetric(
       horizontal: 24,
       vertical: 10,
@@ -56,6 +59,23 @@ class Styles {
     side: const BorderSide(
       width: 1,
       color: colorGreen900,
+    ),
+  );
+
+  static ButtonStyle whiteButton = ElevatedButton.styleFrom(
+    backgroundColor: Colors.white,
+    foregroundColor: colorBlack400,
+    elevation: 3,
+    padding: const EdgeInsets.symmetric(
+      horizontal: 24,
+      vertical: 10,
+    ),
+    textStyle: const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+    ),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(36),
     ),
   );
 
