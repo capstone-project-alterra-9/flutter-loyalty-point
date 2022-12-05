@@ -1,9 +1,12 @@
 part of "../home_view.dart";
 
-class HomeSheetProductTypeList extends StatelessWidget {
-  const HomeSheetProductTypeList({super.key, required this.productTypeList});
+class HomeSheetProductOptionList extends StatelessWidget {
+  const HomeSheetProductOptionList({
+    super.key,
+    required this.productOptionList,
+  });
 
-  final List<ProductTypeModel> productTypeList;
+  final List<ProductOptionModel> productOptionList;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,7 @@ class HomeSheetProductTypeList extends StatelessWidget {
             ),
             Row(
               children: List.generate(
-                productTypeList.length,
+                productOptionList.length,
                 (index) => Expanded(
                   child: Container(
                     padding: const EdgeInsets.symmetric(
@@ -40,17 +43,23 @@ class HomeSheetProductTypeList extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Styles.colorBlack500.withOpacity(0.1),
+                          blurRadius: 4,
+                        ),
+                      ],
                     ),
                     child: Wrap(
                       crossAxisAlignment: WrapCrossAlignment.center,
                       direction: Axis.vertical,
                       children: [
                         SvgPicture.asset(
-                          productTypeList[index].icon,
+                          productOptionList[index].icon,
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          productTypeList[index].name,
+                          productOptionList[index].name,
                           style: const TextStyle(fontSize: 10),
                         ),
                       ],
