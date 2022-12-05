@@ -38,244 +38,246 @@ class _ProfileViewState extends State<ProfileView> {
         ],
       ),
       body: Center(
-          child: Container(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(100)),
-              width: 70,
-              height: 70,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              "Joko Boy",
-              style: GoogleFonts.poppins(
-                  fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                InkWell(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(1, .5), //(x,y)
-                            blurRadius: 1.0,
-                          ),
-                        ]),
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              "assets/images/membership.png",
-                              width: 26,
+          child: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(100)),
+                width: 70,
+                height: 70,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Joko Boy",
+                style: GoogleFonts.poppins(
+                    fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  InkWell(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(1, .5), //(x,y)
+                              blurRadius: 1.0,
                             ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            Text(
-                              "My Membership",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 13, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        )
-                      ],
+                          ]),
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset(
+                                "assets/images/membership.png",
+                                width: 26,
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              Text(
+                                "My Membership",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 13, fontWeight: FontWeight.w500),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                InkWell(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(1, .5), //(x,y)
-                            blurRadius: 1.0,
-                          ),
-                        ]),
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              "assets/images/membership.png",
-                              width: 26,
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  InkWell(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(1, .5), //(x,y)
+                              blurRadius: 1.0,
                             ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            Text(
-                              "My Membership",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 13, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        )
-                      ],
+                          ]),
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset(
+                                "assets/images/settings_icon.png",
+                                width: 26,
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              Text(
+                                "Settings",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 13, fontWeight: FontWeight.w500),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                InkWell(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(1, .5), //(x,y)
-                            blurRadius: 1.0,
-                          ),
-                        ]),
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              "assets/images/membership.png",
-                              width: 26,
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  InkWell(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(1, .5), //(x,y)
+                              blurRadius: 1.0,
                             ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            Text(
-                              "My Membership",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 13, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        )
-                      ],
+                          ]),
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset(
+                                "assets/images/faq_logo.png",
+                                width: 26,
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              Text(
+                                "FAQs",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 13, fontWeight: FontWeight.w500),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                InkWell(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(1, .5), //(x,y)
-                            blurRadius: 1.0,
-                          ),
-                        ]),
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              "assets/images/membership.png",
-                              width: 26,
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  InkWell(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(1, .5), //(x,y)
+                              blurRadius: 1.0,
                             ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            Text(
-                              "My Membership",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 13, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        )
-                      ],
+                          ]),
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset(
+                                "assets/images/terms_logo.png",
+                                width: 26,
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              Text(
+                                "Terms & Conditions",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 13, fontWeight: FontWeight.w500),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                InkWell(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(1, .5), //(x,y)
-                            blurRadius: 1.0,
-                          ),
-                        ]),
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              "assets/images/membership.png",
-                              width: 26,
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  InkWell(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(1, .5), //(x,y)
+                              blurRadius: 1.0,
                             ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            Text(
-                              "My Membership",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 13, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        )
-                      ],
+                          ]),
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset(
+                                "assets/images/privacy_icon.png",
+                                width: 26,
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              Text(
+                                "Privacy Policy",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 13, fontWeight: FontWeight.w500),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(156, 194, 155, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    ),
+                  const SizedBox(
+                    height: 10,
                   ),
-                  onPressed: () async {
-                    // ? move to view model
-                    final SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-                    prefs.clear();
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(156, 194, 155, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                    ),
+                    onPressed: () async {
+                      // ? move to view model
+                      final SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.clear();
 
-                    Navigator.of(context).pushNamed(LoginView.routeName);
-                  },
-                  child: Text(
-                    "Log Out",
-                    style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
+                      Navigator.of(context).pushNamed(LoginView.routeName);
+                    },
+                    child: Text(
+                      "Log Out",
+                      style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
+                    ),
                   ),
-                ),
-              ],
-            )
-          ],
+                ],
+              )
+            ],
+          ),
         ),
       )),
     );
