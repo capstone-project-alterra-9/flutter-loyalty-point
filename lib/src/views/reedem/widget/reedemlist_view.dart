@@ -31,33 +31,33 @@ class RedeemListView extends StatelessWidget {
                 margin: const EdgeInsets.only(bottom: 10),
                 child: Row(
                   children: [
-                    Image.network(
-                      listReedemProduct[index].image,
-                      width: 150,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          listReedemProduct[index].name,
-                          style: GoogleFonts.poppins(
-                              color: const Color.fromARGB(255, 0, 0, 0),
-                              fontWeight: FontWeight.w500),
-                        ),
-                        const SizedBox(
-                          height: 18,
-                        ),
-                        Text(
-                          "${listReedemProduct[index].price.toString()} Poin",
-                          style: GoogleFonts.poppins(
-                              color: const Color.fromARGB(255, 0, 0, 0),
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ],
-                    )
+                    // Image.network(
+                    //   listReedemProduct[index].image,
+                    //   width: 150,
+                    // ),
+                    // const SizedBox(
+                    //   width: 10,
+                    // ),
+                    // Column(
+                    //   crossAxisAlignment: CrossAxisAlignment.start,
+                    //   children: [
+                    //     Text(
+                    //       listReedemProduct[index].name,
+                    //       style: GoogleFonts.poppins(
+                    //           color: const Color.fromARGB(255, 0, 0, 0),
+                    //           fontWeight: FontWeight.w500),
+                    //     ),
+                    //     const SizedBox(
+                    //       height: 18,
+                    //     ),
+                    //     Text(
+                    //       "${listReedemProduct[index].price.toString()} Poin",
+                    //       style: GoogleFonts.poppins(
+                    //           color: const Color.fromARGB(255, 0, 0, 0),
+                    //           fontWeight: FontWeight.w700),
+                    //     ),
+                    //   ],
+                    // )
                   ],
                 ));
           }),

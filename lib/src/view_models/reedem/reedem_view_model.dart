@@ -2,13 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../../models/product/product_model.dart';
-import '../../models/product/response_get_product_list_model.dart';
-import '../../utils/helper/args_reedem_product_detail_helper.dart';
-import '../../utils/helper/args_reedem_product_helper.dart';
-import '../../utils/types/view_state_type.dart';
-import '../../views/reedem_product_detail/reedem_product_detail_view.dart';
+import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
+import 'package:flutter_loyalty_point/src/models/product/response_get_product_list_model.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_detail_helper.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_helper.dart';
+import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
+import 'package:flutter_loyalty_point/src/views/reedem_product_detail/reedem_product_detail_view.dart';
 
 class ReedemViewModel extends ChangeNotifier {
   ReedemViewModel(this.context, {required this.args}) {
@@ -23,17 +22,15 @@ class ReedemViewModel extends ChangeNotifier {
     _setProductList();
   }
 
-  List<ProductModel> get productList => _productList;
-  final List<ProductModel> _productList = [];
-
-  ViewStateType get productListState => _productListState;
   ViewStateType _productListState = ViewStateType.loading;
-
+  ViewStateType get productListState => _productListState;
   void _changeProductListState(ViewStateType state) {
     _productListState = state;
     notifyListeners();
   }
 
+  final List<ProductModel> _productList = [];
+  List<ProductModel> get productList => _productList;
   void _setProductList() async {
     _changeProductListState(ViewStateType.loading);
 
@@ -47,7 +44,9 @@ class ReedemViewModel extends ChangeNotifier {
       );
 
       productList.clear();
-      productList.addAll(result.data);
+      if (result.data != null) {
+        productList.addAll(result.data!);
+      }
 
       _changeProductListState(ViewStateType.none);
     } catch (e) {
