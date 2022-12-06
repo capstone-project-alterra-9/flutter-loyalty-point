@@ -65,25 +65,31 @@ class HomeProductList extends StatelessWidget {
 
       case ViewStateType.none:
         {
+          if (productList.isEmpty) {
+            return const Center(
+              child: Text("Product not found!"),
+            );
+          }
+
           return ListView.builder(
             itemCount: productList.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.only(bottom: 8, left: 12),
-              child: Material(
-                elevation: 4,
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-                child: GestureDetector(
-                  onTap: () => context.read<HomeViewModel>().toProductList(
-                        ArgsProductListHelper(
-                          categoryProductType: CategoryProductType.fromString(
-                            productList[index].category ?? "others",
-                          ),
-                          purchaseType: purchaseType,
-                          productId: productList[index].id,
+              child: GestureDetector(
+                onTap: () => context.read<HomeViewModel>().toProductList(
+                      ArgsProductListHelper(
+                        categoryProductType: CategoryProductType.fromString(
+                          productList[index].category ?? "others",
                         ),
+                        purchaseType: purchaseType,
+                        productId: productList[index].id,
                       ),
+                    ),
+                child: Material(
+                  elevation: 4,
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
                   child: Padding(
                     padding: const EdgeInsets.all(8),
                     child: Column(
@@ -92,24 +98,24 @@ class HomeProductList extends StatelessWidget {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            productList[index].image!,
-                            height: 136,
-                            width: 155,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) =>
-                                const SizedBox(
+                          child: Image.network(productList[index].image ?? "",
+                              height: 136, width: 155, fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Styles.colorBlack100,
                               height: 136,
                               width: 155,
-                              child: Center(
-                                child: Text(
-                                  "Image\nNot Found!",
-                                  style: TextStyle(fontSize: 10),
-                                  textAlign: TextAlign.center,
+                              alignment: Alignment.center,
+                              child: const Text(
+                                "Image\nNot Found!",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
                                 ),
+                                textAlign: TextAlign.center,
                               ),
-                            ),
-                          ),
+                            );
+                          }),
                         ),
                         const SizedBox(height: 8),
                         Text(

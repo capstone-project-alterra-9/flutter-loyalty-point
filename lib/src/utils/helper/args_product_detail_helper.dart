@@ -4,6 +4,6 @@ class ArgsProductDetailHelper {
     required this.identifierNumber,
   });
 
-  final int productId;
+  final String productId;
   final String identifierNumber;
 }

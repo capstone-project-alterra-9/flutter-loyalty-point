@@ -14,7 +14,7 @@ enum CategoryProductType {
         {
           return CategoryProductType.credits;
         }
-      case "data quota":
+      case "data-quota":
         {
           return CategoryProductType.dataQuota;
         }

@@ -3,17 +3,17 @@
     "data": [
         {
             "ID": "ini-string-panjang01",
-            "category": "pulsa",
+            "category": "credits",
             "redeem": true,
             "buy": true,
             "name": "product1",
             "price": 10000,
-            "image": "https://images.unsplash.com/photo-1612416365463-9ddb415d7f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+            "image": null,
             "stock": 1
         },
         {
             "ID": "ini-string-panjang02",
-            "category": "paket-data",
+            "category": "data-quota",
             "redeem": true,
             "buy": true,
             "name": "product2",
@@ -23,7 +23,7 @@
         },
         {
             "ID": "ini-string-panjang03",
-            "category": "paket-data",
+            "category": "e-money",
             "redeem": true,
             "buy": true,
             "name": "product3",
@@ -33,7 +33,7 @@
         },
         {
             "ID": "ini-string-panjang04",
-            "category": "paket-data",
+            "category": "e-money",
             "redeem": true,
             "buy": true,
             "name": "product4",
