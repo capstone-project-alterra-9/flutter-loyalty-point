@@ -1,30 +1,23 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_loyalty_point/src/utils/types/request_method_type.dart';
 import 'package:flutter_loyalty_point/src/utils/urls.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class APIConfig {
-  final Dio _dio = Dio(BaseOptions(baseUrl: Urls.baseUrlApi));
+  APIConfig({required bool withToken}) {
+    initialize(withToken: withToken);
+  }
 
-  Future<Response> request({
-    required RequestMethodType method,
-    required String path,
-    Map<String, dynamic>? data,
-    Map<String, dynamic>? queryParameters,
-    bool withToken = false,
-  }) async {
-    final Map<String, String> headers = {};
+  void initialize({required bool withToken}) async {
+    dio.options.baseUrl = Urls.baseUrlApi;
 
-    // add token to headers when need
     if (withToken) {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       final String? token = prefs.getString('token');
 
-      headers.addAll({"Authorization": 'Bearer $token'});
+      dio.options.headers.addAll({"Authorization": 'Bearer $token'});
     }
 
-    // add interceptors
-    _dio.interceptors.add(
+    dio.interceptors.add(
       QueuedInterceptorsWrapper(
         onError: (e, handler) {
           if (e.response!.statusCode == 401) {
@@ -38,19 +31,7 @@ class APIConfig {
         },
       ),
     );
-
-    // do request to server
-    Future<Response> response = _dio.request(
-      path,
-      data: data,
-      queryParameters: queryParameters,
-      options: Options(
-        method: method.name,
-        headers: headers,
-      ),
-    );
-
-    // return request response
-    return response;
   }
+
+  final Dio dio = Dio();
 }
