@@ -25,7 +25,7 @@ class ProductModel {
     );
   }
 
-  final int? id;
+  final String? id;
   final String? category;
   final bool? redeem;
   final bool? buy;

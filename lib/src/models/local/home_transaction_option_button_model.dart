@@ -1,3 +1,6 @@
+import 'package:flutter_loyalty_point/src/utils/types/category_product_type.dart';
+import 'package:flutter_loyalty_point/src/utils/types/purchase_type.dart';
+
 class HomeTransactionOptionModel {
   const HomeTransactionOptionModel({
     required this.name,
@@ -24,41 +27,50 @@ class HomeTransactionOptionModel {
 }
 
 class ProductOptionModel {
-  const ProductOptionModel({required this.name, required this.icon});
+  const ProductOptionModel(
+      {required this.name, required this.purchaseType, required this.icon});
 
-  final String name;
+  final CategoryProductType name;
+  final PurchaseType purchaseType;
   final String icon;
 
   static const List<ProductOptionModel> productOptionList = [
     ProductOptionModel(
-      name: "Credits",
+      name: CategoryProductType.credits,
+      purchaseType: PurchaseType.buy,
       icon: "assets/icons/icon_credits.svg",
     ),
     ProductOptionModel(
-      name: "Data Quota",
+      name: CategoryProductType.dataQuota,
+      purchaseType: PurchaseType.buy,
       icon: "assets/icons/icon_data_quota.svg",
     ),
     ProductOptionModel(
-      name: "E-money",
+      name: CategoryProductType.eMoney,
+      purchaseType: PurchaseType.buy,
       icon: "assets/icons/icon_emoney.svg",
     ),
   ];
 
   static const List<ProductOptionModel> redeemOptionList = [
     ProductOptionModel(
-      name: "Credits",
+      name: CategoryProductType.credits,
+      purchaseType: PurchaseType.redeem,
       icon: "assets/icons/icon_credits.svg",
     ),
     ProductOptionModel(
-      name: "Data Quota",
+      name: CategoryProductType.dataQuota,
+      purchaseType: PurchaseType.redeem,
       icon: "assets/icons/icon_data_quota.svg",
     ),
     ProductOptionModel(
-      name: "E-money",
+      name: CategoryProductType.eMoney,
+      purchaseType: PurchaseType.redeem,
       icon: "assets/icons/icon_emoney.svg",
     ),
     ProductOptionModel(
-      name: "Cashout",
+      name: CategoryProductType.cashout,
+      purchaseType: PurchaseType.redeem,
       icon: "assets/icons/icon_cashout.svg",
     ),
   ];

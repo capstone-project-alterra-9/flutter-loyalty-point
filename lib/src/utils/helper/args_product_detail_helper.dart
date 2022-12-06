@@ -1,5 +1,5 @@
-class ArgsReedemProductDetailHelper {
-  const ArgsReedemProductDetailHelper({
+class ArgsProductDetailHelper {
+  const ArgsProductDetailHelper({
     required this.productId,
     required this.identifierNumber,
   });

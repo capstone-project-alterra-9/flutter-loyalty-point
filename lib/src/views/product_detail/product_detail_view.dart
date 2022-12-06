@@ -1,12 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_loyalty_point/src/views/reedem/reedem_view.dart';
+import 'package:flutter_loyalty_point/src/views/product_list/product_list_view.dart';
 import 'package:flutter_loyalty_point/src/views/reedem_status/redeem_status_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ReedemProductDetailView extends StatelessWidget {
-  const ReedemProductDetailView({super.key});
+class ProductDetailView extends StatelessWidget {
+  const ProductDetailView({super.key});
 
   static const String routeName = "/reedem-product-detail";
 
@@ -29,7 +29,7 @@ class ReedemProductDetailView extends StatelessWidget {
                   child: IconButton(
                     icon: Icon(Icons.arrow_back),
                     onPressed: () {
-                      Navigator.pushNamed(context, ReedemView.routeName);
+                      // Navigator.pushNamed(context, ReedemView.routeName);
                     },
                   ),
                 ),

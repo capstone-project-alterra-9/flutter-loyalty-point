@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
-import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_helper.dart';
-import 'package:flutter_loyalty_point/src/utils/types/category_product_type.dart';
-import 'package:flutter_loyalty_point/src/view_models/reedem/reedem_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/product_list/product_list_view_model.dart';
 import 'package:flutter_loyalty_point/src/views/home/home_view.dart';
-import 'package:flutter_loyalty_point/src/views/widgets/bottomnav_widget.dart';
-import 'package:flutter_loyalty_point/src/views/reedem/widget/emptylist_view.dart';
-import 'package:flutter_loyalty_point/src/views/reedem/widget/reedemlist_view.dart';
-import 'package:flutter_loyalty_point/src/views/reedem_product_detail/reedem_product_detail_view.dart';
+import 'package:flutter_loyalty_point/src/views/product_detail/product_detail_view.dart';
+import 'package:flutter_loyalty_point/src/views/product_list/widget/emptylist_view.dart';
+import 'package:flutter_loyalty_point/src/views/product_list/widget/reedemlist_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ReedemView extends StatefulWidget {
-  const ReedemView({super.key});
+class ProductListView extends StatefulWidget {
+  const ProductListView({super.key});
 
   static const String routeName = "/reedem";
 
   @override
-  State<ReedemView> createState() => _ReedemViewState();
+  State<ProductListView> createState() => _ProductListViewState();
 }
 
-class _ReedemViewState extends State<ReedemView> {
+class _ProductListViewState extends State<ProductListView> {
   @override
   Widget build(BuildContext context) {
     final List<ProductModel> listReedemProduct =
-        Provider.of<ReedemViewModel>(context).productList;
+        Provider.of<ProductListViewModel>(context).productList;
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
@@ -91,7 +87,7 @@ class _ReedemViewState extends State<ReedemView> {
                     ),
                     onPressed: () {
                       Navigator.of(context)
-                          .pushNamed(ReedemProductDetailView.routeName);
+                          .pushNamed(ProductDetailView.routeName);
                     },
                     child: Text(
                       "Next",

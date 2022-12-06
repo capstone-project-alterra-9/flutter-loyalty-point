@@ -40,22 +40,38 @@ class HomeUserCard extends StatelessWidget {
                   Wrap(
                     direction: Axis.vertical,
                     crossAxisAlignment: WrapCrossAlignment.center,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "Point",
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.white,
                         ),
                       ),
-                      Text(
-                        "5.000",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        ),
-                      ),
+                      Consumer<HomeViewModel>(builder: (context, value, child) {
+                        switch (value.userState) {
+                          case ViewStateType.none:
+                            {
+                              return Text(
+                                value.user?.point == null
+                                    ? "-"
+                                    : NumberFormat.decimalPattern("in_ID")
+                                        .format(value.user!.point),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
+                                ),
+                              );
+                            }
+                          default:
+                            {
+                              return const Center(
+                                child: CircularProgressIndicator.adaptive(),
+                              );
+                            }
+                        }
+                      }),
                     ],
                   )
                 ],

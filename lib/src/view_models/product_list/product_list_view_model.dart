@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
 import 'package:flutter_loyalty_point/src/models/product/response_get_product_list_model.dart';
-import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_detail_helper.dart';
-import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_helper.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_product_detail_helper.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_product_list_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
-import 'package:flutter_loyalty_point/src/views/reedem_product_detail/reedem_product_detail_view.dart';
+import 'package:flutter_loyalty_point/src/views/product_detail/product_detail_view.dart';
 
-class ReedemViewModel extends ChangeNotifier {
-  ReedemViewModel(this.context, {required this.args}) {
+class ProductListViewModel extends ChangeNotifier {
+  ProductListViewModel(this.context, {required this.args}) {
     _initialize();
   }
 
   final BuildContext context;
 
-  final ArgsReedemProductHelper args;
+  final ArgsProductListHelper args;
 
   void _initialize() {
     _setProductList();
@@ -55,16 +55,16 @@ class ReedemViewModel extends ChangeNotifier {
     }
   }
 
-  void tapProduct(int productId) {
+  void tapProduct(String productId) {
     args.productId = productId;
 
     notifyListeners();
   }
 
-  void toReedemProductDetail(ArgsReedemProductDetailHelper args) =>
+  void toReedemProductDetail(ArgsProductDetailHelper args) =>
       Navigator.pushNamed(
         context,
-        ReedemProductDetailView.routeName,
+        ProductDetailView.routeName,
         arguments: args,
       );
 }

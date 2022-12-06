@@ -5,17 +5,17 @@ import 'package:flutter/services.dart';
 
 import '../../models/product/product_model.dart';
 import '../../models/product/response_get_product_model.dart';
-import '../../utils/helper/args_reedem_product_detail_helper.dart';
+import '../../utils/helper/args_product_detail_helper.dart';
 import '../../utils/types/view_state_type.dart';
 
-class ReedemProductDetailViewModel extends ChangeNotifier {
-  ReedemProductDetailViewModel(this.context, {required this.args}) {
+class ProductDetailViewModel extends ChangeNotifier {
+  ProductDetailViewModel(this.context, {required this.args}) {
     _initialize();
   }
 
   final BuildContext context;
 
-  final ArgsReedemProductDetailHelper args;
+  final ArgsProductDetailHelper args;
 
   void _initialize() {
     _setProduct();

@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/product/product_model.dart';
-import '../../../view_models/reedem/reedem_view_model.dart';
+import '../../../view_models/product_list/product_list_view_model.dart';
 
 class RedeemListView extends StatelessWidget {
   const RedeemListView({super.key});
@@ -11,7 +11,7 @@ class RedeemListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<ProductModel> listReedemProduct =
-        Provider.of<ReedemViewModel>(context).productList;
+        Provider.of<ProductListViewModel>(context).productList;
     return Expanded(
       child: ListView.builder(
           itemCount: listReedemProduct.length,

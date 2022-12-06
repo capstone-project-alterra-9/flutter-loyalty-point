@@ -42,6 +42,7 @@ dependencies:
   envied: ^0.3.0
   heroicons: ^0.7.0
   flutter_svg: ^1.1.6
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

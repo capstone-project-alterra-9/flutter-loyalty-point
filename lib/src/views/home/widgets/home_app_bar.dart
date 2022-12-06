@@ -15,27 +15,40 @@ class HomeAppBar extends StatelessWidget {
           children: [
             // leading section
             Expanded(
-              child: Wrap(
-                spacing: 16,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  // user image
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(99),
-                    child: Image.network(
-                      "https://images.unsplash.com/photo-1631588310958-dec1630f8df5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1527&q=80",
-                      height: 45,
-                      width: 45,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+              child: Consumer<HomeViewModel>(
+                builder: (context, value, child) {
+                  switch (value.userState) {
+                    case ViewStateType.none:
+                      {
+                        return Wrap(
+                          spacing: 16,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: [
+                            // icon user
+                            const HeroIcon(
+                              HeroIcons.userCircle,
+                              style: HeroIconStyle.solid,
+                              size: 45,
+                              color: Styles.colorGreen500,
+                            ),
 
-                  // user name
-                  const Text(
-                    "Hi, Joko",
-                    style: TextStyle(fontSize: 14),
-                  ),
-                ],
+                            // user name
+                            Text(
+                              "Hi, ${value.user?.username ?? ''}",
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                    default:
+                      {
+                        return const SizedBox();
+                      }
+                  }
+                },
               ),
             ),
 
