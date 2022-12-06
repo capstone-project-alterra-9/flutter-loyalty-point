@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 class ProductDetailView extends StatelessWidget {
   const ProductDetailView({super.key});
 
-  static const String routeName = "/reedem-product-detail";
+  static const String routeName = "/product-detail";
 
   @override
   Widget build(BuildContext context) {

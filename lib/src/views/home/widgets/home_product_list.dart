@@ -68,12 +68,12 @@ class HomeProductList extends StatelessWidget {
           return ListView.builder(
             itemCount: productList.length,
             scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) => Container(
-              margin: const EdgeInsets.only(bottom: 8, left: 12),
-              color: Colors.white,
+            itemBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.only(bottom: 8, left: 12),
               child: Material(
                 elevation: 4,
                 borderRadius: BorderRadius.circular(15),
+                color: Colors.white,
                 child: GestureDetector(
                   onTap: () => context.read<HomeViewModel>().toProductList(
                         ArgsProductListHelper(
@@ -84,11 +84,8 @@ class HomeProductList extends StatelessWidget {
                           productId: productList[index].id,
                         ),
                       ),
-                  child: Container(
+                  child: Padding(
                     padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,

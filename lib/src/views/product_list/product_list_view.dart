@@ -1,103 +1,195 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
-import 'package:flutter_loyalty_point/src/view_models/product_list/product_list_view_model.dart';
-import 'package:flutter_loyalty_point/src/views/home/home_view.dart';
-import 'package:flutter_loyalty_point/src/views/product_detail/product_detail_view.dart';
-import 'package:flutter_loyalty_point/src/views/product_list/widget/emptylist_view.dart';
-import 'package:flutter_loyalty_point/src/views/product_list/widget/reedemlist_view.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_loyalty_point/src/styles/styles.dart';
+import 'package:heroicons/heroicons.dart';
 
-class ProductListView extends StatefulWidget {
+class ProductListView extends StatelessWidget {
   const ProductListView({super.key});
 
-  static const String routeName = "/reedem";
+  static const String routeName = "/product-list";
 
-  @override
-  State<ProductListView> createState() => _ProductListViewState();
-}
-
-class _ProductListViewState extends State<ProductListView> {
   @override
   Widget build(BuildContext context) {
-    final List<ProductModel> listReedemProduct =
-        Provider.of<ProductListViewModel>(context).productList;
-    return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Text(
-          "Pulsa",
-          style: GoogleFonts.poppins(
-              fontWeight: FontWeight.w500, color: Colors.black),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.grey[50],
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pushNamed(HomeView.routeName);
-          },
-          icon: Icon(Icons.arrow_back),
-        ),
-      ),
-      body: Container(
-        child: Stack(
-          children: [
-            Container(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: Column(
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        contentPadding: const EdgeInsets.only(
-                            top: 10, bottom: 10, left: 10, right: 10),
-                        hintText: "Phone Number",
-                        hintStyle: GoogleFonts.poppins(),
-                        prefix: Text("+62 ")),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  listReedemProduct.isNotEmpty
-                      ? const RedeemListView()
-                      : const EmptyListView(),
-                  const SizedBox(
-                    height: 100,
-                  ),
-                ],
+    return GestureDetector(
+      onTapDown: (details) => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        body: CustomScrollView(
+          slivers: [
+            // app bar section
+            SliverAppBar(
+              title: const Text("Credits"),
+              automaticallyImplyLeading: false,
+              pinned: true,
+              elevation: 1,
+              leading: IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const HeroIcon(
+                  HeroIcons.arrowLeft,
+                  style: HeroIconStyle.outline,
+                  size: 24,
+                  color: Styles.colorBlack400,
+                ),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  color: Colors.white,
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(156, 194, 155, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100),
+
+            // input identifier number section
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 16,
+                  top: 16,
+                  right: 16,
+                  bottom: 8,
+                ),
+                child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  decoration: Styles.textFieldAuth.copyWith(
+                    filled: true,
+                    fillColor: Colors.white,
+                    prefixIcon: const Padding(
+                      padding: EdgeInsets.only(left: 24, right: 4, bottom: 2),
+                      child: Text(
+                        "+62",
+                        style: TextStyle(fontSize: 16),
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(ProductDetailView.routeName);
-                    },
-                    child: Text(
-                      "Next",
-                      style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
-                    ),
+                    prefixIconConstraints: const BoxConstraints(),
                   ),
                 ),
-              ],
-            )
+              ),
+            ),
+
+            SliverToBoxAdapter(
+              child: Container(
+                margin: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: const Color(0xffFFF9ED),
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(
+                    color: const Color(0xffF3BA63),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Wrap(
+                      spacing: 8,
+                      children: const [
+                        Text(
+                          "Information",
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                        HeroIcon(
+                          HeroIcons.informationCircle,
+                          style: HeroIconStyle.solid,
+                          color: Color(0xffEE9D2B),
+                          size: 20,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    const Text(
+                      "Before making a transaction, make sure you have entered the number.",
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // product list
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                childCount: 10,
+                (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8,
+                      horizontal: 16,
+                    ),
+                    child: Material(
+                      elevation: 4,
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: IntrinsicHeight(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: AspectRatio(
+                                  aspectRatio: 181 / 104,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.network(
+                                      "https://images.unsplash.com/photo-1612416365463-9ddb415d7f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+                                      fit: BoxFit.cover,
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return const Center(
+                                          child: Text(
+                                            "image\nnot found!",
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 16,
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: const [
+                                      Text(
+                                        "Credits 15rb",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      Text(
+                                        "data",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
+        ),
+        bottomNavigationBar: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: ElevatedButton(
+              onPressed: () {},
+              style: Styles.greyButton,
+              child: const Text("Next"),
+            ),
+          ),
         ),
       ),
     );

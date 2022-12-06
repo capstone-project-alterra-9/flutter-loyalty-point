@@ -13,9 +13,15 @@ class MyApp extends StatelessWidget {
       initialRoute: SplashView.routeName,
       theme: ThemeData(
         fontFamily: GoogleFonts.poppins().fontFamily,
+        textTheme: const TextTheme(
+          bodyText2: TextStyle(
+            color: Styles.colorBlack400,
+          ),
+        ),
         backgroundColor: Styles.colorBackground,
+        scaffoldBackgroundColor: Styles.colorBackground,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Styles.colorBackground,
+          backgroundColor: Styles.colorWhite,
           foregroundColor: Styles.colorBlack400,
           titleTextStyle: TextStyle(
             fontSize: 24,

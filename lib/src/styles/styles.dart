@@ -62,6 +62,22 @@ class Styles {
     ),
   );
 
+  static ButtonStyle greyButton = ElevatedButton.styleFrom(
+    backgroundColor: colorBlack50,
+    foregroundColor: colorBlack300,
+    padding: const EdgeInsets.symmetric(
+      horizontal: 24,
+      vertical: 10,
+    ),
+    textStyle: const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+    ),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(36),
+    ),
+  );
+
   static ButtonStyle whiteButton = ElevatedButton.styleFrom(
     backgroundColor: Colors.white,
     foregroundColor: colorBlack400,
@@ -92,7 +108,7 @@ class Styles {
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(99),
-      borderSide: const BorderSide(color: Styles.colorGreen900),
+      borderSide: const BorderSide(color: Styles.colorBlack500),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(99),
