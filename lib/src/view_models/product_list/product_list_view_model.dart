@@ -37,6 +37,7 @@ class ProductListViewModel extends ChangeNotifier {
             }
             break;
           }
+
         case CategoryProductType.dataQuota:
           {
             if (identifierNumber.length >= 10) {
@@ -47,6 +48,7 @@ class ProductListViewModel extends ChangeNotifier {
 
             break;
           }
+
         case CategoryProductType.eMoney:
           {
             if (identifierNumber.length >= 16) {
@@ -57,6 +59,7 @@ class ProductListViewModel extends ChangeNotifier {
 
             break;
           }
+
         default:
       }
     }

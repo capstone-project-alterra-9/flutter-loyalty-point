@@ -172,7 +172,9 @@ class HomeProductCard extends StatelessWidget {
 
             // price product
             Text(
-              NumberFormat.simpleCurrency(locale: "in_ID").format(price),
+              price == null
+                  ? "-"
+                  : NumberFormat.simpleCurrency(locale: "in_ID").format(price),
               style: const TextStyle(fontSize: 12),
             ),
           ],
