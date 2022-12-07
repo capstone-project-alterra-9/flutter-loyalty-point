@@ -5,13 +5,13 @@
         "createdAt": "2022-11-22T16:48:08.886542Z",
         "updatedAt": "2022-11-22T16:48:08.886542Z",
         "deletedAt": null,
-        "category": "pulsa",
+        "category": "credits",
         "redeem": true,
         "buy": true,
         "name": "product1",
         "description": "...",
         "price": 10000,
-        "image": "ini-link-image",
+        "image": "10rb",
         "stock": 1
     }
 }

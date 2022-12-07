@@ -128,6 +128,7 @@ class ProductListViewModel extends ChangeNotifier {
       arguments: ArgsProductDetailHelper(
         productId: args.productId!,
         identifierNumber: identifierNumber,
+        purchaseType: args.purchaseType,
       ),
     );
   }

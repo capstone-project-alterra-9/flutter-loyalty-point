@@ -17,8 +17,10 @@ part 'widgets/home_app_bar.dart';
 part 'widgets/home_banner.dart';
 part 'widgets/home_transaction_options_button.dart';
 part 'widgets/home_user_card.dart';
+part 'widgets/home_product_title.dart';
 part 'widgets/home_product_list.dart';
 part 'widgets/home_sheet_product_option_list.dart';
+part 'widgets/home_product_card.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -30,43 +32,57 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          const SliverAppBar(
-            automaticallyImplyLeading: false,
-            centerTitle: false,
-            toolbarHeight: 61,
-            floating: true,
-            snap: true,
-            pinned: true,
-            elevation: 1,
-            flexibleSpace: HomeAppBar(),
-          ),
+          // app bar section
+          const HomeAppBar(),
+
+          // user card section
+          const HomeUserCard(),
+
+          // banner section
+          const HomeBanner(),
+
+          // buttons section
+          const HomeTransactionOptionsButton(),
+
+          // product list
+          const HomeProductTitle(title: "Product"),
           SliverToBoxAdapter(
-            child: Column(
-              children: [
-                const HomeUserCard(),
-                const HomeBanner(),
-                const HomeTransactionOptionsButton(),
-                Consumer<HomeViewModel>(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 4, bottom: 16),
+              child: SizedBox(
+                height: 214,
+                child: Consumer<HomeViewModel>(
                   builder: (context, value, child) => HomeProductList(
-                    title: "Product",
                     productList: value.productList,
                     viewState: value.productListState,
                     purchaseType: PurchaseType.buy,
                   ),
                 ),
-                Consumer<HomeViewModel>(
+              ),
+            ),
+          ),
+
+          // reedem list
+          const HomeProductTitle(title: "Redeem"),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 4, bottom: 16),
+              child: SizedBox(
+                height: 214,
+                child: Consumer<HomeViewModel>(
                   builder: (context, value, child) => HomeProductList(
-                    title: "Redeem",
                     productList: value.redeemList,
                     viewState: value.redeemListState,
                     purchaseType: PurchaseType.redeem,
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ],
       ),
+
+      // bottom bar section
       bottomNavigationBar: const BottomNavWidget(routeName: HomeView.routeName),
     );
   }
