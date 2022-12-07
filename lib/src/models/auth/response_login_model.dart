@@ -8,13 +8,15 @@ class ResponseLoginModel {
     );
   }
 
-  final String message;
-  final DataModel data;
+  final String? message;
+  final DataModel? data;
 }
 
 class DataModel {
   const DataModel({
     required this.username,
+    required this.email,
+    required this.password,
     required this.token,
     required this.refreshToken,
     required this.account,
@@ -23,14 +25,18 @@ class DataModel {
   factory DataModel.fromJson(Map<String, dynamic> json) {
     return DataModel(
       username: json['username'],
+      email: json['email'],
+      password: json['password'],
       token: json['token'],
       refreshToken: json['refreshToken'],
       account: json['account'],
     );
   }
 
-  final String username;
-  final String token;
-  final String refreshToken;
-  final String account;
+  final String? username;
+  final String? email;
+  final String? password;
+  final String? token;
+  final String? refreshToken;
+  final String? account;
 }

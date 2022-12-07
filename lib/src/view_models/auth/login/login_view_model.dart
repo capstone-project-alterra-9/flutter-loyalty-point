@@ -13,14 +13,23 @@ class LoginViewModel extends ChangeNotifier {
 
   final BuildContext context;
 
-  ViewStateType get loginState => _loginState;
+  // login view state
   ViewStateType _loginState = ViewStateType.none;
-
+  ViewStateType get loginState => _loginState;
   void _changeLoginState(ViewStateType state) {
     _loginState = state;
     notifyListeners();
   }
 
+  // obscure text password
+  bool _obscureText = true;
+  bool get obscureText => _obscureText;
+  void changeObscureText() {
+    _obscureText = !_obscureText;
+    notifyListeners();
+  }
+
+  // handle button submit (login)
   void submit(DataRequestLoginModel data) async {
     final NavigatorState navigator = Navigator.of(context);
     _changeLoginState(ViewStateType.loading);
@@ -36,8 +45,13 @@ class LoginViewModel extends ChangeNotifier {
 
       // save token to shared preferences
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('token', result.data.token);
-      await prefs.setString('refreshToken', result.data.refreshToken);
+      if (result.data?.token != null) {
+        await prefs.setString('token', result.data!.token!);
+      }
+
+      if (result.data?.refreshToken != null) {
+        await prefs.setString('refreshToken', result.data!.refreshToken!);
+      }
 
       // navigate to home when login success
       navigator.pushNamedAndRemoveUntil(HomeView.routeName, (route) => false);
