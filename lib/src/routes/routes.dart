@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_status_helper.dart';
+import 'package:flutter_loyalty_point/src/view_models/transaction_status/transaction_status_view_model.dart';
 import 'package:flutter_loyalty_point/src/views/profile/profile_view.dart';
 import 'package:flutter_loyalty_point/src/views/qr/qr_view.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_product_detail_helper.dart';
@@ -13,7 +15,7 @@ import '../views/home/home_view.dart';
 import '../views/onboarding/onboarding_view.dart';
 import '../views/product_list/product_list_view.dart';
 import '../views/product_detail/product_detail_view.dart';
-import '../views/reedem_status/redeem_status_view.dart';
+import '../views/transaction_status/transaction_status_view.dart';
 import '../views/splash/splash_view.dart';
 import '../views/transaction_detail/transaction_detail_view.dart';
 import '../view_models/auth/login/login_view_model.dart';
@@ -39,7 +41,7 @@ class Routes {
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => LoginViewModel(context),
-                child: LoginView(),
+                child: const LoginView(),
               );
             },
           );
@@ -52,7 +54,7 @@ class Routes {
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => RegisterViewModel(context),
-                child: RegisterView(),
+                child: const RegisterView(),
               );
             },
           );
@@ -78,7 +80,7 @@ class Routes {
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => HomeViewModel(context),
-                child: HomeView(),
+                child: const HomeView(),
               );
             },
           );
@@ -111,7 +113,7 @@ class Routes {
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => OnboardingViewModel(context),
-                child: OnboardingView(),
+                child: const OnboardingView(),
               );
             },
           );
@@ -130,7 +132,7 @@ class Routes {
                   context,
                   args: args,
                 ),
-                child: ProductListView(),
+                child: const ProductListView(),
               );
             },
           );
@@ -149,28 +151,27 @@ class Routes {
                   context,
                   args: args,
                 ),
-                child: ProductDetailView(),
+                child: const ProductDetailView(),
               );
             },
           );
         }
 
       // reedem status
-      case RedeemStatusView.routeName:
+      case TransactionStatusView.routeName:
         {
-          return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) {
-              return RedeemStatusView();
-            },
-          );
-        }
+          ArgsTransactionStatusHelper args =
+              settings.arguments as ArgsTransactionStatusHelper;
 
-      // reedem status
-      case RedeemStatusView.routeName:
-        {
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return RedeemStatusView();
+              return ChangeNotifierProvider(
+                create: (context) => TransactionStatusViewModel(
+                  context,
+                  args: args,
+                ),
+                child: const TransactionStatusView(),
+              );
             },
           );
         }
@@ -182,7 +183,7 @@ class Routes {
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => SplashViewModel(context),
-                child: SplashView(),
+                child: const SplashView(),
               );
             },
           );
@@ -201,7 +202,7 @@ class Routes {
                   context,
                   args: args,
                 ),
-                child: TransactionDetailView(),
+                child: const TransactionDetailView(),
               );
             },
           );

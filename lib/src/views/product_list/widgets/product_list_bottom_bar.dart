@@ -19,9 +19,7 @@ class ProductListBottomBar extends StatelessWidget {
             onPressed: value.nextButtonDisabled
                 ? null
                 : productListViewModel.toReedemProductDetail,
-            style: value.nextButtonDisabled
-                ? Styles.greyButton
-                : Styles.primaryButton,
+            style: Styles.primaryButton,
             child: const Text("Next"),
           ),
         ),

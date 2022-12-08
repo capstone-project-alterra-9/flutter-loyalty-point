@@ -61,6 +61,15 @@ class ProductListViewModel extends ChangeNotifier {
           }
 
         default:
+          {
+            if (identifierNumber.isNotEmpty) {
+              _nextButtonDisabled = false;
+              notifyListeners();
+              return;
+            }
+
+            break;
+          }
       }
     }
 
