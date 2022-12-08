@@ -3,11 +3,11 @@ part of "../home_view.dart";
 class HomeTransactionOptionsButton extends StatelessWidget {
   const HomeTransactionOptionsButton({super.key});
 
-  final List<HomeTransactionOptionModel> homeTransactionOptionList =
-      HomeTransactionOptionModel.homeTransactionOptionList;
-
   @override
   Widget build(BuildContext context) {
+    List<HomeTransactionOptionModel> homeTransactionOptionList =
+        context.read<HomeViewModel>().homeTransactionOptionList;
+
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -15,11 +15,13 @@ class HomeTransactionOptionsButton extends StatelessWidget {
           vertical: 12,
         ),
         child: Row(
-          children: [
-            for (int index = 0;
-                index < homeTransactionOptionList.length;
-                index++) ...[
-              Expanded(
+          children: List.generate(
+            homeTransactionOptionList.length,
+            (index) => Expanded(
+              child: Padding(
+                padding: index < homeTransactionOptionList.length - 1
+                    ? const EdgeInsets.only(right: 20)
+                    : const EdgeInsets.all(0),
                 child: ElevatedButton(
                   onPressed: () {
                     showModalBottomSheet(
@@ -50,10 +52,8 @@ class HomeTransactionOptionsButton extends StatelessWidget {
                   ),
                 ),
               ),
-              if (index < homeTransactionOptionList.length - 1)
-                const SizedBox(width: 20),
-            ],
-          ],
+            ),
+          ),
         ),
       ),
     );

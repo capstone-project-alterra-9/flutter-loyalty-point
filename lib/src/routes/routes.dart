@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_payment_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_status_helper.dart';
+import 'package:flutter_loyalty_point/src/view_models/payment/payment_view_model.dart';
 import 'package:flutter_loyalty_point/src/view_models/transaction_status/transaction_status_view_model.dart';
+import 'package:flutter_loyalty_point/src/views/payment/payment_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/profile_view.dart';
 import 'package:flutter_loyalty_point/src/views/qr/qr_view.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_product_detail_helper.dart';
@@ -114,6 +117,24 @@ class Routes {
               return ChangeNotifierProvider(
                 create: (context) => OnboardingViewModel(context),
                 child: const OnboardingView(),
+              );
+            },
+          );
+        }
+
+      // payment section
+      case PaymentView.routeName:
+        {
+          ArgsPaymentHelper args = settings.arguments as ArgsPaymentHelper;
+
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return ChangeNotifierProvider(
+                create: (context) => PaymentViewModel(
+                  context,
+                  args: args,
+                ),
+                child: const PaymentView(),
               );
             },
           );

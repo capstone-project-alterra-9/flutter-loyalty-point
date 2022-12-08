@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_loyalty_point/src/models/local/home_transaction_option_button_model.dart';
 import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
 import 'package:flutter_loyalty_point/src/models/product/response_get_product_list_model.dart';
 import 'package:flutter_loyalty_point/src/models/user/response_get_user_model.dart';
@@ -22,6 +23,9 @@ class HomeViewModel extends ChangeNotifier {
     _setProductList();
     _setRedeemList();
   }
+
+  final List<HomeTransactionOptionModel> homeTransactionOptionList =
+      HomeTransactionOptionModel.homeTransactionOptionList;
 
   ViewStateType _userState = ViewStateType.loading;
   ViewStateType get userState => _userState;
