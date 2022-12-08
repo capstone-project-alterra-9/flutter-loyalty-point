@@ -33,11 +33,19 @@ class HomeAppBar extends StatelessWidget {
                             crossAxisAlignment: WrapCrossAlignment.center,
                             children: [
                               // icon user
-                              const HeroIcon(
-                                HeroIcons.userCircle,
-                                style: HeroIconStyle.solid,
-                                size: 45,
-                                color: Styles.colorGreen500,
+                              CircleAvatar(
+                                backgroundColor: Styles.colorGreen500,
+                                radius: 22.5,
+                                child: Text(
+                                  value.user?.username
+                                          ?.substring(0, 1)
+                                          .toUpperCase() ??
+                                      "",
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w500),
+                                ),
                               ),
 
                               // user name
@@ -61,12 +69,7 @@ class HomeAppBar extends StatelessWidget {
               ),
 
               // icon section
-              const HeroIcon(
-                HeroIcons.bell,
-                style: HeroIconStyle.solid,
-                size: 24,
-                color: Styles.colorBlack400,
-              ),
+              SvgPicture.asset("assets/icons/icon_customer_service.svg"),
             ],
           ),
         ),
