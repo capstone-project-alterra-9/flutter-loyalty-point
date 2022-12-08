@@ -1,11 +1,13 @@
 {
-    "message": "message",
+    "message": "succes get my data",
     "data": {
-        "ID": 1,
-        "username": "username",
-        "email": "email",
-        "password": "password",
-        "point": 100000,
-        "status": "active"
+        "ID": "ini-string-panjang",
+        "createdAt": "2022-11-06T16:48:08.886542Z",
+        "updatedAt": "2022-11-06T16:48:08.886542Z",
+        "deletedAt": null,
+        "role": "user",
+        "username": "test",
+        "email": "testmail01@gmail.com",
+        "point": 20000
     }
 }

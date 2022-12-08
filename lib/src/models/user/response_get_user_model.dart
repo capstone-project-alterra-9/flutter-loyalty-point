@@ -10,6 +10,6 @@ class ResponseGetUserModel {
     );
   }
 
-  final String message;
-  final UserModel data;
+  final String? message;
+  final UserModel? data;
 }

@@ -1,29 +1,45 @@
 {
-    "message": "message",
+    "message": "succes get products",
     "data": [
         {
-            "ID": 1,
-            "category": "pulsa",
-            "name": "product name 1",
+            "ID": "ini-string-panjang01",
+            "category": "credits",
+            "redeem": true,
+            "buy": true,
+            "name": "product1",
             "price": 10000,
-            "image": "https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
+            "image": "10rb",
             "stock": 1
         },
         {
-            "ID": 2,
-            "category": "paket data",
-            "name": "product name 2",
+            "ID": "ini-string-panjang02",
+            "category": "data-quota",
+            "redeem": true,
+            "buy": true,
+            "name": "product2",
             "price": 20000,
-            "image": "https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
+            "image": "3GB",
             "stock": 1
         },
         {
-            "ID": 3,
-            "category": "paket data",
-            "name": "product name 3",
+            "ID": "ini-string-panjang03",
+            "category": "e-money",
+            "redeem": true,
+            "buy": true,
+            "name": "product3",
             "price": 20000,
-            "image": "https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
-            "stock": 0
+            "image": "100rb",
+            "stock": 1
+        },
+        {
+            "ID": "ini-string-panjang04",
+            "category": "cashout",
+            "redeem": true,
+            "buy": true,
+            "name": "product4",
+            "price": 20000,
+            "image": "50rb",
+            "stock": 1
         }
     ]
 }
