@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loyalty_point/src/models/transaction/transaction_model.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_detail_helper.dart';
+import 'package:flutter_loyalty_point/src/view_models/transaction_detail/transaction_detail_view_model.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class TransactionDetailView extends StatelessWidget {
   const TransactionDetailView({super.key});
@@ -8,6 +12,8 @@ class TransactionDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ArgsTransactionDetailHelper dataTransaksi =
+        Provider.of<TransactionDetailViewModel>(context).args;
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
@@ -58,15 +64,13 @@ class TransactionDetailView extends StatelessWidget {
                     height: 9,
                   ),
                   const Text(
-                    "Tanggal : ",
-                    style: TextStyle(fontWeight: FontWeight.w600),
+                    "Tanggal :",
                   ),
                   const SizedBox(
                     height: 9,
                   ),
-                  const Text(
-                    "Order ID : ",
-                    style: TextStyle(fontWeight: FontWeight.w600),
+                  Text(
+                    "Order ID : ${dataTransaksi.transaction.id.toString()}",
                   ),
                 ],
               ),
@@ -104,8 +108,8 @@ class TransactionDetailView extends StatelessWidget {
                       const Text(
                         "Serial Number",
                       ),
-                      const Text(
-                        "12342i928",
+                      Text(
+                        dataTransaksi.transaction.serialNumber,
                       ),
                     ],
                   ),
@@ -119,8 +123,8 @@ class TransactionDetailView extends StatelessWidget {
                       const Text(
                         "Nama Produk",
                       ),
-                      const Text(
-                        "Pulsa 20 Ribu",
+                      Text(
+                        dataTransaksi.transaction.name,
                       ),
                     ],
                   ),
@@ -134,8 +138,8 @@ class TransactionDetailView extends StatelessWidget {
                       const Text(
                         "Nomor Handphone",
                       ),
-                      const Text(
-                        "0822818181",
+                      Text(
+                        dataTransaksi.transaction.identifierNumber,
                       ),
                     ],
                   ),
@@ -149,8 +153,8 @@ class TransactionDetailView extends StatelessWidget {
                       const Text(
                         "Harga",
                       ),
-                      const Text(
-                        "750 Poins",
+                      Text(
+                        "${dataTransaksi.transaction.price.toString()} Poins",
                       ),
                     ],
                   ),
