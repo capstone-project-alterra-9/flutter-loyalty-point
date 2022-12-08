@@ -23,60 +23,27 @@ class ProductListViewModel extends ChangeNotifier {
     _setProductList();
   }
 
-  bool _nextButtonDisabled = true;
-  bool get nextButtonDisabled => _nextButtonDisabled;
-  void _changeNextButtonDisabled() {
+  bool get nextButtonDisabled {
     if (args.productId != null) {
       switch (args.categoryProductType) {
         case CategoryProductType.credits:
-          {
-            if (identifierNumber.length >= 10) {
-              _nextButtonDisabled = false;
-              notifyListeners();
-              return;
-            }
-            break;
-          }
+          if (identifierNumber.length >= 10) return false;
+          break;
 
         case CategoryProductType.dataQuota:
-          {
-            if (identifierNumber.length >= 10) {
-              _nextButtonDisabled = false;
-              notifyListeners();
-              return;
-            }
-
-            break;
-          }
+          if (identifierNumber.length >= 10) return false;
+          break;
 
         case CategoryProductType.eMoney:
-          {
-            if (identifierNumber.length >= 16) {
-              _nextButtonDisabled = false;
-              notifyListeners();
-              return;
-            }
-
-            break;
-          }
+          if (identifierNumber.length >= 16) return false;
+          break;
 
         default:
-          {
-            if (identifierNumber.isNotEmpty) {
-              _nextButtonDisabled = false;
-              notifyListeners();
-              return;
-            }
-
-            break;
-          }
+          if (identifierNumber.isNotEmpty) return false;
       }
     }
 
-    if (_nextButtonDisabled == false) {
-      _nextButtonDisabled = true;
-      notifyListeners();
-    }
+    return true;
   }
 
   String _identifierNumber = "";
@@ -91,7 +58,7 @@ class ProductListViewModel extends ChangeNotifier {
 
   set identifierNumber(String value) {
     _identifierNumber = value;
-    _changeNextButtonDisabled();
+    notifyListeners();
   }
 
   ViewStateType _productListState = ViewStateType.loading;
@@ -129,7 +96,6 @@ class ProductListViewModel extends ChangeNotifier {
 
   void tapProduct(String? productId) {
     args.productId = productId;
-    _changeNextButtonDisabled();
     notifyListeners();
   }
 

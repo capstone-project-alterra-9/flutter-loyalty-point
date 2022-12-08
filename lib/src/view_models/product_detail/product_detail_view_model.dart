@@ -22,11 +22,19 @@ class ProductDetailViewModel extends ChangeNotifier {
 
   final ArgsProductDetailHelper args;
 
-  void _initialize() {
-    _setProduct();
+  void _initialize() async {
+    await _setProduct();
+    await _checkIsUserCoinEnough();
   }
 
-  bool disabledCreateTransaction = true;
+  bool _createTransactionButtonDisabled = true;
+  bool get createTransactionButtonDisabled {
+    if (args.purchaseType == PurchaseType.buy) {
+      return false;
+    }
+
+    return _createTransactionButtonDisabled;
+  }
 
   ViewStateType _productState = ViewStateType.loading;
   ViewStateType get productState => _productState;
@@ -37,7 +45,7 @@ class ProductDetailViewModel extends ChangeNotifier {
 
   ProductModel? get product => _product;
   ProductModel? _product;
-  void _setProduct() async {
+  Future<void> _setProduct() async {
     _changeProductState(ViewStateType.loading);
 
     try {
@@ -51,8 +59,6 @@ class ProductDetailViewModel extends ChangeNotifier {
 
       _product = result.data;
 
-      _checkUserCanCreateTransaction();
-
       _changeProductState(ViewStateType.none);
     } catch (e) {
       _changeProductState(ViewStateType.error);
@@ -60,12 +66,7 @@ class ProductDetailViewModel extends ChangeNotifier {
     }
   }
 
-  void _checkUserCanCreateTransaction() async {
-    if (args.purchaseType == PurchaseType.buy) {
-      disabledCreateTransaction = false;
-      return;
-    }
-
+  Future<void> _checkIsUserCoinEnough() async {
     try {
       final String data = await rootBundle.loadString(
         'assets/json/dummy_data_response_get_user.json',
@@ -77,7 +78,7 @@ class ProductDetailViewModel extends ChangeNotifier {
 
       if (result.data?.point != null && product?.price != null) {
         if (result.data!.point! >= product!.price!) {
-          disabledCreateTransaction = false;
+          _createTransactionButtonDisabled = false;
         }
       }
     } catch (e) {

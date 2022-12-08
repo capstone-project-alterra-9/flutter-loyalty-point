@@ -63,7 +63,7 @@ class ProductDetailBottomBar extends StatelessWidget {
                       ),
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: value.disabledCreateTransaction
+                          onPressed: value.createTransactionButtonDisabled
                               ? null
                               : context
                                   .read<ProductDetailViewModel>()
