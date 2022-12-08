@@ -108,8 +108,11 @@ class TransactionDetailView extends StatelessWidget {
                       const Text(
                         "Serial Number",
                       ),
-                      Text(
-                        dataTransaksi.transaction.serialNumber,
+                      Expanded(
+                        child: Text(
+                          dataTransaksi.transaction.serialNumber,
+                          textAlign: TextAlign.right,
+                        ),
                       ),
                     ],
                   ),
@@ -123,8 +126,11 @@ class TransactionDetailView extends StatelessWidget {
                       const Text(
                         "Nama Produk",
                       ),
-                      Text(
-                        dataTransaksi.transaction.name,
+                      Expanded(
+                        child: Text(
+                          dataTransaksi.transaction.name,
+                          textAlign: TextAlign.right,
+                        ),
                       ),
                     ],
                   ),
@@ -138,8 +144,11 @@ class TransactionDetailView extends StatelessWidget {
                       const Text(
                         "Nomor Handphone",
                       ),
-                      Text(
-                        dataTransaksi.transaction.identifierNumber,
+                      Expanded(
+                        child: Text(
+                          dataTransaksi.transaction.identifierNumber,
+                          textAlign: TextAlign.right,
+                        ),
                       ),
                     ],
                   ),
@@ -153,8 +162,11 @@ class TransactionDetailView extends StatelessWidget {
                       const Text(
                         "Harga",
                       ),
-                      Text(
-                        "${dataTransaksi.transaction.price.toString()} Poins",
+                      Expanded(
+                        child: Text(
+                          "${dataTransaksi.transaction.price.toString()} Poins",
+                          textAlign: TextAlign.right,
+                        ),
                       ),
                     ],
                   ),
