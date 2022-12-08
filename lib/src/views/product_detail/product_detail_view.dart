@@ -4,13 +4,14 @@ import 'package:flutter_loyalty_point/src/utils/types/category_product_type.dart
 import 'package:flutter_loyalty_point/src/utils/types/purchase_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
 import 'package:flutter_loyalty_point/src/view_models/product_detail/product_detail_view_model.dart';
+import 'package:flutter_loyalty_point/src/views/widgets/bottom_sheet_widget.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 part 'widgets/product_detail_app_bar.dart';
 part 'widgets/product_detail_description.dart';
-part 'widgets/product_detail_bottom_bar.dart';
+part 'widgets/product_detail_bottom_sheet.dart';
 
 class ProductDetailView extends StatelessWidget {
   const ProductDetailView({super.key});
@@ -26,7 +27,7 @@ class ProductDetailView extends StatelessWidget {
           ProductDetailDescription(),
         ],
       ),
-      bottomNavigationBar: ProductDetailBottomBar(),
+      bottomSheet: ProductDetailBottomSheet(),
     );
   }
 }
