@@ -4,6 +4,9 @@ import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_status_h
 import 'package:flutter_loyalty_point/src/view_models/payment/payment_view_model.dart';
 import 'package:flutter_loyalty_point/src/view_models/transaction_status/transaction_status_view_model.dart';
 import 'package:flutter_loyalty_point/src/views/payment/payment_view.dart';
+import 'package:flutter_loyalty_point/src/views/profile/faq_view.dart';
+import 'package:flutter_loyalty_point/src/views/profile/faqdetail_view.dart';
+import 'package:flutter_loyalty_point/src/views/profile/membership_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/profile_view.dart';
 import 'package:flutter_loyalty_point/src/views/qr/qr_view.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_product_detail_helper.dart';
@@ -89,12 +92,42 @@ class Routes {
           );
         }
 
-      // bottom navigation section
+      // profileview section
       case ProfileView.routeName:
         {
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
               return ProfileView();
+            },
+          );
+        }
+
+      // membershipview section
+      case MembershipView.routeName:
+        {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return MembershipView();
+            },
+          );
+        }
+
+      // faq section
+      case FAQView.routeName:
+        {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return FAQView();
+            },
+          );
+        }
+
+      // faq detail
+      case FAQDetailView.routeName:
+        {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return FAQDetailView();
             },
           );
         }

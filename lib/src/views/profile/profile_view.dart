@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/styles/styles.dart';
 import 'package:flutter_loyalty_point/src/views/auth/login/login_view.dart';
+import 'package:flutter_loyalty_point/src/views/profile/faq_view.dart';
+import 'package:flutter_loyalty_point/src/views/profile/membership_view.dart';
 import 'package:flutter_loyalty_point/src/views/widgets/bottomnav_widget.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,10 +34,13 @@ class _ProfileViewState extends State<ProfileView> {
           elevation: 0,
           automaticallyImplyLeading: false,
           actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.notifications),
-              color: Colors.black,
+            Container(
+              margin: const EdgeInsets.only(right: 15),
+              child: InkWell(
+                onTap: () {},
+                child:
+                    SvgPicture.asset("assets/icons/icon_customer_service.svg"),
+              ),
             )
           ],
         ),
@@ -67,9 +73,13 @@ class _ProfileViewState extends State<ProfileView> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     InkWell(
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushNamed(MembershipView.routeName);
+                      },
                       child: Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
                             boxShadow: [
                               BoxShadow(
@@ -102,52 +112,55 @@ class _ProfileViewState extends State<ProfileView> {
                         ),
                       ),
                     ),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
+                    // InkWell(
+                    //   child: Container(
+                    //     decoration: BoxDecoration(
+                    //         borderRadius: BorderRadius.circular(10),
+                    //         color: Colors.white,
+                    //         boxShadow: [
+                    //           BoxShadow(
+                    //             color: Colors.grey,
+                    //             offset: Offset(1, .5), //(x,y)
+                    //             blurRadius: 1.0,
+                    //           ),
+                    //         ]),
+                    //     padding: const EdgeInsets.all(10),
+                    //     child: Row(
+                    //       children: [
+                    //         Row(
+                    //           children: [
+                    //             Image.asset(
+                    //               "assets/images/settings_icon.png",
+                    //               width: 26,
+                    //             ),
+                    //             const SizedBox(
+                    //               width: 12,
+                    //             ),
+                    //             Text(
+                    //               "Settings",
+                    //               style: GoogleFonts.poppins(
+                    //                   fontSize: 13,
+                    //                   fontWeight: FontWeight.w500),
+                    //             ),
+                    //           ],
+                    //         )
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
                     const SizedBox(
                       height: 20,
                     ),
                     InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(FAQView.routeName);
+                      },
                       child: Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                offset: Offset(1, .5), //(x,y)
-                                blurRadius: 1.0,
-                              ),
-                            ]),
-                        padding: const EdgeInsets.all(10),
-                        child: Row(
-                          children: [
-                            Row(
-                              children: [
-                                Image.asset(
-                                  "assets/images/settings_icon.png",
-                                  width: 26,
-                                ),
-                                const SizedBox(
-                                  width: 12,
-                                ),
-                                Text(
-                                  "Settings",
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    InkWell(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
                             boxShadow: [
                               BoxShadow(
@@ -183,84 +196,84 @@ class _ProfileViewState extends State<ProfileView> {
                     const SizedBox(
                       height: 20,
                     ),
-                    InkWell(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                offset: Offset(1, .5), //(x,y)
-                                blurRadius: 1.0,
-                              ),
-                            ]),
-                        padding: const EdgeInsets.all(10),
-                        child: Row(
-                          children: [
-                            Row(
-                              children: [
-                                Image.asset(
-                                  "assets/images/terms_logo.png",
-                                  width: 26,
-                                ),
-                                const SizedBox(
-                                  width: 12,
-                                ),
-                                Text(
-                                  "Terms & Conditions",
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    InkWell(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                offset: Offset(1, .5), //(x,y)
-                                blurRadius: 1.0,
-                              ),
-                            ]),
-                        padding: const EdgeInsets.all(10),
-                        child: Row(
-                          children: [
-                            Row(
-                              children: [
-                                Image.asset(
-                                  "assets/images/privacy_icon.png",
-                                  width: 26,
-                                ),
-                                const SizedBox(
-                                  width: 12,
-                                ),
-                                Text(
-                                  "Privacy Policy",
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    // InkWell(
+                    //   child: Container(
+                    //     decoration: BoxDecoration(
+                    //         borderRadius: BorderRadius.circular(10),
+                    //         color: Colors.white,
+                    //         boxShadow: [
+                    //           BoxShadow(
+                    //             color: Colors.grey,
+                    //             offset: Offset(1, .5), //(x,y)
+                    //             blurRadius: 1.0,
+                    //           ),
+                    //         ]),
+                    //     padding: const EdgeInsets.all(10),
+                    //     child: Row(
+                    //       children: [
+                    //         Row(
+                    //           children: [
+                    //             Image.asset(
+                    //               "assets/images/terms_logo.png",
+                    //               width: 26,
+                    //             ),
+                    //             const SizedBox(
+                    //               width: 12,
+                    //             ),
+                    //             Text(
+                    //               "Terms & Conditions",
+                    //               style: GoogleFonts.poppins(
+                    //                   fontSize: 13,
+                    //                   fontWeight: FontWeight.w500),
+                    //             ),
+                    //           ],
+                    //         )
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
+                    // InkWell(
+                    //   child: Container(
+                    //     decoration: BoxDecoration(
+                    //         borderRadius: BorderRadius.circular(10),
+                    //         color: Colors.white,
+                    //         boxShadow: [
+                    //           BoxShadow(
+                    //             color: Colors.grey,
+                    //             offset: Offset(1, .5), //(x,y)
+                    //             blurRadius: 1.0,
+                    //           ),
+                    //         ]),
+                    //     padding: const EdgeInsets.all(10),
+                    //     child: Row(
+                    //       children: [
+                    //         Row(
+                    //           children: [
+                    //             Image.asset(
+                    //               "assets/images/privacy_icon.png",
+                    //               width: 26,
+                    //             ),
+                    //             const SizedBox(
+                    //               width: 12,
+                    //             ),
+                    //             Text(
+                    //               "Privacy Policy",
+                    //               style: GoogleFonts.poppins(
+                    //                   fontSize: 13,
+                    //                   fontWeight: FontWeight.w500),
+                    //             ),
+                    //           ],
+                    //         )
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
+                    // const SizedBox(
+                    //   height: 10,
+                    // ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
