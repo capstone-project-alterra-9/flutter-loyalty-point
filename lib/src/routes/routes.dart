@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_payment_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_status_helper.dart';
 import 'package:flutter_loyalty_point/src/view_models/payment/payment_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/profile/faq_viewmodel.dart';
+import 'package:flutter_loyalty_point/src/view_models/profile/mymembership_viewmodel.dart';
+import 'package:flutter_loyalty_point/src/view_models/profile/profile_viewmodel.dart';
 import 'package:flutter_loyalty_point/src/view_models/transaction_status/transaction_status_view_model.dart';
 import 'package:flutter_loyalty_point/src/views/payment/payment_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/faq_view.dart';
@@ -97,7 +100,9 @@ class Routes {
         {
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return ProfileView();
+              return ChangeNotifierProvider(
+                  create: (context) => ProfileViewModel(context),
+                  child: ProfileView());
             },
           );
         }
@@ -107,7 +112,9 @@ class Routes {
         {
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return MembershipView();
+              return ChangeNotifierProvider(
+                  create: (context) => MyMembershipViewModel(),
+                  child: MembershipView());
             },
           );
         }
@@ -117,7 +124,8 @@ class Routes {
         {
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return FAQView();
+              return ChangeNotifierProvider(
+                  create: (context) => FAQViewModel(), child: FAQView());
             },
           );
         }
