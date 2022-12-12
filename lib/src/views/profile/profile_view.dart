@@ -112,45 +112,45 @@ class _ProfileViewState extends State<ProfileView> {
                         ),
                       ),
                     ),
-                    // const SizedBox(
-                    //   height: 20,
-                    // ),
-                    // InkWell(
-                    //   child: Container(
-                    //     decoration: BoxDecoration(
-                    //         borderRadius: BorderRadius.circular(10),
-                    //         color: Colors.white,
-                    //         boxShadow: [
-                    //           BoxShadow(
-                    //             color: Colors.grey,
-                    //             offset: Offset(1, .5), //(x,y)
-                    //             blurRadius: 1.0,
-                    //           ),
-                    //         ]),
-                    //     padding: const EdgeInsets.all(10),
-                    //     child: Row(
-                    //       children: [
-                    //         Row(
-                    //           children: [
-                    //             Image.asset(
-                    //               "assets/images/settings_icon.png",
-                    //               width: 26,
-                    //             ),
-                    //             const SizedBox(
-                    //               width: 12,
-                    //             ),
-                    //             Text(
-                    //               "Settings",
-                    //               style: GoogleFonts.poppins(
-                    //                   fontSize: 13,
-                    //                   fontWeight: FontWeight.w500),
-                    //             ),
-                    //           ],
-                    //         )
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    InkWell(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                offset: Offset(1, .5), //(x,y)
+                                blurRadius: 1.0,
+                              ),
+                            ]),
+                        padding: const EdgeInsets.all(10),
+                        child: Row(
+                          children: [
+                            Row(
+                              children: [
+                                Image.asset(
+                                  "assets/images/settings_icon.png",
+                                  width: 26,
+                                ),
+                                const SizedBox(
+                                  width: 12,
+                                ),
+                                Text(
+                                  "Settings",
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -196,84 +196,84 @@ class _ProfileViewState extends State<ProfileView> {
                     const SizedBox(
                       height: 20,
                     ),
-                    // InkWell(
-                    //   child: Container(
-                    //     decoration: BoxDecoration(
-                    //         borderRadius: BorderRadius.circular(10),
-                    //         color: Colors.white,
-                    //         boxShadow: [
-                    //           BoxShadow(
-                    //             color: Colors.grey,
-                    //             offset: Offset(1, .5), //(x,y)
-                    //             blurRadius: 1.0,
-                    //           ),
-                    //         ]),
-                    //     padding: const EdgeInsets.all(10),
-                    //     child: Row(
-                    //       children: [
-                    //         Row(
-                    //           children: [
-                    //             Image.asset(
-                    //               "assets/images/terms_logo.png",
-                    //               width: 26,
-                    //             ),
-                    //             const SizedBox(
-                    //               width: 12,
-                    //             ),
-                    //             Text(
-                    //               "Terms & Conditions",
-                    //               style: GoogleFonts.poppins(
-                    //                   fontSize: 13,
-                    //                   fontWeight: FontWeight.w500),
-                    //             ),
-                    //           ],
-                    //         )
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
-                    // const SizedBox(
-                    //   height: 20,
-                    // ),
-                    // InkWell(
-                    //   child: Container(
-                    //     decoration: BoxDecoration(
-                    //         borderRadius: BorderRadius.circular(10),
-                    //         color: Colors.white,
-                    //         boxShadow: [
-                    //           BoxShadow(
-                    //             color: Colors.grey,
-                    //             offset: Offset(1, .5), //(x,y)
-                    //             blurRadius: 1.0,
-                    //           ),
-                    //         ]),
-                    //     padding: const EdgeInsets.all(10),
-                    //     child: Row(
-                    //       children: [
-                    //         Row(
-                    //           children: [
-                    //             Image.asset(
-                    //               "assets/images/privacy_icon.png",
-                    //               width: 26,
-                    //             ),
-                    //             const SizedBox(
-                    //               width: 12,
-                    //             ),
-                    //             Text(
-                    //               "Privacy Policy",
-                    //               style: GoogleFonts.poppins(
-                    //                   fontSize: 13,
-                    //                   fontWeight: FontWeight.w500),
-                    //             ),
-                    //           ],
-                    //         )
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
-                    // const SizedBox(
-                    //   height: 10,
-                    // ),
+                    InkWell(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                offset: Offset(1, .5), //(x,y)
+                                blurRadius: 1.0,
+                              ),
+                            ]),
+                        padding: const EdgeInsets.all(10),
+                        child: Row(
+                          children: [
+                            Row(
+                              children: [
+                                Image.asset(
+                                  "assets/images/terms_logo.png",
+                                  width: 26,
+                                ),
+                                const SizedBox(
+                                  width: 12,
+                                ),
+                                Text(
+                                  "Terms & Conditions",
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    InkWell(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                offset: Offset(1, .5), //(x,y)
+                                blurRadius: 1.0,
+                              ),
+                            ]),
+                        padding: const EdgeInsets.all(10),
+                        child: Row(
+                          children: [
+                            Row(
+                              children: [
+                                Image.asset(
+                                  "assets/images/privacy_icon.png",
+                                  width: 26,
+                                ),
+                                const SizedBox(
+                                  width: 12,
+                                ),
+                                Text(
+                                  "Privacy Policy",
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
