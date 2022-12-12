@@ -41,27 +41,27 @@ class ProductListProductList extends StatelessWidget {
 
               return SliverList(
                 delegate: SliverChildBuilderDelegate(
-                  childCount: value.productList.length,
+                  childCount: value.productList.length + 1,
                   (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 8,
-                        horizontal: 16,
-                      ),
-                      child: GestureDetector(
-                        onTap: () => productListViewModel.tapProduct(
-                          value.productList[index].id,
-                        ),
-                        child: ProductListProductCard(
-                          name: value.productList[index].name,
-                          image: value.productList[index].image,
-                          category: value.productList[index].category,
-                          price: value.productList[index].price,
-                          activeCard: value.productList[index].id ==
-                              value.args.productId,
-                        ),
-                      ),
-                    );
+                    return index == value.productList.length
+                        ? const SizedBox(height: 120)
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 16),
+                            child: GestureDetector(
+                              onTap: () => productListViewModel.tapProduct(
+                                value.productList[index].id,
+                              ),
+                              child: ProductListProductCard(
+                                name: value.productList[index].name,
+                                image: value.productList[index].image,
+                                category: value.productList[index].category,
+                                price: value.productList[index].price,
+                                activeCard: value.productList[index].id ==
+                                    value.args.productId,
+                              ),
+                            ),
+                          );
                   },
                 ),
               );

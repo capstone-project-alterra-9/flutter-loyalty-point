@@ -3,7 +3,8 @@ class UserModel {
     required this.id,
     required this.username,
     required this.email,
-    required this.point,
+    required this.points,
+    required this.costPoints,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -11,12 +12,14 @@ class UserModel {
       id: json["ID"],
       username: json["username"],
       email: json["email"],
-      point: json["point"],
+      points: json["points"],
+      costPoints: json["costPoints"],
     );
   }
 
   final String? id;
   final String? username;
   final String? email;
-  final int? point;
+  final int? points;
+  final int? costPoints;
 }

@@ -21,6 +21,7 @@ class ProductListProductCard extends StatelessWidget {
     String background;
     Positioned categoryText;
     Positioned nominalText;
+    int nominalTextLength = image?.length ?? 4;
 
     CategoryProductType categoryProductType =
         CategoryProductType.fromString(category ?? "");
@@ -49,7 +50,10 @@ class ProductListProductCard extends StatelessWidget {
             bottom: 10,
             child: Text(
               image ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20 * 4 / nominalTextLength,
+              ),
             ),
           );
           break;
@@ -79,7 +83,10 @@ class ProductListProductCard extends StatelessWidget {
             bottom: 10,
             child: Text(
               image ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20 * 4 / nominalTextLength,
+              ),
             ),
           );
           break;
@@ -108,7 +115,10 @@ class ProductListProductCard extends StatelessWidget {
             bottom: 10,
             child: Text(
               image ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20 * 4 / nominalTextLength,
+              ),
             ),
           );
           break;
@@ -137,7 +147,10 @@ class ProductListProductCard extends StatelessWidget {
             bottom: 10,
             child: Text(
               image ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20 * 4 / nominalTextLength,
+              ),
             ),
           );
           break;
@@ -160,7 +173,10 @@ class ProductListProductCard extends StatelessWidget {
                 child: Stack(
                   children: [
                     Positioned.fill(
-                      child: Image.asset(background, fit: BoxFit.cover),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset(background, fit: BoxFit.cover),
+                      ),
                     ),
                     categoryText,
                     nominalText,

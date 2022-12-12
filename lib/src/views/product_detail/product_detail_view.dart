@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/styles/styles.dart';
 import 'package:flutter_loyalty_point/src/utils/types/category_product_type.dart';

@@ -19,6 +19,7 @@ class HomeProductCard extends StatelessWidget {
     String background;
     Positioned categoryText;
     Positioned nominalText;
+    int nominalTextLength = image?.length ?? 4;
 
     CategoryProductType categoryProductType =
         CategoryProductType.fromString(category ?? "");
@@ -39,11 +40,14 @@ class HomeProductCard extends StatelessWidget {
             ),
           );
           nominalText = Positioned(
-            left: 17,
+            left: 15,
             bottom: 19,
             child: Text(
               image ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20 * 4 / nominalTextLength,
+              ),
             ),
           );
           break;
@@ -72,7 +76,10 @@ class HomeProductCard extends StatelessWidget {
             bottom: 19,
             child: Text(
               image ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20 * 4 / nominalTextLength,
+              ),
             ),
           );
           break;
@@ -97,11 +104,13 @@ class HomeProductCard extends StatelessWidget {
             ),
           );
           nominalText = Positioned(
-            right: 12,
+            right: 15,
             bottom: 19,
             child: Text(
               image ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20 * 4 / nominalTextLength),
             ),
           );
           break;
@@ -130,7 +139,9 @@ class HomeProductCard extends StatelessWidget {
             bottom: 19,
             child: Text(
               image ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20 * 4 / nominalTextLength),
             ),
           );
           break;

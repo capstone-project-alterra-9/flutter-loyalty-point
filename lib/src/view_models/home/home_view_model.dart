@@ -1,14 +1,16 @@
-import 'dart:convert';
-
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_loyalty_point/src/models/local/home_transaction_option_button_model.dart';
 import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
 import 'package:flutter_loyalty_point/src/models/product/response_get_product_list_model.dart';
 import 'package:flutter_loyalty_point/src/models/user/response_get_user_model.dart';
 import 'package:flutter_loyalty_point/src/models/user/user_model.dart';
+import 'package:flutter_loyalty_point/src/services/api/products_api_service.dart';
+import 'package:flutter_loyalty_point/src/services/api/users_api_service.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_product_list_helper.dart';
+import 'package:flutter_loyalty_point/src/utils/types/purchase_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
+import 'package:flutter_loyalty_point/src/utils/urls.dart';
 import 'package:flutter_loyalty_point/src/views/product_list/product_list_view.dart';
 
 class HomeViewModel extends ChangeNotifier {
@@ -40,12 +42,10 @@ class HomeViewModel extends ChangeNotifier {
     _changeUserState(ViewStateType.loading);
 
     try {
-      final String data = await rootBundle.loadString(
-        'assets/json/dummy_data_response_get_user.json',
-      );
+      final Response response = await UsersAPIService().getUser();
 
       ResponseGetUserModel result = ResponseGetUserModel.fromJson(
-        jsonDecode(data),
+        response.data,
       );
 
       _user = result.data;
@@ -70,12 +70,12 @@ class HomeViewModel extends ChangeNotifier {
     _changeProductListState(ViewStateType.loading);
 
     try {
-      final String data = await rootBundle.loadString(
-        'assets/json/dummy_data_response_get_product_list.json',
+      final Response response = await ProductsAPIService().getProducts(
+        path: Urls.getProductsByPurchasePathApi(PurchaseType.buy),
       );
 
       ResponseGetProductListModel result = ResponseGetProductListModel.fromJson(
-        jsonDecode(data),
+        response.data,
       );
 
       productList.clear();
@@ -103,12 +103,12 @@ class HomeViewModel extends ChangeNotifier {
     _changeRedeemListState(ViewStateType.loading);
 
     try {
-      final String data = await rootBundle.loadString(
-        'assets/json/dummy_data_response_get_product_list.json',
+      final Response response = await ProductsAPIService().getProducts(
+        path: Urls.getProductsByPurchasePathApi(PurchaseType.redeem),
       );
 
       ResponseGetProductListModel result = ResponseGetProductListModel.fromJson(
-        jsonDecode(data),
+        response.data,
       );
 
       redeemList.clear();

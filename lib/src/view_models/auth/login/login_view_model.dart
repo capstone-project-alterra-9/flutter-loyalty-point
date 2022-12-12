@@ -53,6 +53,10 @@ class LoginViewModel extends ChangeNotifier {
         await prefs.setString('refreshToken', result.data!.refreshToken!);
       }
 
+      if (result.data?.id != null) {
+        await prefs.setString('id', result.data!.id!);
+      }
+
       // navigate to home when login success
       navigator.pushNamedAndRemoveUntil(HomeView.routeName, (route) => false);
 
