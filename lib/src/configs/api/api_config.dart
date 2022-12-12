@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_loyalty_point/src/app.dart';
 import 'package:flutter_loyalty_point/src/utils/urls.dart';
+import 'package:flutter_loyalty_point/src/views/auth/login/login_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class APIConfig {
@@ -8,8 +10,6 @@ class APIConfig {
   }
 
   void initialize({required bool withToken}) async {
-    dio.options.baseUrl = Urls.baseUrlApi;
-
     if (withToken) {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       final String? token = prefs.getString('token');
@@ -22,6 +22,10 @@ class APIConfig {
         onError: (e, handler) {
           if (e.response!.statusCode == 401) {
             // todo: add refresh token here!
+            MyApp.navigatorKey.currentState!.pushNamedAndRemoveUntil(
+              LoginView.routeName,
+              (route) => false,
+            );
 
             return;
           }
@@ -33,5 +37,5 @@ class APIConfig {
     );
   }
 
-  final Dio dio = Dio();
+  final Dio dio = Dio(BaseOptions(baseUrl: Urls.baseUrlApi));
 }
