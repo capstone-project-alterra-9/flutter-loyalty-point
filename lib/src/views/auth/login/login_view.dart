@@ -46,6 +46,7 @@ class _LoginViewState extends State<LoginView> {
     return GestureDetector(
       onTapDown: (details) => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: SafeArea(
           child: Center(
             child: SingleChildScrollView(
