@@ -5,7 +5,7 @@ import 'package:flutter_loyalty_point/src/models/auth/data_request_register_mode
 import 'package:flutter_loyalty_point/src/utils/urls.dart';
 
 class AuthAPIService {
-  final APIConfig _apiConfig = APIConfig(withToken: false);
+  final APIConfig _apiConfig = APIConfig();
 
   Future<Response> register({required DataRequestRegisterModel data}) async {
     try {

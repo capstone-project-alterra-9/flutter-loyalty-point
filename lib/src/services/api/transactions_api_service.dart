@@ -4,10 +4,11 @@ import 'package:flutter_loyalty_point/src/models/transaction/data_request_add_tr
 import 'package:flutter_loyalty_point/src/utils/urls.dart';
 
 class TransactionsAPIService {
-  final APIConfig _apiConfig = APIConfig(withToken: true);
+  final APIConfig _apiConfig = APIConfig();
 
   Future<Response> getTransactionHistoryList() async {
     try {
+      await _apiConfig.addToken();
       Response response = await _apiConfig.dio.get(
         Urls.getTransactionHistoryListPathApi,
       );
@@ -22,6 +23,7 @@ class TransactionsAPIService {
     required DataRequestAddTransaction data,
   }) async {
     try {
+      await _apiConfig.addToken();
       Response response = await _apiConfig.dio.post(
         Urls.createTransactionPathApi,
         data: data.toJson(),
