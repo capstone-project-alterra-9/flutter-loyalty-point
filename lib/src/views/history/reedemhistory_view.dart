@@ -51,82 +51,78 @@ class ReedemHistoryView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 75,
-                        height: 75,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          image: DecorationImage(
-                              image: AssetImage(
-                                  "assets/images/redeem_history.png")),
+                  Expanded(
+                    flex: 2,
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 75,
+                          height: 75,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            image: DecorationImage(
+                                image: AssetImage(
+                                    "assets/images/redeem_history.png")),
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        width: 13,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            listTransactionHistory[index].category,
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500,
-                                color: Styles.colorBlack400,
-                                fontSize: 16),
+                        const SizedBox(
+                          width: 13,
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                listTransactionHistory[index].category,
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,
+                                    color: Styles.colorBlack400,
+                                    fontSize: 14),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                listTransactionHistory[index].name,
+                                style: GoogleFonts.poppins(
+                                    color: Styles.colorBlack400, fontSize: 12),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                "09 Nov 2022",
+                                style: GoogleFonts.poppins(
+                                    color: Styles.colorBlack400, fontSize: 10),
+                              ),
+                            ],
                           ),
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          Text(
-                            listTransactionHistory[index].name,
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500,
-                                color: Styles.colorBlack400,
-                                fontSize: 12),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "09 Nov 2022",
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500,
-                                color: Styles.colorBlack400,
-                                fontSize: 12),
-                          ),
-                        ],
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
-                  Stack(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            "-${listTransactionHistory[index].price.toString()} Points",
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500,
-                                color: Styles.colorBlack400,
-                                fontSize: 16),
-                          ),
-                          const SizedBox(
-                            height: 31,
-                          ),
-                          Text(
-                            "Order ID : ID${listTransactionHistory[index].id}",
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500,
-                                color: Styles.colorBlack400,
-                                fontSize: 12),
-                          ),
-                        ],
-                      ),
-                    ],
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          "-${listTransactionHistory[index].price.toString()} Points",
+                          style: GoogleFonts.poppins(
+                              color: Styles.colorBlack400, fontSize: 14),
+                        ),
+                        const SizedBox(
+                          height: 34,
+                        ),
+                        Text(
+                          "Order ID : ID${listTransactionHistory[index].id}",
+                          style: GoogleFonts.poppins(
+                              color: Styles.colorBlack400, fontSize: 10),
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),

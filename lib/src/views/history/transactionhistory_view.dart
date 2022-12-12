@@ -77,6 +77,7 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
                           width: 13,
                         ),
                         Expanded(
+                          flex: 2,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -86,27 +87,23 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
                                 style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
                                     color: Styles.colorBlack400,
-                                    fontSize: 16),
+                                    fontSize: 14),
                               ),
                               const SizedBox(
-                                height: 12,
+                                height: 8,
                               ),
                               Text(
                                 listTransactionHistory[index].name,
                                 style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w500,
-                                    color: Styles.colorBlack400,
-                                    fontSize: 12),
+                                    color: Styles.colorBlack400, fontSize: 12),
                               ),
                               const SizedBox(
-                                height: 5,
+                                height: 8,
                               ),
                               Text(
                                 "09 Nov 2022",
                                 style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w500,
-                                    color: Styles.colorBlack400,
-                                    fontSize: 12),
+                                    color: Styles.colorBlack400, fontSize: 10),
                               ),
                             ],
                           ),
@@ -122,19 +119,24 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
                         Text(
                           "-${listTransactionHistory[index].price.toString()} Points",
                           style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w500,
-                              color: Styles.colorBlack400,
-                              fontSize: 16),
+                              color: Styles.colorBlack400, fontSize: 14),
+                          textAlign: TextAlign.right,
                         ),
                         const SizedBox(
-                          height: 31,
+                          height: 8,
+                        ),
+                        Text(
+                          "Rp ${listTransactionHistory[index].price}",
+                          style: GoogleFonts.poppins(
+                              color: Styles.colorBlack400, fontSize: 12),
+                        ),
+                        const SizedBox(
+                          height: 8,
                         ),
                         Text(
                           "Order ID : ID${listTransactionHistory[index].id}",
                           style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w500,
-                              color: Styles.colorBlack400,
-                              fontSize: 12),
+                              color: Styles.colorBlack400, fontSize: 10),
                         ),
                       ],
                     ),
