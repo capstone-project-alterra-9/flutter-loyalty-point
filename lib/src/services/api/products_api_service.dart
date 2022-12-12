@@ -4,12 +4,13 @@ import 'package:flutter_loyalty_point/src/utils/helper/query_params_product_list
 import 'package:flutter_loyalty_point/src/utils/urls.dart';
 
 class ProductsAPIService {
-  final APIConfig _apiConfig = APIConfig(withToken: true);
+  final APIConfig _apiConfig = APIConfig();
 
   Future<Response> getProductList({
     required QueryParamsProductListApiServiceHelper queryParams,
   }) async {
     try {
+      await _apiConfig.addToken();
       Response response = await _apiConfig.dio.get(
         Urls.getProductListPathApi,
         queryParameters: queryParams.toJson(),
@@ -25,6 +26,7 @@ class ProductsAPIService {
     required String productId,
   }) async {
     try {
+      await _apiConfig.addToken();
       Response response = await _apiConfig.dio.get(
         Urls.getProductPathApi(productId),
       );
