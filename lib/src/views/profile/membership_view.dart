@@ -39,7 +39,7 @@ class MembershipView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
-                  "assets/images/bronze_badge.png",
+                  "assets/images/tier_badge_bronze.png",
                   width: 40,
                 ),
                 const SizedBox(
@@ -96,7 +96,7 @@ class MembershipView extends StatelessWidget {
                         padding: const EdgeInsets.all(12),
                         child: Center(
                           child: Image.asset(
-                            "assets/images/bronze_badge.png",
+                            "assets/images/tier_badge_bronze.png",
                             width: 25,
                           ),
                         ),
@@ -132,7 +132,7 @@ class MembershipView extends StatelessWidget {
                         padding: const EdgeInsets.all(12),
                         child: Center(
                           child: Image.asset(
-                            "assets/images/silver_badge.png",
+                            "assets/images/tier_badge_silver.png",
                             width: 25,
                           ),
                         ),
@@ -168,7 +168,7 @@ class MembershipView extends StatelessWidget {
                         padding: const EdgeInsets.all(12),
                         child: Center(
                           child: Image.asset(
-                            "assets/images/golden_badge.png",
+                            "assets/images/tier_badge_gold.png",
                             width: 25,
                           ),
                         ),
