@@ -50,30 +50,36 @@ class HomeUserCard extends StatelessWidget {
                           ),
                         ),
                         Consumer<HomeViewModel>(
-                            builder: (context, value, child) {
-                          switch (value.userState) {
-                            case ViewStateType.none:
-                              {
-                                return Text(
-                                  value.user?.points == null
-                                      ? "-"
-                                      : NumberFormat.decimalPattern("in_ID")
-                                          .format(value.user!.points),
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                  ),
-                                );
-                              }
-                            default:
-                              {
-                                return const Center(
-                                  child: CircularProgressIndicator.adaptive(),
-                                );
-                              }
-                          }
-                        }),
+                          builder: (context, value, child) {
+                            switch (value.userState) {
+                              case ViewStateType.none:
+                                {
+                                  return Text(
+                                    value.user?.points == null
+                                        ? "-"
+                                        : NumberFormat.decimalPattern("in_ID")
+                                            .format(value.user!.points),
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white,
+                                    ),
+                                  );
+                                }
+                              default:
+                                {
+                                  return const Padding(
+                                    padding: EdgeInsets.all(4.0),
+                                    child: SkeltonWidget(
+                                      width: 48,
+                                      height: 14,
+                                      borderRadius: 8,
+                                    ),
+                                  );
+                                }
+                            }
+                          },
+                        ),
                       ],
                     )
                   ],
@@ -83,109 +89,151 @@ class HomeUserCard extends StatelessWidget {
                 // bottom card section
                 Consumer<HomeViewModel>(
                   builder: (context, value, child) {
-                    int costPoints = value.user?.costPoints ?? 0;
-                    int limitation = 20000;
-                    String tier = "Bronze";
-                    String badge = "assets/images/tier_badge_bronze.png";
+                    switch (value.userState) {
+                      case ViewStateType.none:
+                        {
+                          int costPoints = value.user?.costPoints ?? 0;
+                          int limitation = 20000;
+                          String tier = "Bronze";
+                          String badge = "assets/images/tier_badge_bronze.png";
 
-                    if (costPoints.abs() >= 20000) {
-                      limitation = 50000;
-                      tier = "Silver";
-                      badge = "assets/images/tier_badge_silver.png";
-                    }
+                          if (costPoints.abs() >= 20000) {
+                            limitation = 50000;
+                            tier = "Silver";
+                            badge = "assets/images/tier_badge_silver.png";
+                          }
 
-                    if (costPoints.abs() >= 50000) {
-                      limitation = 100000;
-                      tier = "Gold";
-                      badge = "assets/images/tier_badge_gold.png";
-                    }
+                          if (costPoints.abs() >= 50000) {
+                            limitation = 100000;
+                            tier = "Gold";
+                            badge = "assets/images/tier_badge_gold.png";
+                          }
 
-                    return Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 4,
-                            horizontal: 6,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.white,
-                          ),
-                          child: Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            spacing: 5,
+                          return Row(
                             children: [
-                              Image.asset(
-                                badge,
-                                height: 20,
-                              ),
-                              Text(
-                                tier,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: Styles.colorGreen700,
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 4,
+                                  horizontal: 6,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Colors.white,
+                                ),
+                                child: Wrap(
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  spacing: 5,
+                                  children: [
+                                    Image.asset(
+                                      badge,
+                                      height: 20,
+                                    ),
+                                    Text(
+                                      tier,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        color: Styles.colorGreen700,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 10),
+                              const SizedBox(width: 10),
 
-                        // tier indicator
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 5),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(99),
-                                  child: LinearProgressIndicator(
-                                    value: costPoints / limitation,
-                                    minHeight: 3,
-                                    color: const Color(0xffD9D9D9),
-                                    valueColor:
-                                        const AlwaysStoppedAnimation<Color>(
-                                      Color(0xffFECC4C),
+                              // tier indicator
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(99),
+                                        child: LinearProgressIndicator(
+                                          value: costPoints / limitation,
+                                          minHeight: 3,
+                                          color: const Color(0xffD9D9D9),
+                                          valueColor:
+                                              const AlwaysStoppedAnimation<
+                                                  Color>(
+                                            Color(0xffFECC4C),
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "${NumberFormat.decimalPattern("in_ID").format(costPoints)}/${NumberFormat.decimalPattern("in_ID").format(limitation)}",
+                                          style: const TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        Text(
+                                          tier,
+                                          style: const TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "${NumberFormat.decimalPattern("in_ID").format(costPoints)}/${NumberFormat.decimalPattern("in_ID").format(limitation)}",
-                                    style: const TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  Text(
-                                    tier,
-                                    style: const TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
+                              const SizedBox(width: 10),
+
+                              // icon question
+                              const HeroIcon(
+                                HeroIcons.questionMarkCircle,
+                                style: HeroIconStyle.solid,
+                                color: Colors.white,
+                                size: 20,
                               ),
                             ],
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-
-                        // icon question
-                        const HeroIcon(
-                          HeroIcons.questionMarkCircle,
-                          style: HeroIconStyle.solid,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      ],
-                    );
+                          );
+                        }
+                      default:
+                        {
+                          return Row(
+                            children: [
+                              const SkeltonWidget(
+                                width: 72,
+                                height: 32,
+                                borderRadius: 8,
+                                margin: EdgeInsets.only(right: 8),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  children: const [
+                                    SkeltonWidget(
+                                      width: double.infinity,
+                                      height: 10,
+                                      borderRadius: 4,
+                                      margin: EdgeInsets.only(bottom: 4),
+                                    ),
+                                    SkeltonWidget(
+                                      width: double.infinity,
+                                      height: 10,
+                                      borderRadius: 4,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SkeltonWidget(
+                                width: 32,
+                                height: 32,
+                                borderRadius: 999,
+                                margin: EdgeInsets.only(left: 8),
+                              ),
+                            ],
+                          );
+                        }
+                    }
                   },
                 ),
               ],

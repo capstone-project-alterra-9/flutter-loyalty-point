@@ -8,6 +8,7 @@ import 'package:flutter_loyalty_point/src/utils/types/purchase_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
 import 'package:flutter_loyalty_point/src/view_models/home/home_view_model.dart';
 import 'package:flutter_loyalty_point/src/views/widgets/bottomnav_widget.dart';
+import 'package:flutter_loyalty_point/src/views/widgets/skelton_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:intl/intl.dart';

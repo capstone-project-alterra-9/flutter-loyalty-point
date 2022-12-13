@@ -17,8 +17,43 @@ class HomeProductList extends StatelessWidget {
     switch (viewState) {
       case ViewStateType.loading:
         {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
+          return ListView.builder(
+            itemCount: 4,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                SkeltonWidget(
+                  width: 150,
+                  height: 150,
+                  borderRadius: 8,
+                  margin: EdgeInsets.only(
+                    left: 12,
+                    right: 12,
+                    bottom: 4,
+                    top: 8,
+                  ),
+                ),
+                SkeltonWidget(
+                  width: 100,
+                  height: 14,
+                  borderRadius: 8,
+                  margin: EdgeInsets.only(
+                    left: 12,
+                    right: 12,
+                    bottom: 2,
+                  ),
+                ),
+                SkeltonWidget(
+                  width: 125,
+                  height: 14,
+                  borderRadius: 8,
+                  margin: EdgeInsets.only(
+                    left: 12,
+                  ),
+                ),
+              ],
+            ),
           );
         }
 

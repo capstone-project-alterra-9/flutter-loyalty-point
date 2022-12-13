@@ -8,11 +8,37 @@ class ProductDetailBottomSheet extends StatelessWidget {
     return BottomSheetWidget(
       child: Consumer<ProductDetailViewModel>(
         builder: (context, value, child) {
-          switch (value.productState) {
+          switch (value.checkIsUserPointsEnoughState) {
             case ViewStateType.loading:
               {
-                return const Center(
-                  child: CircularProgressIndicator.adaptive(),
+                return Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          SkeltonWidget(
+                            width: 100,
+                            height: 14,
+                            borderRadius: 4,
+                            margin: EdgeInsets.only(bottom: 4),
+                          ),
+                          SkeltonWidget(
+                            width: 150,
+                            height: 16,
+                            borderRadius: 4,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SkeltonWidget(
+                      width: 100,
+                      height: 32,
+                      borderRadius: 20,
+                      margin: EdgeInsets.only(left: 100),
+                    ),
+                  ],
                 );
               }
 
@@ -58,38 +84,27 @@ class ProductDetailBottomSheet extends StatelessWidget {
                         ],
                       ),
                     ),
-                    value.createTransactionState == ViewStateType.loading ||
-                            value.checkIsUserPointsEnoughState ==
-                                    ViewStateType.loading &&
-                                value.args.purchaseType == PurchaseType.redeem
-                        ? Expanded(
-                            child: ElevatedButton(
-                              onPressed: null,
-                              style: Styles.primaryButton,
-                              child: const SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(),
-                              ),
-                            ),
-                          )
-                        : Expanded(
-                            child: ElevatedButton(
-                              onPressed: value.createTransactionButtonDisabled
-                                  ? null
-                                  : context
-                                      .read<ProductDetailViewModel>()
-                                      .createTransaction,
-                              style: Styles.primaryButton,
-                              child: Text(
-                                stock <= 0
-                                    ? "Out of Stock"
-                                    : value.createTransactionButtonDisabled
-                                        ? "Not Enough"
-                                        : value.args.purchaseType.value,
-                              ),
-                            ),
-                          ),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: value.createTransactionButtonDisabled ||
+                                value.createTransactionState ==
+                                    ViewStateType.loading ||
+                                value.createTransactionState ==
+                                    ViewStateType.error
+                            ? null
+                            : context
+                                .read<ProductDetailViewModel>()
+                                .createTransaction,
+                        style: Styles.primaryButton,
+                        child: Text(
+                          stock <= 0
+                              ? "Out of Stock"
+                              : value.createTransactionButtonDisabled
+                                  ? "Not Enough"
+                                  : value.args.purchaseType.value,
+                        ),
+                      ),
+                    ),
                   ],
                 );
               }

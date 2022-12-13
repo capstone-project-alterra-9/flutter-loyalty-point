@@ -13,9 +13,47 @@ class ProductListProductList extends StatelessWidget {
         switch (value.productListState) {
           case ViewStateType.loading:
             {
-              return const SliverToBoxAdapter(
-                child: Center(
-                  child: CircularProgressIndicator.adaptive(),
+              return SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  childCount: 2,
+                  (context, index) => Row(
+                    children: [
+                      const Expanded(
+                        child: SkeltonWidget(
+                          width: double.infinity,
+                          height: 100,
+                          borderRadius: 16,
+                          margin: EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: const [
+                            SkeltonWidget(
+                              width: double.infinity,
+                              height: 32,
+                              borderRadius: 8,
+                              margin: EdgeInsets.only(
+                                right: 16,
+                                bottom: 8,
+                              ),
+                            ),
+                            SkeltonWidget(
+                              width: double.infinity,
+                              height: 32,
+                              borderRadius: 8,
+                              margin: EdgeInsets.only(
+                                right: 64,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               );
             }
@@ -33,8 +71,12 @@ class ProductListProductList extends StatelessWidget {
             {
               if (value.productList.isEmpty) {
                 return const SliverToBoxAdapter(
-                  child: Center(
-                    child: Text("Product not found!"),
+                  child: Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Text(
+                      "Product not found!",
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 );
               }

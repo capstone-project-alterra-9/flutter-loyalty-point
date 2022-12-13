@@ -30,8 +30,9 @@ class ProductDetailAppBar extends StatelessWidget {
           switch (value.productState) {
             case ViewStateType.loading:
               {
-                return const Center(
-                  child: CircularProgressIndicator.adaptive(),
+                return const SkeltonWidget(
+                  width: double.infinity,
+                  height: double.infinity,
                 );
               }
 

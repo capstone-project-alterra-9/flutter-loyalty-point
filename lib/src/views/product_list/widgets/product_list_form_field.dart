@@ -14,7 +14,7 @@ class ProductListFormField extends StatelessWidget {
     switch (productListViewModel.args.categoryProductType) {
       case CategoryProductType.credits:
         {
-          hintFormField = "000 1111 2222";
+          hintFormField = "823 2222 3333";
 
           prefixFormField = const Padding(
             padding: EdgeInsets.only(left: 24, right: 4, bottom: 2),

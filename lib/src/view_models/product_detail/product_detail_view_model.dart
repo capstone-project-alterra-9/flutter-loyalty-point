@@ -17,11 +17,13 @@ import 'package:flutter_loyalty_point/src/utils/helper/args_payment_helper.dart'
 import 'package:flutter_loyalty_point/src/utils/helper/args_product_detail_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_status_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/types/purchase_type.dart';
+import 'package:flutter_loyalty_point/src/utils/types/snack_bar_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
 import 'package:flutter_loyalty_point/src/utils/urls.dart';
 import 'package:flutter_loyalty_point/src/views/home/home_view.dart';
 import 'package:flutter_loyalty_point/src/views/payment/payment_view.dart';
 import 'package:flutter_loyalty_point/src/views/transaction_status/transaction_status_view.dart';
+import 'package:flutter_loyalty_point/src/views/widgets/snack_bar_widget.dart';
 
 class ProductDetailViewModel extends ChangeNotifier {
   ProductDetailViewModel(this.context, {required this.args}) {
@@ -79,7 +81,7 @@ class ProductDetailViewModel extends ChangeNotifier {
     }
   }
 
-  ViewStateType _checkIsUserPointsEnoughState = ViewStateType.none;
+  ViewStateType _checkIsUserPointsEnoughState = ViewStateType.loading;
   ViewStateType get checkIsUserPointsEnoughState =>
       _checkIsUserPointsEnoughState;
   void _changeCheckIsUserPointsEnoughState(ViewStateType state) {
@@ -146,13 +148,14 @@ class ProductDetailViewModel extends ChangeNotifier {
 
       _changeCreateTransactionState(ViewStateType.none);
     } on DioError catch (e) {
-      if (e.response != null) {
-        String message = ResponseErrorModel.fromJson(e.response!.data).message;
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(message)),
-        );
-      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBarWidget(
+                title: "${args.purchaseType.value} Product Failed",
+                subtitle:
+                    "Something went wrong, you can't ${args.purchaseType.value} the product now",
+                snackBarType: SnackBarType.error)
+            .build(context),
+      );
 
       Timer(
         const Duration(seconds: 2),
