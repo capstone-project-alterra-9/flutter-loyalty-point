@@ -12,7 +12,7 @@ class APIConfig {
           final SharedPreferences prefs = await SharedPreferences.getInstance();
           final String? token = prefs.getString('token');
 
-          dio.options.headers.addAll({"Authorization": 'Bearer $token'});
+          options.headers.addAll({"Authorization": 'Bearer $token'});
 
           return handler.next(options);
         },
