@@ -19,7 +19,6 @@ class ForgotPasswordViewModel extends ChangeNotifier {
 
   // handle button login
   void submit(DataRequestForgotPasswordModel data) async {
-    final NavigatorState navigator = Navigator.of(context);
     _changeForgotPasswordState(ViewStateType.loading);
 
     try {
@@ -35,8 +34,8 @@ class ForgotPasswordViewModel extends ChangeNotifier {
           snackBarType: SnackBarType.error,
         ).build(context),
       );
-    }
 
-    _changeForgotPasswordState(ViewStateType.error);
+      _changeForgotPasswordState(ViewStateType.error);
+    }
   }
 }
