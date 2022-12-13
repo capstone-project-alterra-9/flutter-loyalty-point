@@ -1,43 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loyalty_point/src/styles/styles.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_payment_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_status_helper.dart';
 import 'package:flutter_loyalty_point/src/view_models/auth/forgot_password/forgot_password_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/auth/login/login_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/auth/register/register_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/history/history_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/home/home_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/onboarding/onboarding_view_model.dart';
 import 'package:flutter_loyalty_point/src/view_models/payment/payment_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/product_detail/product_detail_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/product_list/product_list_view_model.dart';
 import 'package:flutter_loyalty_point/src/view_models/profile/faq_viewmodel.dart';
 import 'package:flutter_loyalty_point/src/view_models/profile/mymembership_viewmodel.dart';
 import 'package:flutter_loyalty_point/src/view_models/profile/profile_viewmodel.dart';
+import 'package:flutter_loyalty_point/src/view_models/splash/splash_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/transaction_detail/transaction_detail_view_model.dart';
 import 'package:flutter_loyalty_point/src/view_models/transaction_status/transaction_status_view_model.dart';
 import 'package:flutter_loyalty_point/src/views/auth/forgot_password/forgot_password_view.dart';
+import 'package:flutter_loyalty_point/src/views/auth/login/login_view.dart';
+import 'package:flutter_loyalty_point/src/views/auth/register/register_view.dart';
+import 'package:flutter_loyalty_point/src/views/history/history_view.dart';
+import 'package:flutter_loyalty_point/src/views/home/home_view.dart';
+import 'package:flutter_loyalty_point/src/views/onboarding/onboarding_view.dart';
 import 'package:flutter_loyalty_point/src/views/payment/payment_view.dart';
+import 'package:flutter_loyalty_point/src/views/product_detail/product_detail_view.dart';
+import 'package:flutter_loyalty_point/src/views/product_list/product_list_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/faq_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/faqdetail_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/membership_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/profile_view.dart';
-import 'package:flutter_loyalty_point/src/views/qr/qr_view.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_product_detail_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_product_list_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_detail_helper.dart';
+import 'package:flutter_loyalty_point/src/views/splash/splash_view.dart';
+import 'package:flutter_loyalty_point/src/views/transaction_detail/transaction_detail_view.dart';
+import 'package:flutter_loyalty_point/src/views/transaction_status/transaction_status_view.dart';
 import 'package:provider/provider.dart';
-
-import '../views/auth/login/login_view.dart';
-import '../views/auth/register/register_view.dart';
-import '../views/history/history_view.dart';
-import '../views/home/home_view.dart';
-import '../views/onboarding/onboarding_view.dart';
-import '../views/product_list/product_list_view.dart';
-import '../views/product_detail/product_detail_view.dart';
-import '../views/transaction_status/transaction_status_view.dart';
-import '../views/splash/splash_view.dart';
-import '../views/transaction_detail/transaction_detail_view.dart';
-import '../view_models/auth/login/login_view_model.dart';
-import '../view_models/auth/register/register_view_model.dart';
-import '../view_models/history/history_view_model.dart';
-import '../view_models/home/home_view_model.dart';
-import '../view_models/onboarding/onboarding_view_model.dart';
-import '../view_models/product_list/product_list_view_model.dart';
-import '../view_models/product_detail/product_detail_view_model.dart';
-import '../view_models/splash/splash_view_model.dart';
-import '../view_models/transaction_detail/transaction_detail_view_model.dart';
 
 class Routes {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -49,6 +48,8 @@ class Routes {
       case LoginView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => LoginViewModel(context),
@@ -62,6 +63,8 @@ class Routes {
       case RegisterView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => RegisterViewModel(context),
@@ -75,6 +78,8 @@ class Routes {
       case ForgotPasswordView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => ForgotPasswordViewModel(context),
@@ -88,6 +93,8 @@ class Routes {
       case HistoryView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => HistoryViewModel(context),
@@ -101,6 +108,8 @@ class Routes {
       case HomeView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => HomeViewModel(context),
@@ -114,6 +123,8 @@ class Routes {
       case ProfileView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                   create: (context) => ProfileViewModel(context),
@@ -126,10 +137,13 @@ class Routes {
       case MembershipView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
-                  create: (context) => MyMembershipViewModel(),
-                  child: MembershipView());
+                create: (context) => MyMembershipViewModel(),
+                child: MembershipView(),
+              );
             },
           );
         }
@@ -138,9 +152,13 @@ class Routes {
       case FAQView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
-                  create: (context) => FAQViewModel(), child: FAQView());
+                create: (context) => FAQViewModel(),
+                child: FAQView(),
+              );
             },
           );
         }
@@ -149,18 +167,10 @@ class Routes {
       case FAQDetailView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return FAQDetailView();
-            },
-          );
-        }
-
-      // bottom navigation section
-      case QrView.routeName:
-        {
-          return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) {
-              return QrView();
             },
           );
         }
@@ -169,6 +179,8 @@ class Routes {
       case OnboardingView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => OnboardingViewModel(context),
@@ -184,6 +196,8 @@ class Routes {
           ArgsPaymentHelper args = settings.arguments as ArgsPaymentHelper;
 
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => PaymentViewModel(
@@ -203,6 +217,8 @@ class Routes {
               settings.arguments as ArgsProductListHelper;
 
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => ProductListViewModel(
@@ -222,6 +238,8 @@ class Routes {
               settings.arguments as ArgsProductDetailHelper;
 
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => ProductDetailViewModel(
@@ -241,6 +259,8 @@ class Routes {
               settings.arguments as ArgsTransactionStatusHelper;
 
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => TransactionStatusViewModel(
@@ -257,6 +277,8 @@ class Routes {
       case SplashView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => SplashViewModel(context),
@@ -273,6 +295,8 @@ class Routes {
               settings.arguments as ArgsTransactionDetailHelper;
 
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => TransactionDetailViewModel(
@@ -289,6 +313,8 @@ class Routes {
       default:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return const Scaffold(
                 body: Center(

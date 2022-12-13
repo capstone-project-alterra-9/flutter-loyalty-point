@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/views/history/history_view.dart';
 import 'package:flutter_loyalty_point/src/views/home/home_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/profile_view.dart';
-import 'package:flutter_loyalty_point/src/views/qr/qr_view.dart';
 
 class BottomNavWidget extends StatelessWidget {
   const BottomNavWidget({super.key, required this.routeName});
