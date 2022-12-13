@@ -71,11 +71,12 @@ class ProductDetailDescription extends StatelessWidget {
                 price = value.product?.price == null
                     ? "-"
                     : NumberFormat.simpleCurrency(locale: "in_ID")
-                        .format(value.product!.price);
+                        .format(value.product!.price)
+                        .replaceAll(",00", "");
               } else {
                 price = value.product?.price == null
                     ? "-"
-                    : "${NumberFormat.decimalPattern('in_ID').format(value.product!.price)} Points";
+                    : "${NumberFormat.decimalPattern('in_ID').format(value.product!.price).replaceAll(",00", "")} Points";
               }
 
               return SliverList(

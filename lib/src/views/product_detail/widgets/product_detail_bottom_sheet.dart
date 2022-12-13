@@ -56,12 +56,11 @@ class ProductDetailBottomSheet extends StatelessWidget {
                 if (value.args.purchaseType == PurchaseType.buy) {
                   price = value.product?.price == null
                       ? "-"
-                      : NumberFormat.simpleCurrency(locale: "in_ID")
-                          .format(value.product!.price);
+                      : value.product!.price!.formatToCurrency();
                 } else {
                   price = value.product?.price == null
                       ? "-"
-                      : "${NumberFormat.decimalPattern('in_ID').format(value.product!.price)} Points";
+                      : "${value.product!.price!.formatToDecimal()} Points";
                 }
 
                 final int stock = value.product?.stock ?? 0;

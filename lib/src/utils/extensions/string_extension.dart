@@ -10,12 +10,6 @@ extension StringExtension on String {
 
   bool isValidPassword() => length >= 8;
 
-  /// used to get error message from a string like this "code=400, message=Email and Username cannot be the same"
-  String getMessage() {
-    const String getMessageAfter = "message=";
-    return substring(indexOf(getMessageAfter) + getMessageAfter.length);
-  }
-
   String capitalize() {
     return "${this[0].toUpperCase()}${substring(1)}";
   }

@@ -57,8 +57,7 @@ class HomeUserCard extends StatelessWidget {
                                   return Text(
                                     value.user?.points == null
                                         ? "-"
-                                        : NumberFormat.decimalPattern("in_ID")
-                                            .format(value.user!.points),
+                                        : value.user!.points!.formatToDecimal(),
                                     style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
@@ -164,7 +163,7 @@ class HomeUserCard extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          "${NumberFormat.decimalPattern("in_ID").format(costPoints)}/${NumberFormat.decimalPattern("in_ID").format(limitation)}",
+                                          "${costPoints.formatToDecimal()}/${limitation.formatToDecimal()}",
                                           style: const TextStyle(
                                             fontSize: 10,
                                             fontWeight: FontWeight.w500,

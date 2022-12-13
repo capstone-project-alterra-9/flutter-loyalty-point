@@ -175,18 +175,24 @@ class HomeProductCard extends StatelessWidget {
             const SizedBox(height: 8),
 
             // title product
-            Text(
-              name ?? "",
-              style: const TextStyle(fontSize: 12),
+            SizedBox(
+              width: 155,
+              child: Text(
+                name ?? "",
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 12),
+              ),
             ),
             const SizedBox(height: 2),
 
             // price product
-            Text(
-              price == null
-                  ? "-"
-                  : NumberFormat.simpleCurrency(locale: "in_ID").format(price),
-              style: const TextStyle(fontSize: 12),
+            SizedBox(
+              width: 155,
+              child: Text(
+                overflow: TextOverflow.ellipsis,
+                price == null ? "-" : price!.formatToCurrency(),
+                style: const TextStyle(fontSize: 12),
+              ),
             ),
           ],
         ),
