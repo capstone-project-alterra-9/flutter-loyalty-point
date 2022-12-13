@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_payment_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_status_helper.dart';
+import 'package:flutter_loyalty_point/src/view_models/auth/forgot_password/forgot_password_view_model.dart';
 import 'package:flutter_loyalty_point/src/view_models/payment/payment_view_model.dart';
 import 'package:flutter_loyalty_point/src/view_models/profile/faq_viewmodel.dart';
 import 'package:flutter_loyalty_point/src/view_models/profile/mymembership_viewmodel.dart';
 import 'package:flutter_loyalty_point/src/view_models/profile/profile_viewmodel.dart';
 import 'package:flutter_loyalty_point/src/view_models/transaction_status/transaction_status_view_model.dart';
+import 'package:flutter_loyalty_point/src/views/auth/forgot_password/forgot_password_view.dart';
 import 'package:flutter_loyalty_point/src/views/payment/payment_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/faq_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/faqdetail_view.dart';
@@ -64,6 +66,19 @@ class Routes {
               return ChangeNotifierProvider(
                 create: (context) => RegisterViewModel(context),
                 child: const RegisterView(),
+              );
+            },
+          );
+        }
+
+      // auth - forgot password section
+      case ForgotPasswordView.routeName:
+        {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return ChangeNotifierProvider(
+                create: (context) => ForgotPasswordViewModel(context),
+                child: const ForgotPasswordView(),
               );
             },
           );

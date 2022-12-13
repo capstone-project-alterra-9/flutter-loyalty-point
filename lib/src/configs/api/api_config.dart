@@ -8,6 +8,14 @@ class APIConfig {
   APIConfig() {
     dio.interceptors.add(
       QueuedInterceptorsWrapper(
+        onRequest: (options, handler) async {
+          final SharedPreferences prefs = await SharedPreferences.getInstance();
+          final String? token = prefs.getString('token');
+
+          dio.options.headers.addAll({"Authorization": 'Bearer $token'});
+
+          return handler.next(options);
+        },
         onError: (e, handler) {
           if (e.response!.statusCode == 401) {
             // todo: add refresh token here!
@@ -19,7 +27,6 @@ class APIConfig {
             return;
           }
 
-          // send other error responses
           handler.next(e);
         },
       ),
@@ -28,6 +35,7 @@ class APIConfig {
 
   final Dio dio = Dio(BaseOptions(baseUrl: Urls.baseUrlApi));
 
+  @Deprecated("already handled in the interceptors, planned to be removed!")
   Future<void> addToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? token = prefs.getString('token');

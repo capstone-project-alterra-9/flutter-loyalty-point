@@ -4,8 +4,11 @@ import 'package:flutter_loyalty_point/src/models/auth/data_request_login_model.d
 import 'package:flutter_loyalty_point/src/models/auth/response_login_model.dart';
 import 'package:flutter_loyalty_point/src/models/response_error_model.dart';
 import 'package:flutter_loyalty_point/src/services/api/auth_api_service.dart';
+import 'package:flutter_loyalty_point/src/utils/extensions/string_extension.dart';
+import 'package:flutter_loyalty_point/src/utils/types/snack_bar_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
 import 'package:flutter_loyalty_point/src/views/home/home_view.dart';
+import 'package:flutter_loyalty_point/src/views/widgets/snack_bar_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewModel extends ChangeNotifier {
@@ -29,7 +32,7 @@ class LoginViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // handle button submit (login)
+  // handle button login
   void submit(DataRequestLoginModel data) async {
     final NavigatorState navigator = Navigator.of(context);
     _changeLoginState(ViewStateType.loading);
@@ -43,7 +46,7 @@ class LoginViewModel extends ChangeNotifier {
         response.data,
       );
 
-      // save token to shared preferences
+      // save token, refresh token and id to shared preferences
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       if (result.data?.token != null) {
         await prefs.setString('token', result.data!.token!);
@@ -63,13 +66,15 @@ class LoginViewModel extends ChangeNotifier {
       _changeLoginState(ViewStateType.none);
     } on DioError catch (e) {
       // showing error with snackbar
-      if (e.response != null) {
-        String message = ResponseErrorModel.fromJson(e.response!.data).message;
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(message)),
-        );
-      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBarWidget(
+          title: "Login Failed",
+          subtitle:
+              "The email address or password you entered is incorrect or the account does not exist.",
+          snackBarType: SnackBarType.error,
+        ).build(context),
+      );
     }
 
     _changeLoginState(ViewStateType.error);
