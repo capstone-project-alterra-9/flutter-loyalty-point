@@ -80,11 +80,19 @@ class HomeView extends StatelessWidget {
               ),
             ),
           ),
+
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 150,
+            ),
+          )
         ],
       ),
 
       // bottom bar section
-      bottomNavigationBar: const BottomNavWidget(routeName: HomeView.routeName),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton:
+          const BottomNavWidget(routeName: HomeView.routeName),
     );
   }
 }

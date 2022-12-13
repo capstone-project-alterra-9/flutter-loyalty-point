@@ -39,9 +39,6 @@ class MyApp extends StatelessWidget {
             color: Styles.colorBlack400,
           ),
         ),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: Colors.white,
-        ),
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Styles.colorBlack500,
         ),
