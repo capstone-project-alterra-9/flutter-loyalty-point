@@ -42,13 +42,9 @@ class HomeViewModel extends ChangeNotifier {
     _changeUserState(ViewStateType.loading);
 
     try {
-      final Response response = await UsersAPIService().getUser();
+      final ResponseGetUserModel response = await UsersAPIService().getUser();
 
-      ResponseGetUserModel result = ResponseGetUserModel.fromJson(
-        response.data,
-      );
-
-      _user = result.data;
+      _user = response.data;
 
       _changeUserState(ViewStateType.none);
     } catch (e) {
@@ -70,17 +66,16 @@ class HomeViewModel extends ChangeNotifier {
     _changeProductListState(ViewStateType.loading);
 
     try {
-      final Response response = await ProductsAPIService().getProducts(
-        path: Urls.getProductsByPurchasePathApi(PurchaseType.buy),
-      );
-
-      ResponseGetProductListModel result = ResponseGetProductListModel.fromJson(
-        response.data,
+      final ResponseGetProductListModel response =
+          await ProductsAPIService().getProducts(
+        path: Urls.getProductsByPurchasePathApi(
+          PurchaseType.buy,
+        ),
       );
 
       productList.clear();
-      if (result.data != null) {
-        productList.addAll(result.data!);
+      if (response.data != null) {
+        productList.addAll(response.data!);
       }
 
       _changeProductListState(ViewStateType.none);
@@ -103,17 +98,16 @@ class HomeViewModel extends ChangeNotifier {
     _changeRedeemListState(ViewStateType.loading);
 
     try {
-      final Response response = await ProductsAPIService().getProducts(
-        path: Urls.getProductsByPurchasePathApi(PurchaseType.redeem),
-      );
-
-      ResponseGetProductListModel result = ResponseGetProductListModel.fromJson(
-        response.data,
+      final ResponseGetProductListModel response =
+          await ProductsAPIService().getProducts(
+        path: Urls.getProductsByPurchasePathApi(
+          PurchaseType.redeem,
+        ),
       );
 
       redeemList.clear();
-      if (result.data != null) {
-        redeemList.addAll(result.data!);
+      if (response.data != null) {
+        redeemList.addAll(response.data!);
       }
 
       _changeRedeemListState(ViewStateType.none);

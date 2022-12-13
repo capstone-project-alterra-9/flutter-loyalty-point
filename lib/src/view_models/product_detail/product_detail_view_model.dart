@@ -65,15 +65,12 @@ class ProductDetailViewModel extends ChangeNotifier {
     _changeProductState(ViewStateType.loading);
 
     try {
-      final Response response = await ProductsAPIService().getProducts(
-        path: Urls.getProductByIdPathApi(args.productId),
+      final ResponseGetProductModel response =
+          await ProductsAPIService().getProductById(
+        productId: args.productId,
       );
 
-      ResponseGetProductModel result = ResponseGetProductModel.fromJson(
-        response.data,
-      );
-
-      _product = result.data;
+      _product = response.data;
 
       _changeProductState(ViewStateType.none);
     } on DioError catch (e) {
@@ -94,14 +91,10 @@ class ProductDetailViewModel extends ChangeNotifier {
     _changeCheckIsUserPointsEnoughState(ViewStateType.loading);
 
     try {
-      final Response response = await UsersAPIService().getUser();
+      final ResponseGetUserModel response = await UsersAPIService().getUser();
 
-      ResponseGetUserModel result = ResponseGetUserModel.fromJson(
-        response.data,
-      );
-
-      if (result.data?.points != null && product?.price != null) {
-        if (result.data!.points! >= product!.price!) {
+      if (response.data?.points != null && product?.price != null) {
+        if (response.data!.points! >= product!.price!) {
           _createTransactionButtonDisabled = false;
         }
       }
@@ -126,7 +119,7 @@ class ProductDetailViewModel extends ChangeNotifier {
 
     try {
       if (args.purchaseType == PurchaseType.redeem) {
-        final Response response =
+        final ResponseCreateTransactionModel response =
             await TransactionsAPIService().createTransaction(
           data: DataRequestAddTransaction(
             purchaseType: args.purchaseType,
@@ -135,15 +128,10 @@ class ProductDetailViewModel extends ChangeNotifier {
           ),
         );
 
-        ResponseCreateTransactionModel result =
-            ResponseCreateTransactionModel.fromJson(
-          response.data,
-        );
-
         navigator.pushNamed(
           TransactionStatusView.routeName,
           arguments: ArgsTransactionStatusHelper(
-            isSuccess: result.status ?? false,
+            isSuccess: response.status ?? false,
             purchaseType: args.purchaseType,
           ),
         );

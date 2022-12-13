@@ -79,28 +79,21 @@ class ProductListViewModel extends ChangeNotifier {
 
     try {
       if (args.productId != null) {
-        final Response response = await ProductsAPIService().getProducts(
-          path: Urls.getProductByIdPathApi(args.productId!),
+        final ResponseGetProductModel response =
+            await ProductsAPIService().getProductById(
+          productId: args.productId!,
         );
 
-        ResponseGetProductModel result = ResponseGetProductModel.fromJson(
-          response.data,
-        );
-
-        productList.addAll([result.data!]);
+        productList.addAll([response.data!]);
       } else {
-        final Response response = await ProductsAPIService().getProducts(
+        final ResponseGetProductListModel response =
+            await ProductsAPIService().getProducts(
           path: Urls.getProductsByCategoryPathApi(args.categoryProductType),
         );
 
-        ResponseGetProductListModel result =
-            ResponseGetProductListModel.fromJson(
-          response.data,
-        );
-
         productList.clear();
-        if (result.data != null) {
-          productList.addAll(result.data!);
+        if (response.data != null) {
+          productList.addAll(response.data!);
         }
       }
 
