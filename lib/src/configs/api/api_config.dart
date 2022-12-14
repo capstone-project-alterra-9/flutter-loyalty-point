@@ -50,35 +50,44 @@ class APIConfig {
   }
 
   Future<bool> _refreshToken() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? refreshToken = prefs.getString('refreshToken');
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final String? refreshToken = prefs.getString('refreshToken');
 
-    Response response = await dio.post(
-      Urls.refreshTokenPathApi,
-      data: {"refreshToken": refreshToken},
-    );
+      Response response = await dio.post(
+        Urls.refreshTokenPathApi,
+        data: {"refreshToken": refreshToken},
+      );
 
-    ResponseRefreshTokenModel result = ResponseRefreshTokenModel.fromJson(
-      response.data,
-    );
+      ResponseRefreshTokenModel result = ResponseRefreshTokenModel.fromJson(
+        response.data,
+      );
 
-    if (result.data?.token != null) {
-      await prefs.setString('token', result.data!.token!);
+      if (result.data?.token != null) {
+        await prefs.setString('token', result.data!.token!);
+      }
+
+      return true;
+    } on DioError {
+      return false;
     }
-
-    return response.statusCode == 200;
   }
 
   Future<Response> _retry(RequestOptions requestOptions) async {
-    final options = Options(
-      method: requestOptions.method,
-      headers: requestOptions.headers,
-    );
-    return dio.request<dynamic>(
-      requestOptions.path,
-      data: requestOptions.data,
-      queryParameters: requestOptions.queryParameters,
-      options: options,
-    );
+    try {
+      final options = Options(
+        method: requestOptions.method,
+        headers: requestOptions.headers,
+      );
+
+      return dio.request<dynamic>(
+        requestOptions.path,
+        data: requestOptions.data,
+        queryParameters: requestOptions.queryParameters,
+        options: options,
+      );
+    } on DioError {
+      rethrow;
+    }
   }
 }
