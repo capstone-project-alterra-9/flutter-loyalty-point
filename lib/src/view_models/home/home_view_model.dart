@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/models/local/home_transaction_option_button_model.dart';
 import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
@@ -9,9 +8,13 @@ import 'package:flutter_loyalty_point/src/services/api/products_api_service.dart
 import 'package:flutter_loyalty_point/src/services/api/users_api_service.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_product_list_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/types/purchase_type.dart';
+import 'package:flutter_loyalty_point/src/utils/types/snack_bar_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
 import 'package:flutter_loyalty_point/src/utils/urls.dart';
 import 'package:flutter_loyalty_point/src/views/product_list/product_list_view.dart';
+import 'package:flutter_loyalty_point/src/views/widgets/snack_bar_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class HomeViewModel extends ChangeNotifier {
   HomeViewModel(this.context) {
@@ -122,4 +125,8 @@ class HomeViewModel extends ChangeNotifier {
         ProductListView.routeName,
         arguments: args,
       );
+
+  void toCustomerService() async {
+    await launchUrlString("tel:911");
+  }
 }

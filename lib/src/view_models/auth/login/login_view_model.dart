@@ -53,7 +53,7 @@ class LoginViewModel extends ChangeNotifier {
       navigator.pushNamedAndRemoveUntil(HomeView.routeName, (route) => false);
 
       _changeLoginState(ViewStateType.none);
-    } on DioError catch (e) {
+    } on DioError {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBarWidget(
           title: "Login Failed",
@@ -62,8 +62,8 @@ class LoginViewModel extends ChangeNotifier {
           snackBarType: SnackBarType.error,
         ).build(context),
       );
-    }
 
-    _changeLoginState(ViewStateType.error);
+      _changeLoginState(ViewStateType.error);
+    }
   }
 }

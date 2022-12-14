@@ -12,17 +12,16 @@ import 'package:flutter_loyalty_point/src/views/widgets/bottomnav_widget.dart';
 import 'package:flutter_loyalty_point/src/views/widgets/skelton_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heroicons/heroicons.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 part 'widgets/home_app_bar.dart';
 part 'widgets/home_banner.dart';
+part 'widgets/home_product_card.dart';
+part 'widgets/home_product_list.dart';
+part 'widgets/home_product_title.dart';
+part 'widgets/home_sheet_product_option_list.dart';
 part 'widgets/home_transaction_options_button.dart';
 part 'widgets/home_user_card.dart';
-part 'widgets/home_product_title.dart';
-part 'widgets/home_product_list.dart';
-part 'widgets/home_sheet_product_option_list.dart';
-part 'widgets/home_product_card.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

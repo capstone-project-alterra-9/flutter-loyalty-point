@@ -1,12 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
 import 'package:flutter_loyalty_point/src/models/product/response_get_product_model.dart';
-import 'package:flutter_loyalty_point/src/models/response_error_model.dart';
 import 'package:flutter_loyalty_point/src/models/transaction/data_request_add_transaction.dart';
 import 'package:flutter_loyalty_point/src/models/transaction/response_create_transaction_model.dart';
 import 'package:flutter_loyalty_point/src/models/user/response_get_user_model.dart';
@@ -19,7 +16,6 @@ import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_status_h
 import 'package:flutter_loyalty_point/src/utils/types/purchase_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/snack_bar_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
-import 'package:flutter_loyalty_point/src/utils/urls.dart';
 import 'package:flutter_loyalty_point/src/views/home/home_view.dart';
 import 'package:flutter_loyalty_point/src/views/payment/payment_view.dart';
 import 'package:flutter_loyalty_point/src/views/transaction_status/transaction_status_view.dart';
@@ -75,7 +71,7 @@ class ProductDetailViewModel extends ChangeNotifier {
       _product = response.data;
 
       _changeProductState(ViewStateType.none);
-    } on DioError catch (e) {
+    } on DioError {
       _changeProductState(ViewStateType.error);
       rethrow;
     }
@@ -147,7 +143,7 @@ class ProductDetailViewModel extends ChangeNotifier {
       );
 
       _changeCreateTransactionState(ViewStateType.none);
-    } on DioError catch (e) {
+    } on DioError {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBarWidget(
                 title: "${args.purchaseType.value} Product Failed",

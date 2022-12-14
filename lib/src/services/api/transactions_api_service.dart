@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_loyalty_point/src/configs/api/api_config.dart';
 import 'package:flutter_loyalty_point/src/models/transaction/data_request_add_transaction.dart';
-import 'package:flutter_loyalty_point/src/models/transaction/response_get_transaction_list.dart';
-import 'package:flutter_loyalty_point/src/models/transaction/transaction_model.dart';
 import 'package:flutter_loyalty_point/src/models/transaction/response_create_transaction_model.dart';
+import 'package:flutter_loyalty_point/src/models/transaction/response_get_transaction_list.dart';
 import 'package:flutter_loyalty_point/src/utils/urls.dart';
 
 class TransactionsAPIService {

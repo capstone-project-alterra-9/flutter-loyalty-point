@@ -84,7 +84,11 @@ class HomeAppBar extends StatelessWidget {
               ),
 
               // icon section
-              SvgPicture.asset("assets/icons/icon_customer_service.svg"),
+              GestureDetector(
+                onTap: context.read<HomeViewModel>().toCustomerService,
+                child:
+                    SvgPicture.asset("assets/icons/icon_customer_service.svg"),
+              ),
             ],
           ),
         ),
