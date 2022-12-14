@@ -206,9 +206,7 @@ class ProductListProductCard extends StatelessWidget {
 
                       // price product
                       Text(
-                        NumberFormat.simpleCurrency(locale: "in_ID").format(
-                          price,
-                        ),
+                        price!.formatToCurrency(),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(

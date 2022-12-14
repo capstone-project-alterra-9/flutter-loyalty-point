@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_loyalty_point/src/styles/styles.dart';
+import 'package:flutter_loyalty_point/src/utils/extensions/int_extension.dart';
 import 'package:flutter_loyalty_point/src/utils/types/category_product_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
 import 'package:flutter_loyalty_point/src/view_models/product_list/product_list_view_model.dart';
