@@ -91,48 +91,58 @@ class ReedemHistoryView extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(100),
                                           image: DecorationImage(
-                                              image: AssetImage(
-                                                  "assets/images/redeem_history.png")),
+                                              image: AssetImage(value
+                                                          .redeemList[index]
+                                                          .category ==
+                                                      "credits"
+                                                  ? "assets/images/redeem_history.png"
+                                                  : "assets/images/redeem_history.png")),
                                         ),
                                       ),
                                       const SizedBox(
                                         width: 13,
                                       ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            value.redeemList[index].category ??
-                                                "",
-                                            style: GoogleFonts.poppins(
-                                                fontWeight: FontWeight.w500,
-                                                color: Styles.colorBlack400,
-                                                fontSize: 16),
-                                          ),
-                                          const SizedBox(
-                                            height: 12,
-                                          ),
-                                          Text(
-                                            value.redeemList[index].name ?? "",
-                                            style: GoogleFonts.poppins(
-                                                fontWeight: FontWeight.w500,
-                                                color: Styles.colorBlack400,
-                                                fontSize: 12),
-                                          ),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            "09 Nov 2022",
-                                            style: GoogleFonts.poppins(
-                                                fontWeight: FontWeight.w500,
-                                                color: Styles.colorBlack400,
-                                                fontSize: 12),
-                                          ),
-                                        ],
+                                      Expanded(
+                                        flex: 2,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              value.redeemList[index]
+                                                      .category ??
+                                                  "",
+                                              style: GoogleFonts.poppins(
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Styles.colorBlack400,
+                                                  fontSize: 16),
+                                            ),
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
+                                            Text(
+                                              value.redeemList[index].name ??
+                                                  "",
+                                              style: GoogleFonts.poppins(
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Styles.colorBlack400,
+                                                  fontSize: 12),
+                                            ),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              value.redeemList[index].date ??
+                                                  "",
+                                              style: GoogleFonts.poppins(
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Styles.colorBlack400,
+                                                  fontSize: 12),
+                                            ),
+                                          ],
+                                        ),
                                       )
                                     ],
                                   ),
@@ -170,13 +180,6 @@ class ReedemHistoryView extends StatelessWidget {
                           ),
                         );
                       });
-            }
-
-          default:
-            {
-              return const Center(
-                child: Text("error"),
-              );
             }
         }
       },

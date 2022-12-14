@@ -19,7 +19,7 @@ class TransactionModel {
         image: json["image"],
         serialNumber: json["serialNumber"],
         identifierNumber: json["identifierNum"],
-        date: json["date"],
+        date: json["createdAt"],
         status: json["status"]);
   }
 
