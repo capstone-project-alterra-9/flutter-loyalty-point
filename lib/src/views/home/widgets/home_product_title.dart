@@ -15,15 +15,9 @@ class HomeProductTitle extends StatelessWidget {
           left: 16,
           bottom: 8,
         ),
-        child: Row(
-          children: [
-            Text(
-              "$title Recommend",
-              style: const TextStyle(fontWeight: FontWeight.w600),
-            ),
-            const Spacer(),
-            Text("See All $title", style: const TextStyle(fontSize: 12)),
-          ],
+        child: Text(
+          "$title Recommend",
+          style: const TextStyle(fontWeight: FontWeight.w600),
         ),
       ),
     );

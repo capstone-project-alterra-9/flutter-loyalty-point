@@ -1,17 +1,29 @@
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
 import 'package:flutter_loyalty_point/src/models/product/response_get_product_model.dart';
+import 'package:flutter_loyalty_point/src/models/response_error_model.dart';
+import 'package:flutter_loyalty_point/src/models/transaction/data_request_add_transaction.dart';
+import 'package:flutter_loyalty_point/src/models/transaction/response_create_transaction_model.dart';
 import 'package:flutter_loyalty_point/src/models/user/response_get_user_model.dart';
+import 'package:flutter_loyalty_point/src/services/api/products_api_service.dart';
+import 'package:flutter_loyalty_point/src/services/api/transactions_api_service.dart';
+import 'package:flutter_loyalty_point/src/services/api/users_api_service.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_payment_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_product_detail_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_status_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/types/purchase_type.dart';
+import 'package:flutter_loyalty_point/src/utils/types/snack_bar_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
+import 'package:flutter_loyalty_point/src/utils/urls.dart';
+import 'package:flutter_loyalty_point/src/views/home/home_view.dart';
 import 'package:flutter_loyalty_point/src/views/payment/payment_view.dart';
 import 'package:flutter_loyalty_point/src/views/transaction_status/transaction_status_view.dart';
+import 'package:flutter_loyalty_point/src/views/widgets/snack_bar_widget.dart';
 
 class ProductDetailViewModel extends ChangeNotifier {
   ProductDetailViewModel(this.context, {required this.args}) {
@@ -24,11 +36,17 @@ class ProductDetailViewModel extends ChangeNotifier {
 
   void _initialize() async {
     await _setProduct();
-    await _checkIsUserCoinEnough();
+    await _checkIsUserPointsEnough();
   }
 
   bool _createTransactionButtonDisabled = true;
   bool get createTransactionButtonDisabled {
+    final int stock = product?.stock ?? 0;
+
+    if (stock <= 0) {
+      return true;
+    }
+
     if (args.purchaseType == PurchaseType.buy) {
       return false;
     }
@@ -49,57 +67,105 @@ class ProductDetailViewModel extends ChangeNotifier {
     _changeProductState(ViewStateType.loading);
 
     try {
-      final String data = await rootBundle.loadString(
-        'assets/json/dummy_data_response_get_product.json',
+      final ResponseGetProductModel response =
+          await ProductsAPIService().getProductById(
+        productId: args.productId,
       );
 
-      ResponseGetProductModel result = ResponseGetProductModel.fromJson(
-        jsonDecode(data),
-      );
-
-      _product = result.data;
+      _product = response.data;
 
       _changeProductState(ViewStateType.none);
-    } catch (e) {
+    } on DioError catch (e) {
       _changeProductState(ViewStateType.error);
       rethrow;
     }
   }
 
-  Future<void> _checkIsUserCoinEnough() async {
+  ViewStateType _checkIsUserPointsEnoughState = ViewStateType.loading;
+  ViewStateType get checkIsUserPointsEnoughState =>
+      _checkIsUserPointsEnoughState;
+  void _changeCheckIsUserPointsEnoughState(ViewStateType state) {
+    _checkIsUserPointsEnoughState = state;
+    notifyListeners();
+  }
+
+  Future<void> _checkIsUserPointsEnough() async {
+    _changeCheckIsUserPointsEnoughState(ViewStateType.loading);
+
     try {
-      final String data = await rootBundle.loadString(
-        'assets/json/dummy_data_response_get_user.json',
-      );
+      final ResponseGetUserModel response = await UsersAPIService().getUser();
 
-      ResponseGetUserModel result = ResponseGetUserModel.fromJson(
-        jsonDecode(data),
-      );
-
-      if (result.data?.point != null && product?.price != null) {
-        if (result.data!.point! >= product!.price!) {
+      if (response.data?.points != null && product?.price != null) {
+        if (response.data!.points! >= product!.price!) {
           _createTransactionButtonDisabled = false;
         }
       }
+
+      _changeCheckIsUserPointsEnoughState(ViewStateType.none);
     } catch (e) {
+      _changeCheckIsUserPointsEnoughState(ViewStateType.error);
       rethrow;
     }
   }
 
-  void createTransaction() {
-    if (args.purchaseType == PurchaseType.redeem) {
-      Navigator.pushNamed(
-        context,
-        TransactionStatusView.routeName,
-        arguments: const ArgsTransactionStatusHelper(isSuccess: true),
-      );
-      return;
-    }
+  ViewStateType _createTransactionState = ViewStateType.none;
+  ViewStateType get createTransactionState => _createTransactionState;
+  void _changeCreateTransactionState(ViewStateType state) {
+    _createTransactionState = state;
+    notifyListeners();
+  }
 
-    Navigator.pushNamed(
-      context,
-      PaymentView.routeName,
-      arguments: ArgsPaymentHelper(product: product!),
-    );
+  void createTransaction() async {
+    final NavigatorState navigator = Navigator.of(context);
+    _changeCreateTransactionState(ViewStateType.loading);
+
+    try {
+      if (args.purchaseType == PurchaseType.redeem) {
+        final ResponseCreateTransactionModel response =
+            await TransactionsAPIService().createTransaction(
+          data: DataRequestAddTransaction(
+            purchaseType: args.purchaseType,
+            productId: args.productId,
+            identifierNumber: args.identifierNumber,
+          ),
+        );
+
+        navigator.pushNamed(
+          TransactionStatusView.routeName,
+          arguments: ArgsTransactionStatusHelper(
+            isSuccess: response.status ?? false,
+            purchaseType: args.purchaseType,
+          ),
+        );
+
+        return;
+      }
+
+      navigator.pushNamed(
+        PaymentView.routeName,
+        arguments: ArgsPaymentHelper(product: product!),
+      );
+
+      _changeCreateTransactionState(ViewStateType.none);
+    } on DioError catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBarWidget(
+                title: "${args.purchaseType.value} Product Failed",
+                subtitle:
+                    "Something went wrong, you can't ${args.purchaseType.value} the product now",
+                snackBarType: SnackBarType.error)
+            .build(context),
+      );
+
+      Timer(
+        const Duration(seconds: 2),
+        () => navigator.pushNamedAndRemoveUntil(
+          HomeView.routeName,
+          (route) => false,
+        ),
+      );
+
+      _changeCreateTransactionState(ViewStateType.error);
+    }
   }
 }

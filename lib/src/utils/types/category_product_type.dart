@@ -34,4 +34,6 @@ enum CategoryProductType {
   }
 
   final String value;
+
+  String toPath() => value.toLowerCase().replaceAll(" ", "-");
 }

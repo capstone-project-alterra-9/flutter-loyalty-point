@@ -94,7 +94,7 @@ class _RegisterViewState extends State<RegisterView> {
                           validator: (value) =>
                               value.toString().isValidUsername()
                                   ? null
-                                  : "Must be at least 3 characters",
+                                  : "Must be between 8 and 16 characters",
                         ),
                         const SizedBox(height: 20),
 
@@ -106,7 +106,7 @@ class _RegisterViewState extends State<RegisterView> {
                           ),
                           validator: (value) => value.toString().isValidEmail()
                               ? null
-                              : 'Invalid Email!',
+                              : 'Must be at least 8 characters & valid email',
                         ),
                         const SizedBox(height: 15),
 
@@ -135,7 +135,7 @@ class _RegisterViewState extends State<RegisterView> {
                             validator: (value) =>
                                 value.toString().isValidPassword()
                                     ? null
-                                    : "Must be at least 6 characters",
+                                    : "Must be at least 8 characters",
                           ),
                         ),
 
@@ -148,17 +148,10 @@ class _RegisterViewState extends State<RegisterView> {
                   // button register section
                   Consumer<RegisterViewModel>(
                     builder: (context, value, child) {
-                      switch (value.registerState) {
-                        case ViewStateType.loading:
-                          {
-                            return const Center(
-                              child: CircularProgressIndicator.adaptive(),
-                            );
-                          }
-                        default:
-                          {
-                            return ElevatedButton(
-                              onPressed: () {
+                      return ElevatedButton(
+                        onPressed: value.registerState == ViewStateType.loading
+                            ? null
+                            : () {
                                 if (_formKey.currentState!.validate()) {
                                   Provider.of<RegisterViewModel>(context,
                                           listen: false)
@@ -171,15 +164,13 @@ class _RegisterViewState extends State<RegisterView> {
                                   );
                                 }
                               },
-                              style: Styles.primaryButton.copyWith(
-                                minimumSize: const MaterialStatePropertyAll(
-                                  Size.fromHeight(44),
-                                ),
-                              ),
-                              child: const Text("Register"),
-                            );
-                          }
-                      }
+                        style: Styles.primaryButton.copyWith(
+                          minimumSize: const MaterialStatePropertyAll(
+                            Size.fromHeight(44),
+                          ),
+                        ),
+                        child: const Text("Register"),
+                      );
                     },
                   ),
                   const SizedBox(height: 32),
