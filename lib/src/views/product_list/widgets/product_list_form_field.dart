@@ -8,6 +8,13 @@ class ProductListFormField extends StatelessWidget {
     ProductListViewModel productListViewModel =
         context.read<ProductListViewModel>();
 
+    if (productListViewModel.args.categoryProductType ==
+            CategoryProductType.other ||
+        productListViewModel.args.categoryProductType ==
+            CategoryProductType.cashout) {
+      return const SliverToBoxAdapter();
+    }
+
     String? hintFormField;
     Widget? prefixFormField;
 
@@ -25,6 +32,7 @@ class ProductListFormField extends StatelessWidget {
           );
           break;
         }
+
       case CategoryProductType.dataQuota:
         {
           hintFormField = "823 2222 3333";
@@ -37,11 +45,13 @@ class ProductListFormField extends StatelessWidget {
           );
           break;
         }
+
       case CategoryProductType.eMoney:
         {
           hintFormField = "0000 1111 2222 3333";
           break;
         }
+
       default:
         {
           hintFormField = "Input your number";
