@@ -11,7 +11,6 @@ class TransactionsAPIService {
   Future<ResponseGetTransactionListModel>
       getTransactionHistoryListFromAPI() async {
     try {
-      await _apiConfig.addToken();
       Response response = await _apiConfig.dio.get(
         Urls.transactionHistoryPath,
       );
@@ -27,7 +26,6 @@ class TransactionsAPIService {
 
   Future<ResponseGetTransactionListModel> getReedemHistoryListFromAPI() async {
     try {
-      await _apiConfig.addToken();
       Response response = await _apiConfig.dio.get(
         Urls.redeemHistoryPath,
       );

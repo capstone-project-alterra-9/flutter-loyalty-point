@@ -38,7 +38,7 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
             }
           case ViewStateType.none:
             {
-              return value.redeemList.isEmpty
+              return value.transactionList.isEmpty
                   ? const Center(
                       child: Text(
                         "You don't have any current transaction actions,\nPlease try at Homepage",
@@ -143,7 +143,9 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
                                               height: 8,
                                             ),
                                             Text(
-                                              "09 Nov 2022",
+                                              value.transactionList[index]
+                                                      .date ??
+                                                  "",
                                               style: GoogleFonts.poppins(
                                                   color: Styles.colorBlack400,
                                                   fontSize: 10),

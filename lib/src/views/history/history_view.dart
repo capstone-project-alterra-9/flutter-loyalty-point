@@ -48,335 +48,346 @@ class _HistoryViewState extends State<HistoryView> {
       length: 2,
       child: Scaffold(
           floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(32),
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(32),
+                    ),
                   ),
-                ),
-                isScrollControlled: true,
-                builder: ((_) {
-                  return StatefulBuilder(
-                    builder: (BuildContext context, StateSetter setState) {
-                      return FractionallySizedBox(
-                        heightFactor: 0.65,
-                        child: Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    "FILTER",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: Styles.colorBlack200,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        cbxAll = true;
-                                        cbxCredit = false;
-                                        cbxDataQuota = false;
-                                        cbxEmoney = false;
-                                        cbxCashout = false;
-                                        radioValue = "Newest";
-                                      });
-                                    },
-                                    child: const Text(
-                                      "Reset",
-                                      style: TextStyle(
-                                          color: Styles.colorBlack400),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
+                  isScrollControlled: true,
+                  builder: ((_) {
+                    return StatefulBuilder(
+                      builder: (BuildContext context, StateSetter setState) {
+                        return FractionallySizedBox(
+                          heightFactor: 0.65,
+                          child: Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      "CATEGORY",
+                                      "FILTER",
                                       style: TextStyle(
+                                          fontSize: 18,
                                           color: Styles.colorBlack200,
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.w700),
                                     ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 0, 10, 0),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              const Text(
-                                                "All",
-                                                style: TextStyle(
-                                                  color: Styles.colorBlack400,
-                                                ),
-                                              ),
-                                              Checkbox(
-                                                visualDensity: VisualDensity(
-                                                    horizontal: -4,
-                                                    vertical: -4),
-                                                value: cbxAll,
-                                                activeColor:
-                                                    Styles.colorBlack900,
-                                                onChanged: (values) {
-                                                  setState(() {
-                                                    cbxAll = values!;
-                                                    cbxCredit = false;
-                                                    cbxDataQuota = false;
-                                                    cbxEmoney = false;
-                                                    cbxCashout = false;
-                                                  });
-                                                },
-                                              )
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              const Text(
-                                                "Credit",
-                                                style: TextStyle(
-                                                  color: Styles.colorBlack400,
-                                                ),
-                                              ),
-                                              Checkbox(
-                                                visualDensity: VisualDensity(
-                                                    horizontal: -4,
-                                                    vertical: -4),
-                                                value: cbxCredit,
-                                                activeColor:
-                                                    Styles.colorBlack900,
-                                                onChanged: (values) {
-                                                  setState(() {
-                                                    cbxAll = false;
-                                                    cbxCredit = values!;
-                                                  });
-                                                },
-                                              )
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              const Text(
-                                                "Data Quota",
-                                                style: TextStyle(
-                                                  color: Styles.colorBlack400,
-                                                ),
-                                              ),
-                                              Checkbox(
-                                                visualDensity: VisualDensity(
-                                                    horizontal: -4,
-                                                    vertical: -4),
-                                                value: cbxDataQuota,
-                                                activeColor:
-                                                    Styles.colorBlack900,
-                                                onChanged: (values) {
-                                                  setState(() {
-                                                    cbxDataQuota = values!;
-                                                    cbxAll = false;
-                                                  });
-                                                },
-                                              )
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              const Text(
-                                                "E-money",
-                                                style: TextStyle(
-                                                  color: Styles.colorBlack400,
-                                                ),
-                                              ),
-                                              Checkbox(
-                                                visualDensity: VisualDensity(
-                                                    horizontal: -4,
-                                                    vertical: -4),
-                                                value: cbxEmoney,
-                                                activeColor:
-                                                    Styles.colorBlack900,
-                                                onChanged: (values) {
-                                                  setState(() {
-                                                    cbxEmoney = values!;
-                                                    cbxAll = false;
-                                                  });
-                                                },
-                                              )
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              const Text(
-                                                "Cashout",
-                                                style: TextStyle(
-                                                  color: Styles.colorBlack400,
-                                                ),
-                                              ),
-                                              Checkbox(
-                                                visualDensity: VisualDensity(
-                                                    horizontal: -4,
-                                                    vertical: -4),
-                                                value: cbxCashout,
-                                                activeColor:
-                                                    Styles.colorBlack900,
-                                                onChanged: (values) {
-                                                  setState(() {
-                                                    cbxCashout = values!;
-                                                    cbxAll = false;
-                                                  });
-                                                },
-                                              )
-                                            ],
-                                          ),
-                                        ],
+                                    InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          cbxAll = true;
+                                          cbxCredit = false;
+                                          cbxDataQuota = false;
+                                          cbxEmoney = false;
+                                          cbxCashout = false;
+                                          radioValue = "Newest";
+                                        });
+                                      },
+                                      child: const Text(
+                                        "Reset",
+                                        style: TextStyle(
+                                            color: Styles.colorBlack400),
                                       ),
                                     ),
                                   ],
                                 ),
-                              ),
-                              Container(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 5, 10, 0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      "SORT BY",
-                                      style: TextStyle(
-                                          color: Styles.colorBlack200,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 0, 10, 0),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              const Text(
-                                                "Newest",
-                                                style: TextStyle(
-                                                  color: Styles.colorBlack400,
-                                                ),
-                                              ),
-                                              Radio<String>(
-                                                visualDensity: VisualDensity(
-                                                    horizontal: -4,
-                                                    vertical: -4),
-                                                value: "Newest",
-                                                activeColor:
-                                                    Styles.colorBlack900,
-                                                onChanged: (values) {
-                                                  setState(() {
-                                                    radioValue = values ?? "";
-                                                  });
-                                                },
-                                                groupValue: radioValue,
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              const Text(
-                                                "Oldest",
-                                                style: TextStyle(
-                                                  color: Styles.colorBlack400,
-                                                ),
-                                              ),
-                                              Radio(
-                                                visualDensity: VisualDensity(
-                                                    horizontal: -4,
-                                                    vertical: -4),
-                                                value: "Oldest",
-                                                activeColor:
-                                                    Styles.colorBlack900,
-                                                onChanged: (values) {
-                                                  setState(() {
-                                                    radioValue = values ?? "";
-                                                  });
-                                                },
-                                                groupValue: radioValue,
-                                              )
-                                            ],
-                                          ),
-                                        ],
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        "CATEGORY",
+                                        style: TextStyle(
+                                            color: Styles.colorBlack200,
+                                            fontWeight: FontWeight.bold),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                style: Styles.primaryButton.copyWith(
-                                  minimumSize: const MaterialStatePropertyAll(
-                                    Size.fromHeight(44),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            10, 0, 10, 0),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                const Text(
+                                                  "All",
+                                                  style: TextStyle(
+                                                    color: Styles.colorBlack400,
+                                                  ),
+                                                ),
+                                                Checkbox(
+                                                  visualDensity: VisualDensity(
+                                                      horizontal: -4,
+                                                      vertical: -4),
+                                                  value: cbxAll,
+                                                  activeColor:
+                                                      Styles.colorBlack900,
+                                                  onChanged: (values) {
+                                                    setState(() {
+                                                      cbxAll = values!;
+                                                      cbxCredit = false;
+                                                      cbxDataQuota = false;
+                                                      cbxEmoney = false;
+                                                      cbxCashout = false;
+                                                    });
+                                                  },
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                const Text(
+                                                  "Credit",
+                                                  style: TextStyle(
+                                                    color: Styles.colorBlack400,
+                                                  ),
+                                                ),
+                                                Checkbox(
+                                                  visualDensity: VisualDensity(
+                                                      horizontal: -4,
+                                                      vertical: -4),
+                                                  value: cbxCredit,
+                                                  activeColor:
+                                                      Styles.colorBlack900,
+                                                  onChanged: (values) {
+                                                    setState(() {
+                                                      cbxAll = false;
+                                                      cbxCredit = values!;
+                                                    });
+                                                  },
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                const Text(
+                                                  "Data Quota",
+                                                  style: TextStyle(
+                                                    color: Styles.colorBlack400,
+                                                  ),
+                                                ),
+                                                Checkbox(
+                                                  visualDensity: VisualDensity(
+                                                      horizontal: -4,
+                                                      vertical: -4),
+                                                  value: cbxDataQuota,
+                                                  activeColor:
+                                                      Styles.colorBlack900,
+                                                  onChanged: (values) {
+                                                    setState(() {
+                                                      cbxDataQuota = values!;
+                                                      cbxAll = false;
+                                                    });
+                                                  },
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                const Text(
+                                                  "E-money",
+                                                  style: TextStyle(
+                                                    color: Styles.colorBlack400,
+                                                  ),
+                                                ),
+                                                Checkbox(
+                                                  visualDensity: VisualDensity(
+                                                      horizontal: -4,
+                                                      vertical: -4),
+                                                  value: cbxEmoney,
+                                                  activeColor:
+                                                      Styles.colorBlack900,
+                                                  onChanged: (values) {
+                                                    setState(() {
+                                                      cbxEmoney = values!;
+                                                      cbxAll = false;
+                                                    });
+                                                  },
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                const Text(
+                                                  "Cashout",
+                                                  style: TextStyle(
+                                                    color: Styles.colorBlack400,
+                                                  ),
+                                                ),
+                                                Checkbox(
+                                                  visualDensity: VisualDensity(
+                                                      horizontal: -4,
+                                                      vertical: -4),
+                                                  value: cbxCashout,
+                                                  activeColor:
+                                                      Styles.colorBlack900,
+                                                  onChanged: (values) {
+                                                    setState(() {
+                                                      cbxCashout = values!;
+                                                      cbxAll = false;
+                                                    });
+                                                  },
+                                                )
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                child: const Text("Show"),
-                              )
-                            ],
+                                Container(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 5, 10, 0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        "SORT BY",
+                                        style: TextStyle(
+                                            color: Styles.colorBlack200,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            10, 0, 10, 0),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                const Text(
+                                                  "Newest",
+                                                  style: TextStyle(
+                                                    color: Styles.colorBlack400,
+                                                  ),
+                                                ),
+                                                Radio<String>(
+                                                  visualDensity: VisualDensity(
+                                                      horizontal: -4,
+                                                      vertical: -4),
+                                                  value: "Newest",
+                                                  activeColor:
+                                                      Styles.colorBlack900,
+                                                  onChanged: (values) {
+                                                    setState(() {
+                                                      radioValue = values ?? "";
+                                                    });
+                                                  },
+                                                  groupValue: radioValue,
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                const Text(
+                                                  "Oldest",
+                                                  style: TextStyle(
+                                                    color: Styles.colorBlack400,
+                                                  ),
+                                                ),
+                                                Radio(
+                                                  visualDensity: VisualDensity(
+                                                      horizontal: -4,
+                                                      vertical: -4),
+                                                  value: "Oldest",
+                                                  activeColor:
+                                                      Styles.colorBlack900,
+                                                  onChanged: (values) {
+                                                    setState(() {
+                                                      radioValue = values ?? "";
+                                                    });
+                                                  },
+                                                  groupValue: radioValue,
+                                                )
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  style: Styles.primaryButton.copyWith(
+                                    minimumSize: const MaterialStatePropertyAll(
+                                      Size.fromHeight(44),
+                                    ),
+                                  ),
+                                  child: const Text("Show"),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                  );
-                }),
-              );
-            },
-            backgroundColor: Styles.colorGreen500,
-            child: const Icon(Icons.filter_list),
-          ),
+                        );
+                      },
+                    );
+                  }),
+                );
+              },
+              backgroundColor: Styles.colorGreen500,
+              child: Image.asset(
+                "assets/images/filter.png",
+                width: 30,
+              )),
           bottomNavigationBar:
               const BottomNavWidget(routeName: HistoryView.routeName),
           appBar: AppBar(
@@ -397,7 +408,7 @@ class _HistoryViewState extends State<HistoryView> {
                 tabs: <Widget>[
                   Tab(
                     child: Text(
-                      "Transaction",
+                      "Product",
                       style: TextStyle(fontWeight: FontWeight.w700),
                     ),
                   ),
