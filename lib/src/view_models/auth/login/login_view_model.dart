@@ -62,8 +62,8 @@ class LoginViewModel extends ChangeNotifier {
           snackBarType: SnackBarType.error,
         ).build(context),
       );
-    }
 
-    _changeLoginState(ViewStateType.error);
+      _changeLoginState(ViewStateType.error);
+    }
   }
 }
