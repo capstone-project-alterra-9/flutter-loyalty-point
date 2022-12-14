@@ -47,7 +47,11 @@ class TransactionDetailView extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Text("Berhasil"),
+                      Text(dataTransaksi.transaction.status == "success"
+                          ? "Status : Berhasil"
+                          : dataTransaksi.transaction.status == "pending"
+                              ? "Status : Menunggu Server"
+                              : "Status : Gagal"),
                       const SizedBox(
                         width: 4,
                       ),
@@ -55,7 +59,11 @@ class TransactionDetailView extends StatelessWidget {
                         width: 10,
                         height: 10,
                         decoration: BoxDecoration(
-                            color: Colors.green,
+                            color: dataTransaksi.transaction.status == "success"
+                                ? Colors.green
+                                : dataTransaksi.transaction.status == "pending"
+                                    ? Colors.amber
+                                    : Colors.red,
                             borderRadius: BorderRadius.circular(100)),
                       )
                     ],
@@ -63,8 +71,8 @@ class TransactionDetailView extends StatelessWidget {
                   const SizedBox(
                     height: 9,
                   ),
-                  const Text(
-                    "Tanggal :",
+                  Text(
+                    "Tanggal : ${dataTransaksi.transaction.date}",
                   ),
                   const SizedBox(
                     height: 9,
@@ -110,7 +118,7 @@ class TransactionDetailView extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          dataTransaksi.transaction.serialNumber,
+                          dataTransaksi.transaction.serialNumber.toString(),
                           textAlign: TextAlign.right,
                         ),
                       ),
@@ -128,7 +136,7 @@ class TransactionDetailView extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          dataTransaksi.transaction.name,
+                          dataTransaksi.transaction.name ?? "",
                           textAlign: TextAlign.right,
                         ),
                       ),
@@ -146,7 +154,7 @@ class TransactionDetailView extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          dataTransaksi.transaction.identifierNumber,
+                          dataTransaksi.transaction.identifierNumber ?? "",
                           textAlign: TextAlign.right,
                         ),
                       ),

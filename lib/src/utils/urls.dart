@@ -21,6 +21,10 @@ class Urls {
   static const String getTransactionHistoryListPathApi = '/history';
   static const String createTransactionPathApi = '/auth/transactions';
 
+  // transaction history api
+  static const String redeemHistoryPath = '/auth/history/method/redeem';
+  static const String transactionHistoryPath = '/auth/history/method/buy';
+
   // users path api
   static String getUserPathApi(String id) => '/users/$id';
 }

@@ -141,6 +141,10 @@ class _HistoryViewState extends State<HistoryView> {
                                                 onChanged: (values) {
                                                   setState(() {
                                                     cbxAll = values!;
+                                                    cbxCredit = false;
+                                                    cbxDataQuota = false;
+                                                    cbxEmoney = false;
+                                                    cbxCashout = false;
                                                   });
                                                 },
                                               )
@@ -167,6 +171,7 @@ class _HistoryViewState extends State<HistoryView> {
                                                     Styles.colorBlack900,
                                                 onChanged: (values) {
                                                   setState(() {
+                                                    cbxAll = false;
                                                     cbxCredit = values!;
                                                   });
                                                 },
@@ -195,6 +200,7 @@ class _HistoryViewState extends State<HistoryView> {
                                                 onChanged: (values) {
                                                   setState(() {
                                                     cbxDataQuota = values!;
+                                                    cbxAll = false;
                                                   });
                                                 },
                                               )
@@ -222,6 +228,7 @@ class _HistoryViewState extends State<HistoryView> {
                                                 onChanged: (values) {
                                                   setState(() {
                                                     cbxEmoney = values!;
+                                                    cbxAll = false;
                                                   });
                                                 },
                                               )
@@ -249,6 +256,7 @@ class _HistoryViewState extends State<HistoryView> {
                                                 onChanged: (values) {
                                                   setState(() {
                                                     cbxCashout = values!;
+                                                    cbxAll = false;
                                                   });
                                                 },
                                               )
