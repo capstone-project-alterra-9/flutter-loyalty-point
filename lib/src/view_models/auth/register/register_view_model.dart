@@ -42,7 +42,7 @@ class RegisterViewModel extends ChangeNotifier {
       );
 
       _changeRegisterState(ViewStateType.none);
-    } on DioError catch (e) {
+    } on DioError {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBarWidget(
           title: "Register Failed",

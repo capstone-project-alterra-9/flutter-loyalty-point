@@ -25,7 +25,7 @@ class ForgotPasswordViewModel extends ChangeNotifier {
       // todo: request forgot password (waiting be)
 
       _changeForgotPasswordState(ViewStateType.none);
-    } on DioError catch (e) {
+    } on DioError {
       // showing error with snackbar
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBarWidget(

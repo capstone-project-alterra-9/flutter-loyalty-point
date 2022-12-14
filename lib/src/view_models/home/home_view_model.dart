@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/models/local/home_transaction_option_button_model.dart';
 import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
