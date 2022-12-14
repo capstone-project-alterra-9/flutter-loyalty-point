@@ -185,9 +185,7 @@ class PaymentProductCard extends StatelessWidget {
 
                     // price product
                     Text(
-                      NumberFormat.simpleCurrency(locale: "in_ID").format(
-                        price,
-                      ),
+                      price!.formatToCurrency(),
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,

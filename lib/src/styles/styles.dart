@@ -103,4 +103,17 @@ class Styles {
       borderSide: const BorderSide(color: Colors.red),
     ),
   );
+
+  static const Duration animationDuration = Duration(milliseconds: 200);
+
+  static Widget animationBuilder(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    animation = CurvedAnimation(parent: animation, curve: Curves.easeInOut);
+
+    return FadeTransition(opacity: animation, child: child);
+  }
 }

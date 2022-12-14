@@ -14,6 +14,7 @@ class ResponseLoginModel {
 
 class DataModel {
   const DataModel({
+    required this.id,
     required this.username,
     required this.email,
     required this.password,
@@ -24,6 +25,7 @@ class DataModel {
 
   factory DataModel.fromJson(Map<String, dynamic> json) {
     return DataModel(
+      id: json['id'],
       username: json['username'],
       email: json['email'],
       password: json['password'],
@@ -33,6 +35,7 @@ class DataModel {
     );
   }
 
+  final String? id;
   final String? username;
   final String? email;
   final String? password;

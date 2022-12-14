@@ -1,13 +1,17 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
 import 'package:flutter_loyalty_point/src/models/product/response_get_product_list_model.dart';
+import 'package:flutter_loyalty_point/src/models/product/response_get_product_model.dart';
+import 'package:flutter_loyalty_point/src/services/api/products_api_service.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_product_detail_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_product_list_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/types/category_product_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
+import 'package:flutter_loyalty_point/src/utils/urls.dart';
 import 'package:flutter_loyalty_point/src/views/product_detail/product_detail_view.dart';
 
 class ProductListViewModel extends ChangeNotifier {
@@ -74,17 +78,23 @@ class ProductListViewModel extends ChangeNotifier {
     _changeProductListState(ViewStateType.loading);
 
     try {
-      final String data = await rootBundle.loadString(
-        'assets/json/dummy_data_response_get_product_list.json',
-      );
+      if (args.productId != null) {
+        final ResponseGetProductModel response =
+            await ProductsAPIService().getProductById(
+          productId: args.productId!,
+        );
 
-      ResponseGetProductListModel result = ResponseGetProductListModel.fromJson(
-        jsonDecode(data),
-      );
+        productList.addAll([response.data!]);
+      } else {
+        final ResponseGetProductListModel response =
+            await ProductsAPIService().getProducts(
+          path: Urls.getProductsByCategoryPathApi(args.categoryProductType),
+        );
 
-      productList.clear();
-      if (result.data != null) {
-        productList.addAll(result.data!);
+        productList.clear();
+        if (response.data != null) {
+          productList.addAll(response.data!);
+        }
       }
 
       _changeProductListState(ViewStateType.none);

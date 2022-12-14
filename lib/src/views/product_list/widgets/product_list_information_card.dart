@@ -8,7 +8,7 @@ class ProductListInformationCard extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Consumer<ProductListViewModel>(
         builder: (context, value, child) {
-          if (!value.nextButtonDisabled) {
+          if (!value.nextButtonDisabled || value.productList.isEmpty) {
             return const SizedBox();
           }
 

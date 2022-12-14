@@ -10,9 +10,46 @@ class ProductDetailDescription extends StatelessWidget {
         switch (value.productState) {
           case ViewStateType.loading:
             {
-              return const SliverToBoxAdapter(
-                child: Center(
-                  child: CircularProgressIndicator.adaptive(),
+              return SliverToBoxAdapter(
+                child: Column(
+                  children: const [
+                    SkeltonWidget(
+                      width: double.infinity,
+                      height: 24,
+                      borderRadius: 8,
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 50,
+                        vertical: 16,
+                      ),
+                    ),
+                    SkeltonWidget(
+                      width: double.infinity,
+                      height: 20,
+                      borderRadius: 8,
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 100,
+                        vertical: 0,
+                      ),
+                    ),
+                    SkeltonWidget(
+                      width: double.infinity,
+                      height: 16,
+                      borderRadius: 8,
+                      margin: EdgeInsets.only(top: 32, left: 16, right: 16),
+                    ),
+                    SkeltonWidget(
+                      width: double.infinity,
+                      height: 16,
+                      borderRadius: 8,
+                      margin: EdgeInsets.only(top: 8, left: 16, right: 16),
+                    ),
+                    SkeltonWidget(
+                      width: double.infinity,
+                      height: 16,
+                      borderRadius: 8,
+                      margin: EdgeInsets.only(top: 8, left: 16, right: 16),
+                    ),
+                  ],
                 ),
               );
             }
@@ -34,11 +71,12 @@ class ProductDetailDescription extends StatelessWidget {
                 price = value.product?.price == null
                     ? "-"
                     : NumberFormat.simpleCurrency(locale: "in_ID")
-                        .format(value.product!.price);
+                        .format(value.product!.price)
+                        .replaceAll(",00", "");
               } else {
                 price = value.product?.price == null
                     ? "-"
-                    : "${NumberFormat.decimalPattern('in_ID').format(value.product!.price)} Points";
+                    : "${NumberFormat.decimalPattern('in_ID').format(value.product!.price).replaceAll(",00", "")} Points";
               }
 
               return SliverList(

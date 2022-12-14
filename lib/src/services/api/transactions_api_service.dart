@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_loyalty_point/src/configs/api/api_config.dart';
 import 'package:flutter_loyalty_point/src/models/transaction/data_request_add_transaction.dart';
+import 'package:flutter_loyalty_point/src/models/transaction/response_create_transaction_model.dart';
 import 'package:flutter_loyalty_point/src/utils/urls.dart';
 
 class TransactionsAPIService {
@@ -19,17 +20,21 @@ class TransactionsAPIService {
     }
   }
 
-  Future<Response> createTransaction({
+  Future<ResponseCreateTransactionModel> createTransaction({
     required DataRequestAddTransaction data,
   }) async {
     try {
-      await _apiConfig.addToken();
       Response response = await _apiConfig.dio.post(
         Urls.createTransactionPathApi,
         data: data.toJson(),
       );
 
-      return response;
+      ResponseCreateTransactionModel result =
+          ResponseCreateTransactionModel.fromJson(
+        response.data,
+      );
+
+      return result;
     } catch (e) {
       rethrow;
     }

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/models/local/home_transaction_option_button_model.dart';
 import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
 import 'package:flutter_loyalty_point/src/styles/styles.dart';
+import 'package:flutter_loyalty_point/src/utils/extensions/int_extension.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_product_list_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/types/category_product_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/purchase_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
 import 'package:flutter_loyalty_point/src/view_models/home/home_view_model.dart';
 import 'package:flutter_loyalty_point/src/views/widgets/bottomnav_widget.dart';
+import 'package:flutter_loyalty_point/src/views/widgets/skelton_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:intl/intl.dart';
@@ -79,11 +81,19 @@ class HomeView extends StatelessWidget {
               ),
             ),
           ),
+
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 150,
+            ),
+          )
         ],
       ),
 
       // bottom bar section
-      bottomNavigationBar: const BottomNavWidget(routeName: HomeView.routeName),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton:
+          const BottomNavWidget(routeName: HomeView.routeName),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loyalty_point/src/utils/types/purchase_type.dart';
 import 'package:flutter_loyalty_point/src/view_models/transaction_status/transaction_status_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +10,13 @@ class TransactionStatusView extends StatelessWidget {
   @override
   @override
   Widget build(BuildContext context) {
-    context.read<TransactionStatusViewModel>();
+    TransactionStatusViewModel transactionStatusViewModel =
+        context.read<TransactionStatusViewModel>();
+
+    final String message =
+        transactionStatusViewModel.args.purchaseType == PurchaseType.buy
+            ? "You have successfully buy your\nproduct"
+            : "You have successfully redeemed\nyour points";
 
     return Scaffold(
       body: Center(
@@ -26,10 +33,10 @@ class TransactionStatusView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
-              "You have successfully redeemed\nyour points!",
+            Text(
+              message,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
