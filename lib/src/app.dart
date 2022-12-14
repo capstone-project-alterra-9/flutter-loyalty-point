@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_loyalty_point/src/styles/styles.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'routes/routes.dart';
@@ -12,6 +13,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ));
+
     return MaterialApp(
       initialRoute: SplashView.routeName,
       navigatorKey: navigatorKey,
@@ -25,6 +30,7 @@ class MyApp extends StatelessWidget {
         backgroundColor: Styles.colorBackground,
         scaffoldBackgroundColor: Styles.colorBackground,
         appBarTheme: const AppBarTheme(
+          centerTitle: true,
           backgroundColor: Styles.colorWhite,
           foregroundColor: Styles.colorBlack400,
           titleTextStyle: TextStyle(
@@ -32,9 +38,6 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.w500,
             color: Styles.colorBlack400,
           ),
-        ),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: Colors.white,
         ),
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Styles.colorBlack500,

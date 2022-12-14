@@ -21,6 +21,7 @@ class ProductListProductCard extends StatelessWidget {
     String background;
     Positioned categoryText;
     Positioned nominalText;
+    int nominalTextLength = image?.length ?? 4;
 
     CategoryProductType categoryProductType =
         CategoryProductType.fromString(category ?? "");
@@ -49,7 +50,10 @@ class ProductListProductCard extends StatelessWidget {
             bottom: 10,
             child: Text(
               image ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20 * 4 / nominalTextLength,
+              ),
             ),
           );
           break;
@@ -79,7 +83,10 @@ class ProductListProductCard extends StatelessWidget {
             bottom: 10,
             child: Text(
               image ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20 * 4 / nominalTextLength,
+              ),
             ),
           );
           break;
@@ -108,7 +115,10 @@ class ProductListProductCard extends StatelessWidget {
             bottom: 10,
             child: Text(
               image ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20 * 4 / nominalTextLength,
+              ),
             ),
           );
           break;
@@ -137,7 +147,10 @@ class ProductListProductCard extends StatelessWidget {
             bottom: 10,
             child: Text(
               image ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20 * 4 / nominalTextLength,
+              ),
             ),
           );
           break;
@@ -160,7 +173,10 @@ class ProductListProductCard extends StatelessWidget {
                 child: Stack(
                   children: [
                     Positioned.fill(
-                      child: Image.asset(background, fit: BoxFit.cover),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset(background, fit: BoxFit.cover),
+                      ),
                     ),
                     categoryText,
                     nominalText,
@@ -169,33 +185,39 @@ class ProductListProductCard extends StatelessWidget {
               ),
               const SizedBox(width: 8),
 
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // title product
-                    Text(
-                      name ?? "",
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // title product
+                      Text(
+                        name ?? "",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 2),
+                      const SizedBox(height: 2),
 
-                    // price product
-                    Text(
-                      NumberFormat.simpleCurrency(locale: "in_ID").format(
-                        price,
+                      // price product
+                      Text(
+                        NumberFormat.simpleCurrency(locale: "in_ID").format(
+                          price,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               )
             ],

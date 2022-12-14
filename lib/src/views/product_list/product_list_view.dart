@@ -5,6 +5,7 @@ import 'package:flutter_loyalty_point/src/utils/types/category_product_type.dart
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
 import 'package:flutter_loyalty_point/src/view_models/product_list/product_list_view_model.dart';
 import 'package:flutter_loyalty_point/src/views/widgets/bottom_sheet_widget.dart';
+import 'package:flutter_loyalty_point/src/views/widgets/skelton_widget.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

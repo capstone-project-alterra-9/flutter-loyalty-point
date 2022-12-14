@@ -61,7 +61,22 @@ class HomeAppBar extends StatelessWidget {
                         }
                       default:
                         {
-                          return const SizedBox();
+                          return Wrap(
+                            spacing: 16,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: const [
+                              SkeltonWidget(
+                                width: 45,
+                                height: 45,
+                                borderRadius: 999,
+                              ),
+                              SkeltonWidget(
+                                width: 135,
+                                height: 22.5,
+                                borderRadius: 15,
+                              )
+                            ],
+                          );
                         }
                     }
                   },

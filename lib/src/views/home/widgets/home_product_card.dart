@@ -19,6 +19,7 @@ class HomeProductCard extends StatelessWidget {
     String background;
     Positioned categoryText;
     Positioned nominalText;
+    int nominalTextLength = image?.length ?? 4;
 
     CategoryProductType categoryProductType =
         CategoryProductType.fromString(category ?? "");
@@ -39,11 +40,14 @@ class HomeProductCard extends StatelessWidget {
             ),
           );
           nominalText = Positioned(
-            left: 17,
+            left: 15,
             bottom: 19,
             child: Text(
               image ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20 * 4 / nominalTextLength,
+              ),
             ),
           );
           break;
@@ -72,7 +76,10 @@ class HomeProductCard extends StatelessWidget {
             bottom: 19,
             child: Text(
               image ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20 * 4 / nominalTextLength,
+              ),
             ),
           );
           break;
@@ -97,11 +104,13 @@ class HomeProductCard extends StatelessWidget {
             ),
           );
           nominalText = Positioned(
-            right: 12,
+            right: 15,
             bottom: 19,
             child: Text(
               image ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20 * 4 / nominalTextLength),
             ),
           );
           break;
@@ -130,7 +139,9 @@ class HomeProductCard extends StatelessWidget {
             bottom: 19,
             child: Text(
               image ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20 * 4 / nominalTextLength),
             ),
           );
           break;
@@ -164,18 +175,24 @@ class HomeProductCard extends StatelessWidget {
             const SizedBox(height: 8),
 
             // title product
-            Text(
-              name ?? "",
-              style: const TextStyle(fontSize: 12),
+            SizedBox(
+              width: 155,
+              child: Text(
+                name ?? "",
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 12),
+              ),
             ),
             const SizedBox(height: 2),
 
             // price product
-            Text(
-              price == null
-                  ? "-"
-                  : NumberFormat.simpleCurrency(locale: "in_ID").format(price),
-              style: const TextStyle(fontSize: 12),
+            SizedBox(
+              width: 155,
+              child: Text(
+                overflow: TextOverflow.ellipsis,
+                price == null ? "-" : price!.formatToCurrency(),
+                style: const TextStyle(fontSize: 12),
+              ),
             ),
           ],
         ),

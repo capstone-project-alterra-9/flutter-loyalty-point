@@ -8,11 +8,37 @@ class ProductDetailBottomSheet extends StatelessWidget {
     return BottomSheetWidget(
       child: Consumer<ProductDetailViewModel>(
         builder: (context, value, child) {
-          switch (value.productState) {
+          switch (value.checkIsUserPointsEnoughState) {
             case ViewStateType.loading:
               {
-                return const Center(
-                  child: CircularProgressIndicator.adaptive(),
+                return Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          SkeltonWidget(
+                            width: 100,
+                            height: 14,
+                            borderRadius: 4,
+                            margin: EdgeInsets.only(bottom: 4),
+                          ),
+                          SkeltonWidget(
+                            width: 150,
+                            height: 16,
+                            borderRadius: 4,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SkeltonWidget(
+                      width: 100,
+                      height: 32,
+                      borderRadius: 20,
+                      margin: EdgeInsets.only(left: 100),
+                    ),
+                  ],
                 );
               }
 
@@ -30,13 +56,14 @@ class ProductDetailBottomSheet extends StatelessWidget {
                 if (value.args.purchaseType == PurchaseType.buy) {
                   price = value.product?.price == null
                       ? "-"
-                      : NumberFormat.simpleCurrency(locale: "in_ID")
-                          .format(value.product!.price);
+                      : value.product!.price!.formatToCurrency();
                 } else {
                   price = value.product?.price == null
                       ? "-"
-                      : "${NumberFormat.decimalPattern('in_ID').format(value.product!.price)} Points";
+                      : "${value.product!.price!.formatToDecimal()} Points";
                 }
+
+                final int stock = value.product?.stock ?? 0;
 
                 return Row(
                   children: [
@@ -58,14 +85,22 @@ class ProductDetailBottomSheet extends StatelessWidget {
                     ),
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: value.createTransactionButtonDisabled
+                        onPressed: value.createTransactionButtonDisabled ||
+                                value.createTransactionState ==
+                                    ViewStateType.loading ||
+                                value.createTransactionState ==
+                                    ViewStateType.error
                             ? null
                             : context
                                 .read<ProductDetailViewModel>()
                                 .createTransaction,
                         style: Styles.primaryButton,
                         child: Text(
-                          value.args.purchaseType.value,
+                          stock <= 0
+                              ? "Out of Stock"
+                              : value.createTransactionButtonDisabled
+                                  ? "Not Enough"
+                                  : value.args.purchaseType.value,
                         ),
                       ),
                     ),

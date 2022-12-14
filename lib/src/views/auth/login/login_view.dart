@@ -4,6 +4,7 @@ import 'package:flutter_loyalty_point/src/styles/styles.dart';
 import 'package:flutter_loyalty_point/src/utils/extensions/string_extension.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
 import 'package:flutter_loyalty_point/src/view_models/auth/login/login_view_model.dart';
+import 'package:flutter_loyalty_point/src/views/auth/forgot_password/forgot_password_view.dart';
 import 'package:flutter_loyalty_point/src/views/auth/register/register_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -82,7 +83,7 @@ class _LoginViewState extends State<LoginView> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        // textfield username
+                        // textfield email
                         TextFormField(
                           controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
@@ -91,7 +92,7 @@ class _LoginViewState extends State<LoginView> {
                           ),
                           validator: (value) => value.toString().isValidEmail()
                               ? null
-                              : 'Invalid Email!',
+                              : 'Must be at least 8 characters & valid email',
                         ),
                         const SizedBox(height: 20),
 
@@ -120,7 +121,7 @@ class _LoginViewState extends State<LoginView> {
                             validator: (value) =>
                                 value.toString().isValidPassword()
                                     ? null
-                                    : "Must be at least 6 characters",
+                                    : "Must be at least 8 characters",
                           ),
                         ),
 
@@ -132,7 +133,10 @@ class _LoginViewState extends State<LoginView> {
 
                   // link to forgot password
                   InkWell(
-                    onTap: () {},
+                    onTap: () => Navigator.pushNamed(
+                      context,
+                      ForgotPasswordView.routeName,
+                    ),
                     child: const Text(
                       "Forgot password?",
                       style: TextStyle(
@@ -145,20 +149,12 @@ class _LoginViewState extends State<LoginView> {
                   const SizedBox(height: 20),
 
                   // button login section
-
                   Consumer<LoginViewModel>(
                     builder: (context, value, child) {
-                      switch (value.loginState) {
-                        case ViewStateType.loading:
-                          {
-                            return const Center(
-                              child: CircularProgressIndicator.adaptive(),
-                            );
-                          }
-                        default:
-                          {
-                            return ElevatedButton(
-                              onPressed: () {
+                      return ElevatedButton(
+                        onPressed: value.loginState == ViewStateType.loading
+                            ? null
+                            : () {
                                 if (_formKey.currentState!.validate()) {
                                   Provider.of<LoginViewModel>(context,
                                           listen: false)
@@ -170,15 +166,13 @@ class _LoginViewState extends State<LoginView> {
                                   );
                                 }
                               },
-                              style: Styles.primaryButton.copyWith(
-                                minimumSize: const MaterialStatePropertyAll(
-                                  Size.fromHeight(44),
-                                ),
-                              ),
-                              child: const Text("Login"),
-                            );
-                          }
-                      }
+                        style: Styles.primaryButton.copyWith(
+                          minimumSize: const MaterialStatePropertyAll(
+                            Size.fromHeight(44),
+                          ),
+                        ),
+                        child: const Text("Login"),
+                      );
                     },
                   ),
                   const SizedBox(height: 32),
@@ -208,8 +202,6 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     ],
                   ),
-
-                  // end section
                 ],
               ),
             ),

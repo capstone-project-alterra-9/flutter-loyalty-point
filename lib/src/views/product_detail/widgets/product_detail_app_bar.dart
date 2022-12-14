@@ -30,8 +30,9 @@ class ProductDetailAppBar extends StatelessWidget {
           switch (value.productState) {
             case ViewStateType.loading:
               {
-                return const Center(
-                  child: CircularProgressIndicator.adaptive(),
+                return const SkeltonWidget(
+                  width: double.infinity,
+                  height: double.infinity,
                 );
               }
 
@@ -47,11 +48,17 @@ class ProductDetailAppBar extends StatelessWidget {
                 String background;
                 Positioned categoryText;
                 Positioned nominalText;
+                int topDistance = 0;
+                int nominalTextLength = value.product?.image?.length ?? 4;
 
                 CategoryProductType categoryProductType =
                     CategoryProductType.fromString(
                   value.product?.category ?? "",
                 );
+
+                if (Platform.isAndroid) {
+                  topDistance = -24;
+                }
 
                 switch (categoryProductType) {
                   // credits
@@ -60,7 +67,7 @@ class ProductDetailAppBar extends StatelessWidget {
                       background =
                           "assets/images/background_product_detail_card_credits.jpg";
                       categoryText = Positioned(
-                        top: 86 / 393 * width,
+                        top: 86 / 393 * width + topDistance,
                         right: 0,
                         left: 0,
                         bottom: 60 / 393 * width,
@@ -80,7 +87,7 @@ class ProductDetailAppBar extends StatelessWidget {
                           value.product?.image ?? "",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 48 / 393 * width,
+                            fontSize: 48 / 393 * width * 4 / nominalTextLength,
                           ),
                         ),
                       );
@@ -93,7 +100,7 @@ class ProductDetailAppBar extends StatelessWidget {
                       background =
                           "assets/images/background_product_detail_card_quota_data.jpg";
                       categoryText = Positioned(
-                        top: 86 / 393 * width,
+                        top: 86 / 393 * width + topDistance,
                         right: 0,
                         left: 0,
                         bottom: 60 / 393 * width,
@@ -114,7 +121,7 @@ class ProductDetailAppBar extends StatelessWidget {
                           value.product?.image ?? "",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 48 / 393 * width,
+                            fontSize: 48 / 393 * width * 4 / nominalTextLength,
                           ),
                         ),
                       );
@@ -127,7 +134,7 @@ class ProductDetailAppBar extends StatelessWidget {
                       background =
                           "assets/images/background_product_detail_card_e_money.jpg";
                       categoryText = Positioned(
-                        top: 86 / 393 * width,
+                        top: 86 / 393 * width + topDistance,
                         right: 0,
                         left: 0,
                         bottom: 60 / 393 * width,
@@ -148,7 +155,7 @@ class ProductDetailAppBar extends StatelessWidget {
                           value.product?.image ?? "",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 48 / 393 * width,
+                            fontSize: 48 / 393 * width * 4 / nominalTextLength,
                           ),
                         ),
                       );
@@ -161,7 +168,7 @@ class ProductDetailAppBar extends StatelessWidget {
                       background =
                           "assets/images/background_product_detail_card_others.jpg";
                       categoryText = Positioned(
-                        top: 86 / 393 * width,
+                        top: 86 / 393 * width + topDistance,
                         right: 0,
                         left: 0,
                         bottom: 60 / 393 * width,
@@ -182,7 +189,7 @@ class ProductDetailAppBar extends StatelessWidget {
                           value.product?.image ?? "",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 48 / 393 * width,
+                            fontSize: 48 / 393 * width * 4 / nominalTextLength,
                           ),
                         ),
                       );
