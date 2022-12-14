@@ -40,10 +40,10 @@ class MembershipView extends StatelessWidget {
               children: [
                 Image.asset(
                   "assets/images/tier_badge_bronze.png",
-                  width: 40,
+                  width: 50,
                 ),
                 const SizedBox(
-                  width: 6,
+                  width: 12,
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -61,7 +61,7 @@ class MembershipView extends StatelessWidget {
                         Text(
                           "BRONZE",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17),
+                              fontWeight: FontWeight.bold, fontSize: 14),
                           textAlign: TextAlign.left,
                         ),
                         const SizedBox(
@@ -69,7 +69,7 @@ class MembershipView extends StatelessWidget {
                         ),
                         const Text(
                           "USER",
-                          style: TextStyle(fontSize: 17),
+                          style: TextStyle(fontSize: 14),
                           textAlign: TextAlign.left,
                         ),
                       ],
@@ -141,7 +141,7 @@ class MembershipView extends StatelessWidget {
                         height: 8,
                       ),
                       const Text(
-                        "Bronze",
+                        "Silver",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Styles.colorBlack300,
@@ -177,7 +177,7 @@ class MembershipView extends StatelessWidget {
                         height: 8,
                       ),
                       const Text(
-                        "Bronze",
+                        "Gold",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Styles.colorBlack300,
@@ -198,12 +198,16 @@ class MembershipView extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
+            const SizedBox(
+              height: 24,
+            ),
             const Text(
               "Redeeming points won’t affect your progress to the next level",
               style: TextStyle(
                   fontWeight: FontWeight.w500,
                   color: Styles.colorBlack200,
-                  fontSize: 11),
+                  fontSize: 10),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(
               height: 18,

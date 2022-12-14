@@ -6,6 +6,7 @@ import 'package:heroicons/heroicons.dart';
 
 import '../../models/user/response_get_user_model.dart';
 import '../../models/user/user_model.dart';
+import '../../services/api/users_api_service.dart';
 import '../../utils/types/view_state_type.dart';
 import 'package:flutter/material.dart';
 
@@ -92,15 +93,9 @@ class ProfileViewModel extends ChangeNotifier {
     _changeUserState(ViewStateType.loading);
 
     try {
-      final String data = await rootBundle.loadString(
-        'assets/json/dummy_data_response_get_user.json',
-      );
+      final ResponseGetUserModel response = await UsersAPIService().getUser();
 
-      ResponseGetUserModel result = ResponseGetUserModel.fromJson(
-        jsonDecode(data),
-      );
-
-      _user = result.data;
+      _user = response.data;
 
       _changeUserState(ViewStateType.none);
     } catch (e) {
