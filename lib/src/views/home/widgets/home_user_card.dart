@@ -187,11 +187,25 @@ class HomeUserCard extends StatelessWidget {
                               const SizedBox(width: 10),
 
                               // icon question
-                              const HeroIcon(
-                                HeroIcons.questionMarkCircle,
-                                style: HeroIconStyle.solid,
-                                color: Colors.white,
-                                size: 20,
+                              Tooltip(
+                                message:
+                                    "Earn more points to\ngo to the next level",
+                                verticalOffset: -60,
+                                textStyle: const TextStyle(
+                                  fontSize: 8,
+                                  color: Styles.colorWhite,
+                                ),
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: Styles.colorBlack200,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const HeroIcon(
+                                  HeroIcons.questionMarkCircle,
+                                  style: HeroIconStyle.solid,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
                               ),
                             ],
                           );
