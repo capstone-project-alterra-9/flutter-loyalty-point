@@ -15,7 +15,7 @@ class MembershipView extends StatelessWidget {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
-          "My Membership",
+          "User Level",
           style: GoogleFonts.poppins(
               fontWeight: FontWeight.w500, color: Colors.black),
         ),
