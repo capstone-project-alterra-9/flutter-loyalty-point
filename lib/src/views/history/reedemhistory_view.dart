@@ -96,7 +96,11 @@ class ReedemHistoryView extends StatelessWidget {
                                                           .category ==
                                                       "credits"
                                                   ? "assets/images/redeem_history.png"
-                                                  : "assets/images/redeem_history.png")),
+                                                  : value.redeemList[index]
+                                                              .category ==
+                                                          "data-quota"
+                                                      ? "assets/images/data-quota_history.png"
+                                                      : "assets/images/redeem_history.png")),
                                         ),
                                       ),
                                       const SizedBox(
