@@ -97,7 +97,7 @@ class Routes {
             transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
-                create: (context) => HistoryViewModel(context),
+                create: (context) => HistoryViewModel(),
                 child: HistoryView(),
               );
             },

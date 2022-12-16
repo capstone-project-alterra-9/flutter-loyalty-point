@@ -3,6 +3,7 @@ import 'package:flutter_loyalty_point/src/models/transaction/transaction_model.d
 import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_detail_helper.dart';
 import 'package:flutter_loyalty_point/src/view_models/transaction_detail/transaction_detail_view_model.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class TransactionDetailView extends StatelessWidget {
@@ -18,7 +19,7 @@ class TransactionDetailView extends StatelessWidget {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
-          "Detail Transaksi",
+          "Transaction Details",
           style: GoogleFonts.poppins(
               fontWeight: FontWeight.w500, color: Colors.black),
         ),
@@ -47,11 +48,14 @@ class TransactionDetailView extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(dataTransaksi.transaction.status == "success"
-                          ? "Status : Berhasil"
-                          : dataTransaksi.transaction.status == "pending"
-                              ? "Status : Menunggu Server"
-                              : "Status : Gagal"),
+                      Text(
+                        dataTransaksi.transaction.status == "success"
+                            ? "Success"
+                            : dataTransaksi.transaction.status == "pending"
+                                ? "Pending"
+                                : "Failed",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       const SizedBox(
                         width: 4,
                       ),
@@ -71,14 +75,46 @@ class TransactionDetailView extends StatelessWidget {
                   const SizedBox(
                     height: 9,
                   ),
-                  Text(
-                    "Tanggal : ${dataTransaksi.transaction.date}",
+                  Row(
+                    children: [
+                      const Text(
+                        "Date:",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        width: 7,
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          DateFormat.yMMMd()
+                              .format(DateTime.parse(
+                                dataTransaksi.transaction.date ?? "",
+                              ))
+                              .toString(),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 9,
                   ),
-                  Text(
-                    "Order ID : ${dataTransaksi.transaction.id.toString()}",
+                  Row(
+                    children: [
+                      const Text(
+                        "Order ID:",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        width: 7,
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          "ID${dataTransaksi.transaction.id.toString().substring(0, 8).toUpperCase()}",
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -103,36 +139,36 @@ class TransactionDetailView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const Text(
-                    "Detail transaksi",
+                    "Transaction Details",
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(
                     height: 12,
                   ),
+                  // Row(
+                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     const Text(
+                  //       "Serial Number",
+                  //     ),
+                  //     Expanded(
+                  //       child: Text(
+                  //         dataTransaksi.transaction.serialNumber.toString(),
+                  //         textAlign: TextAlign.right,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // const SizedBox(
+                  //   height: 12,
+                  // ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Serial Number",
-                      ),
-                      Expanded(
-                        child: Text(
-                          dataTransaksi.transaction.serialNumber.toString(),
-                          textAlign: TextAlign.right,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "Nama Produk",
+                        "Product Name",
                       ),
                       Expanded(
                         child: Text(
@@ -150,7 +186,7 @@ class TransactionDetailView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Nomor Handphone",
+                        "Mobile Number",
                       ),
                       Expanded(
                         child: Text(
@@ -168,7 +204,7 @@ class TransactionDetailView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Harga",
+                        "Price",
                       ),
                       Expanded(
                         child: Text(
