@@ -18,7 +18,11 @@ class APIConfig {
           return handler.next(options);
         },
         onError: (e, handler) async {
-          if (e.response!.statusCode == 401) {
+          bool isError401 = e.response!.statusCode == 401;
+          bool withToken =
+              e.requestOptions.headers["Authorization"] != "Bearer null";
+
+          if (isError401 && withToken) {
             bool getNewToken = await _refreshToken();
 
             if (getNewToken) {
