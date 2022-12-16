@@ -91,10 +91,11 @@ class _RegisterViewState extends State<RegisterView> {
                           decoration: Styles.textFieldAuth.copyWith(
                             label: const Text('Username'),
                           ),
-                          validator: (value) =>
-                              value.toString().isValidUsername()
-                                  ? null
-                                  : "Must be between 8 and 16 characters",
+                          validator: (value) => value
+                                  .toString()
+                                  .isValidUsername()
+                              ? null
+                              : "Must be between 8 and 16 alphanumeric characters",
                         ),
                         const SizedBox(height: 20),
 

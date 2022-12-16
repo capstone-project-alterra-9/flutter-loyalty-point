@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/models/auth/data_request_forgot_password_model.dart';
+import 'package:flutter_loyalty_point/src/services/api/auth_api_service.dart';
 import 'package:flutter_loyalty_point/src/utils/types/snack_bar_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
 import 'package:flutter_loyalty_point/src/views/widgets/snack_bar_widget.dart';
@@ -22,7 +23,7 @@ class ForgotPasswordViewModel extends ChangeNotifier {
     _changeForgotPasswordState(ViewStateType.loading);
 
     try {
-      // todo: request forgot password (waiting be)
+      await AuthAPIService().forgotPassword(data: data);
 
       _changeForgotPasswordState(ViewStateType.none);
     } on DioError {
@@ -37,5 +38,6 @@ class ForgotPasswordViewModel extends ChangeNotifier {
 
       _changeForgotPasswordState(ViewStateType.error);
     }
+    print(forgotPasswordState);
   }
 }

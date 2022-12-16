@@ -1,5 +1,5 @@
 extension StringExtension on String {
-  bool isValidUsername() => length >= 8 && length <= 16;
+  bool isValidUsername() => length >= 8 && length <= 16 && !contains(" ");
 
   bool isValidEmail() {
     return RegExp(
