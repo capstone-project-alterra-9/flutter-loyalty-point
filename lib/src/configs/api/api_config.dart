@@ -50,8 +50,9 @@ class APIConfig {
   }
 
   Future<bool> _refreshToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
     try {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
       final String? refreshToken = prefs.getString('refreshToken');
 
       Response response = await dio.post(
@@ -69,6 +70,8 @@ class APIConfig {
 
       return true;
     } on DioError {
+      prefs.clear();
+
       return false;
     }
   }
