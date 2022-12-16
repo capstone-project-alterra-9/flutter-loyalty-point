@@ -1,0 +1,17 @@
+{
+    "message": "succes add transaction",
+    "data": {
+        "ID": "ini string panjang",
+        "createdAt": "2022-11-22T16:48:08.886542Z",
+        "updatedAt": "2022-11-22T16:48:08.886542Z",
+        "deletedAt": null,
+        "paymentMethod": "redeem",
+        "username": "test-updated",
+        "category": "pulsa",
+        "name": "product1",
+        "price": 10000,
+        "serialNumber": "ini uint64 12 digit",
+        "identifierNum": "081234567890",
+        "status": "pending"
+    }
+}

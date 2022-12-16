@@ -112,7 +112,8 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                   builder: (context, value, child) {
                     return ElevatedButton(
                       onPressed: value.forgotPasswordState ==
-                              ViewStateType.loading
+                                  ViewStateType.loading ||
+                              value.forgotPasswordState == ViewStateType.none
                           ? null
                           : () {
                               if (_formKey.currentState!.validate()) {

@@ -1,17 +1,18 @@
 {
-    "message": "succes get products by id",
+    "message": "Success get product",
+    "errors": {},
     "data": {
-        "ID": "ini-string-panjang01",
-        "createdAt": "2022-11-22T16:48:08.886542Z",
-        "updatedAt": "2022-11-22T16:48:08.886542Z",
+        "ID": "139c1d73-629c-43c2-af86-e7f33e87500a",
+        "createdAt": "2022-12-10T17:53:28.431528Z",
+        "updatedAt": "2022-12-13T14:58:25.889684Z",
         "deletedAt": null,
-        "category": "e-money",
+        "category": "credits",
         "redeem": true,
         "buy": true,
-        "name": "product1",
+        "name": "name",
         "description": "description",
         "price": 10000,
-        "image": "10rb",
-        "stock": 1
+        "stock": 13,
+        "image": "10rb"
     }
 }

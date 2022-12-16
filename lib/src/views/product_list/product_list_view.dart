@@ -8,15 +8,14 @@ import 'package:flutter_loyalty_point/src/view_models/product_list/product_list_
 import 'package:flutter_loyalty_point/src/views/widgets/bottom_sheet_widget.dart';
 import 'package:flutter_loyalty_point/src/views/widgets/skelton_widget.dart';
 import 'package:heroicons/heroicons.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 part 'widgets/product_list_app_bar.dart';
+part 'widgets/product_list_bottom_sheet.dart';
 part 'widgets/product_list_form_field.dart';
 part 'widgets/product_list_information_card.dart';
-part 'widgets/product_list_product_list.dart';
-part 'widgets/product_list_bottom_sheet.dart';
 part 'widgets/product_list_product_card.dart';
+part 'widgets/product_list_product_list.dart';
 
 class ProductListView extends StatelessWidget {
   const ProductListView({super.key});
