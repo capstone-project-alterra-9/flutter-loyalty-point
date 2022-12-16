@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
 import 'package:flutter_loyalty_point/src/models/product/response_get_product_model.dart';
-import 'package:flutter_loyalty_point/src/models/transaction/data_request_add_transaction.dart';
+import 'package:flutter_loyalty_point/src/models/transaction/data_request_create_transaction.dart';
 import 'package:flutter_loyalty_point/src/models/transaction/response_create_transaction_model.dart';
 import 'package:flutter_loyalty_point/src/models/user/response_get_user_model.dart';
 import 'package:flutter_loyalty_point/src/services/api/products_api_service.dart';
@@ -119,7 +119,7 @@ class ProductDetailViewModel extends ChangeNotifier {
       if (args.purchaseType == PurchaseType.redeem) {
         final ResponseCreateTransactionModel response =
             await TransactionsAPIService().createTransaction(
-          data: DataRequestAddTransaction(
+          data: DataRequestCreateTransaction(
             purchaseType: args.purchaseType,
             productId: args.productId,
             identifierNumber: args.identifierNumber,

@@ -1,13 +1,15 @@
 {
-    "message": "succes get my data",
+    "message": "Success to get user",
+    "errors": {},
     "data": {
-        "ID": "ini-string-panjang",
-        "createdAt": "2022-11-06T16:48:08.886542Z",
-        "updatedAt": "2022-11-06T16:48:08.886542Z",
-        "deletedAt": null,
+        "ID": "05d80d25-1691-40c3-b84e-2181641c655f",
+        "createdAt": "2022-12-12T11:56:28.517807Z",
+        "updatedAt": "2022-12-12T14:26:26.541888Z",
         "role": "user",
-        "username": "test",
-        "email": "testmail01@gmail.com",
-        "point": 20000
+        "username": "Aku12345678",
+        "email": "aku12345678@mail.com",
+        "password": "$2a$10$60ONo7sqgCgE4.Cw/m4FAOk0RCT9ODhgGz6U4MLeX7h8XCEfiZgWW",
+        "points": 40000,
+        "costPoints": 480000
     }
 }
