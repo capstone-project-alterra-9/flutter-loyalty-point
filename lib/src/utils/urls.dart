@@ -10,6 +10,7 @@ class Urls {
   static const String registerPathApi = '/register';
   static const String loginPathApi = '/login';
   static const String refreshTokenPathApi = '/refresh-token';
+  static const String forgotPasswordPathApi = '/forgot-password';
 
   // product path api
   static String getProductByIdPathApi(String id) => '/auth/products/$id';

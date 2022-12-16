@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_loyalty_point/src/configs/api/api_config.dart';
+import 'package:flutter_loyalty_point/src/models/auth/data_request_forgot_password_model.dart';
 import 'package:flutter_loyalty_point/src/models/auth/data_request_login_model.dart';
 import 'package:flutter_loyalty_point/src/models/auth/data_request_register_model.dart';
+import 'package:flutter_loyalty_point/src/models/auth/response_forgot_password_model.dart';
 import 'package:flutter_loyalty_point/src/models/auth/response_login_model.dart';
 import 'package:flutter_loyalty_point/src/models/auth/response_register_model.dart';
 import 'package:flutter_loyalty_point/src/utils/urls.dart';
@@ -39,6 +41,24 @@ class AuthAPIService {
       final ResponseLoginModel result = ResponseLoginModel.fromJson(
         response.data,
       );
+
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseForgotPasswordModel> forgotPassword({
+    required DataRequestForgotPasswordModel data,
+  }) async {
+    try {
+      Response response = await _apiConfig.dio.post(
+        Urls.forgotPasswordPathApi,
+        data: data.toJson(),
+      );
+
+      final ResponseForgotPasswordModel result =
+          ResponseForgotPasswordModel.fromJson(response.data);
 
       return result;
     } catch (e) {

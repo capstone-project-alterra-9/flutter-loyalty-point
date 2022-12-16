@@ -3,7 +3,6 @@ import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/styles/styles.dart';
 import 'package:flutter_loyalty_point/src/utils/extensions/int_extension.dart';
-import 'package:flutter_loyalty_point/src/utils/extensions/string_extension.dart';
 import 'package:flutter_loyalty_point/src/utils/types/category_product_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/purchase_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
@@ -15,8 +14,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 part 'widgets/product_detail_app_bar.dart';
-part 'widgets/product_detail_description.dart';
 part 'widgets/product_detail_bottom_sheet.dart';
+part 'widgets/product_detail_description.dart';
 
 class ProductDetailView extends StatelessWidget {
   const ProductDetailView({super.key});
