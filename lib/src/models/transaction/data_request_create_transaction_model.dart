@@ -1,7 +1,7 @@
 import 'package:flutter_loyalty_point/src/utils/types/purchase_type.dart';
 
-class DataRequestCreateTransaction {
-  const DataRequestCreateTransaction({
+class DataRequestCreateTransactionModel {
+  const DataRequestCreateTransactionModel({
     required this.purchaseType,
     required this.productId,
     required this.identifierNumber,

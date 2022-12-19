@@ -1,7 +1,5 @@
-import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
-
 class ArgsPaymentHelper {
-  const ArgsPaymentHelper({required this.product});
+  const ArgsPaymentHelper({required this.url});
 
-  final ProductModel product;
+  final String url;
 }
