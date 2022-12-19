@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
 
-import 'package:flutter_loyalty_point/src/models/transaction/data_request_create_transaction.dart'
+import 'package:flutter_loyalty_point/src/models/transaction/data_request_create_transaction_model.dart'
     as _i6;
 import 'package:flutter_loyalty_point/src/models/transaction/response_create_transaction_model.dart'
     as _i3;
@@ -91,7 +91,7 @@ class MockTransactionsAPIService extends _i1.Mock
           ) as _i5.Future<_i2.ResponseGetTransactionListModel>);
   @override
   _i5.Future<_i3.ResponseCreateTransactionModel> createTransaction(
-          {required _i6.DataRequestCreateTransaction? data}) =>
+          {required _i6.DataRequestCreateTransactionModel? data}) =>
       (super.noSuchMethod(
         Invocation.method(
           #createTransaction,

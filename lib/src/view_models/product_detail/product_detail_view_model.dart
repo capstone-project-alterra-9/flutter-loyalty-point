@@ -4,7 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
 import 'package:flutter_loyalty_point/src/models/product/response_get_product_model.dart';
-import 'package:flutter_loyalty_point/src/models/transaction/data_request_create_transaction.dart';
+import 'package:flutter_loyalty_point/src/models/transaction/data_request_create_midtrans_transaction_model.dart';
+import 'package:flutter_loyalty_point/src/models/transaction/data_request_create_transaction_model.dart';
+import 'package:flutter_loyalty_point/src/models/transaction/response_create_midtrans_transaction_model.dart';
 import 'package:flutter_loyalty_point/src/models/transaction/response_create_transaction_model.dart';
 import 'package:flutter_loyalty_point/src/models/user/response_get_user_model.dart';
 import 'package:flutter_loyalty_point/src/services/api/products_api_service.dart';
@@ -20,6 +22,8 @@ import 'package:flutter_loyalty_point/src/views/home/home_view.dart';
 import 'package:flutter_loyalty_point/src/views/payment/payment_view.dart';
 import 'package:flutter_loyalty_point/src/views/transaction_status/transaction_status_view.dart';
 import 'package:flutter_loyalty_point/src/views/widgets/snack_bar_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ProductDetailViewModel extends ChangeNotifier {
   ProductDetailViewModel(this.context, {required this.args}) {
@@ -115,11 +119,28 @@ class ProductDetailViewModel extends ChangeNotifier {
     final NavigatorState navigator = Navigator.of(context);
     _changeCreateTransactionState(ViewStateType.loading);
 
+    void whenError() {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBarWidget(
+              title: "${args.purchaseType.value} Product Failed",
+              subtitle:
+                  "Something went wrong, you can't ${args.purchaseType.value} the product now",
+              snackBarType: SnackBarType.error)
+          .build(context));
+
+      Timer(
+        const Duration(seconds: 4),
+        () => navigator.pushNamedAndRemoveUntil(
+          HomeView.routeName,
+          (route) => false,
+        ),
+      );
+    }
+
     try {
       if (args.purchaseType == PurchaseType.redeem) {
         final ResponseCreateTransactionModel response =
             await TransactionsAPIService().createTransaction(
-          data: DataRequestCreateTransaction(
+          data: DataRequestCreateTransactionModel(
             purchaseType: args.purchaseType,
             productId: args.productId,
             identifierNumber: args.identifierNumber,
@@ -137,29 +158,25 @@ class ProductDetailViewModel extends ChangeNotifier {
         return;
       }
 
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final String? id = prefs.getString('id');
+
+      final ResponseCreateMidtransTransactionModel response =
+          await TransactionsAPIService().createMidtransTransaction(
+        data: DataRequestCreateMidtransTransactionModel(
+          productID: args.productId,
+          userID: id!,
+        ),
+      );
+
       navigator.pushNamed(
         PaymentView.routeName,
-        arguments: ArgsPaymentHelper(product: product!),
+        arguments: ArgsPaymentHelper(url: response.data!.directUrl!),
       );
 
       _changeCreateTransactionState(ViewStateType.none);
     } on DioError {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBarWidget(
-                title: "${args.purchaseType.value} Product Failed",
-                subtitle:
-                    "Something went wrong, you can't ${args.purchaseType.value} the product now",
-                snackBarType: SnackBarType.error)
-            .build(context),
-      );
-
-      Timer(
-        const Duration(seconds: 2),
-        () => navigator.pushNamedAndRemoveUntil(
-          HomeView.routeName,
-          (route) => false,
-        ),
-      );
+      whenError();
 
       _changeCreateTransactionState(ViewStateType.error);
     }
