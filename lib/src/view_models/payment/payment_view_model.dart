@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_loyalty_point/src/models/local/payment_method_model.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_payment_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_status_helper.dart';
-import 'package:flutter_loyalty_point/src/utils/types/payment_method_type.dart';
 import 'package:flutter_loyalty_point/src/utils/types/purchase_type.dart';
 import 'package:flutter_loyalty_point/src/views/transaction_status/transaction_status_view.dart';
 
@@ -13,25 +12,9 @@ class PaymentViewModel extends ChangeNotifier {
 
   final ArgsPaymentHelper args;
 
-  final List<PaymentMethodModel> paymentMethodList =
-      PaymentMethodModel.paymentMethodList;
+  InAppWebViewController? inAppWebViewController;
 
-  bool get payButtonDisabled {
-    if (paymentMethod == null) {
-      return true;
-    }
-
-    return false;
-  }
-
-  PaymentMethodType? _paymentMethod;
-  PaymentMethodType? get paymentMethod => _paymentMethod;
-  set paymentMethod(PaymentMethodType? value) {
-    _paymentMethod = value;
-    notifyListeners();
-  }
-
-  void createTransaction() {
+  void handleDone() {
     Navigator.pushNamed(
       context,
       TransactionStatusView.routeName,

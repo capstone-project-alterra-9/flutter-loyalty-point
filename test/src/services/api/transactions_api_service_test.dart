@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_loyalty_point/src/models/transaction/data_request_create_transaction.dart';
+import 'package:flutter_loyalty_point/src/models/transaction/data_request_create_transaction_model.dart';
 import 'package:flutter_loyalty_point/src/models/transaction/response_create_transaction_model.dart';
 import 'package:flutter_loyalty_point/src/services/api/transactions_api_service.dart';
 import 'package:flutter_loyalty_point/src/utils/types/purchase_type.dart';
@@ -25,8 +25,8 @@ void main() {
       test(
         "Should be able to convert response to ResponseCreateTransactionModel",
         () async {
-          const DataRequestCreateTransaction data =
-              DataRequestCreateTransaction(
+          const DataRequestCreateTransactionModel data =
+              DataRequestCreateTransactionModel(
             purchaseType: PurchaseType.redeem,
             productId: "productId",
             identifierNumber: "identifierNumber",

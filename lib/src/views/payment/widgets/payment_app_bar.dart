@@ -5,18 +5,32 @@ class PaymentAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PaymentViewModel productListViewModel = context.read<PaymentViewModel>();
+
+    handleBack() async {
+      if (await productListViewModel.inAppWebViewController!.canGoBack()) {
+        productListViewModel.inAppWebViewController!.goBack();
+        return false;
+      } else {
+        return true;
+      }
+    }
+
     return SliverAppBar(
       title: const Text("Payment Method"),
       automaticallyImplyLeading: false,
       pinned: true,
       elevation: 1,
-      leading: IconButton(
-        onPressed: () => Navigator.pop(context),
-        icon: const HeroIcon(
-          HeroIcons.arrowLeft,
-          style: HeroIconStyle.outline,
-          size: 24,
-          color: Styles.colorBlack400,
+      leading: WillPopScope(
+        onWillPop: handleBack,
+        child: IconButton(
+          onPressed: handleBack,
+          icon: const HeroIcon(
+            HeroIcons.arrowLeft,
+            style: HeroIconStyle.outline,
+            size: 24,
+            color: Styles.colorBlack400,
+          ),
         ),
       ),
     );

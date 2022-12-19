@@ -124,6 +124,9 @@ class HomeViewModel extends ChangeNotifier {
       );
 
   void toCustomerService() async {
-    await launchUrlString("tel:911");
+    await launchUrlString(
+      "https://wa.me/6288287112431",
+      mode: LaunchMode.externalNonBrowserApplication,
+    );
   }
 }

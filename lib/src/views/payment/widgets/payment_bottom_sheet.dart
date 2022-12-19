@@ -8,14 +8,10 @@ class PaymentBottomSheet extends StatelessWidget {
     PaymentViewModel productListViewModel = context.read<PaymentViewModel>();
 
     return BottomSheetWidget(
-      child: Consumer<PaymentViewModel>(
-        builder: (context, value, child) => ElevatedButton(
-          onPressed: value.payButtonDisabled
-              ? null
-              : productListViewModel.createTransaction,
-          style: Styles.primaryButton,
-          child: const Text("Next"),
-        ),
+      child: ElevatedButton(
+        onPressed: productListViewModel.handleDone,
+        style: Styles.primaryButton,
+        child: const Text("Done"),
       ),
     );
   }
