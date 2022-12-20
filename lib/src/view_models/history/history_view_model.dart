@@ -12,24 +12,18 @@ import '../../utils/helper/args_transaction_detail_helper.dart';
 import '../../utils/types/view_state_type.dart';
 import '../../views/transaction_detail/transaction_detail_view.dart';
 
-enum SortStatusState { newest, oldest }
-
 class HistoryViewModel extends ChangeNotifier {
   HistoryViewModel() {
-    if (sortStatusState == SortStatusState.newest) {
-      _initializeNewest();
-    } else {
-      _initializeOldest();
-    }
+    initializeNewest();
   }
 
-  void _initializeNewest() async {
+  Future<void> initializeNewest() async {
     await _setTransactionListNewest();
     await _setReedemListNewest();
     // _getTransactionFromAPI();
   }
 
-  void _initializeOldest() async {
+  Future<void> initializeOldest() async {
     await _setTransactionListOldest();
     await _setReedemListOldest();
     // _getTransactionFromAPI();
@@ -44,22 +38,13 @@ class HistoryViewModel extends ChangeNotifier {
   ViewStateType get transactionListState => _transactionListState;
   ViewStateType _transactionListState = ViewStateType.loading;
 
-  SortStatusState _sortStatusState = SortStatusState.newest;
-  SortStatusState get sortStatusState => _sortStatusState;
-
   void _changeTransactionListState(ViewStateType state) {
     _transactionListState = state;
     notifyListeners();
   }
 
-  changeSortStatusState(SortStatusState s) {
-    _sortStatusState = s;
-    notifyListeners();
-  }
-
   Future<void> _setTransactionListNewest() async {
     _changeTransactionListState(ViewStateType.loading);
-    changeSortStatusState(SortStatusState.newest);
 
     try {
       final ResponseGetTransactionListModel result =
@@ -80,7 +65,6 @@ class HistoryViewModel extends ChangeNotifier {
 
   Future<void> _setTransactionListOldest() async {
     _changeTransactionListState(ViewStateType.loading);
-    changeSortStatusState(SortStatusState.oldest);
 
     try {
       final ResponseGetTransactionListModel result =
@@ -99,7 +83,6 @@ class HistoryViewModel extends ChangeNotifier {
 
   Future<void> _setReedemListNewest() async {
     _changeTransactionListState(ViewStateType.loading);
-    changeSortStatusState(SortStatusState.newest);
 
     try {
       final ResponseGetTransactionListModel result =
@@ -120,8 +103,6 @@ class HistoryViewModel extends ChangeNotifier {
 
   Future<void> _setReedemListOldest() async {
     _changeTransactionListState(ViewStateType.loading);
-    changeSortStatusState(SortStatusState.oldest);
-
     try {
       final ResponseGetTransactionListModel result =
           await TransactionsAPIService().getReedemHistoryListFromAPI();

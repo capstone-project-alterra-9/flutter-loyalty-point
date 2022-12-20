@@ -28,10 +28,9 @@ class _HistoryViewState extends State<HistoryView> {
 
   String radioValue = "";
 
-  SortStatusState status = SortStatusState.newest;
-
   @override
   void initState() {
+    // Provider.of<HistoryViewModel>(context, listen: false).initializeNewest();
     setState(() {
       cbxAll = true;
       cbxCredit = false;
@@ -40,7 +39,6 @@ class _HistoryViewState extends State<HistoryView> {
       cbxCashout = false;
       radioValue = "Newest";
     });
-    status = SortStatusState.newest;
     super.initState();
   }
 
@@ -92,8 +90,11 @@ class _HistoryViewState extends State<HistoryView> {
                                           cbxEmoney = false;
                                           cbxCashout = false;
                                           radioValue = "Newest";
-                                          status = SortStatusState.newest;
                                         });
+                                        // Provider.of<HistoryViewModel>(context,
+                                        //         listen: false)
+                                        //     .changeSortStatusState(
+                                        //         SortStatusState.newest);
                                       },
                                       child: const Text(
                                         "Reset",
@@ -342,9 +343,13 @@ class _HistoryViewState extends State<HistoryView> {
                                                   onChanged: (values) {
                                                     setState(() {
                                                       radioValue = values ?? "";
-                                                      status = SortStatusState
-                                                          .newest;
                                                     });
+                                                    // Provider.of<HistoryViewModel>(
+                                                    //         context,
+                                                    //         listen: false)
+                                                    //     .changeSortStatusState(
+                                                    //         SortStatusState
+                                                    //             .newest);
                                                   },
                                                   groupValue: radioValue,
                                                 ),
@@ -374,9 +379,13 @@ class _HistoryViewState extends State<HistoryView> {
                                                   onChanged: (values) {
                                                     setState(() {
                                                       radioValue = values ?? "";
-                                                      status = SortStatusState
-                                                          .oldest;
                                                     });
+                                                    // Provider.of<HistoryViewModel>(
+                                                    //         context,
+                                                    //         listen: false)
+                                                    //     .changeSortStatusState(
+                                                    //         SortStatusState
+                                                    //             .oldest);
                                                   },
                                                   groupValue: radioValue,
                                                 )
