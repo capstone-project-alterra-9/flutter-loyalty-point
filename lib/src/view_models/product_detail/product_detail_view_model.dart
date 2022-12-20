@@ -23,7 +23,6 @@ import 'package:flutter_loyalty_point/src/views/payment/payment_view.dart';
 import 'package:flutter_loyalty_point/src/views/transaction_status/transaction_status_view.dart';
 import 'package:flutter_loyalty_point/src/views/widgets/snack_bar_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class ProductDetailViewModel extends ChangeNotifier {
   ProductDetailViewModel(this.context, {required this.args}) {
@@ -128,7 +127,7 @@ class ProductDetailViewModel extends ChangeNotifier {
           .build(context));
 
       Timer(
-        const Duration(seconds: 4),
+        const Duration(milliseconds: 4500),
         () => navigator.pushNamedAndRemoveUntil(
           HomeView.routeName,
           (route) => false,
@@ -169,10 +168,14 @@ class ProductDetailViewModel extends ChangeNotifier {
         ),
       );
 
-      navigator.pushNamed(
-        PaymentView.routeName,
-        arguments: ArgsPaymentHelper(url: response.data!.directUrl!),
-      );
+      if (response.data!.directUrl == "") {
+        whenError();
+      } else {
+        navigator.pushNamed(
+          PaymentView.routeName,
+          arguments: ArgsPaymentHelper(url: response.data!.directUrl!),
+        );
+      }
 
       _changeCreateTransactionState(ViewStateType.none);
     } on DioError {

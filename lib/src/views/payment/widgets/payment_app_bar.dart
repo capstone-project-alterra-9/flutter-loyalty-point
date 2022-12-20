@@ -5,11 +5,11 @@ class PaymentAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PaymentViewModel productListViewModel = context.read<PaymentViewModel>();
+    PaymentViewModel paymentViewModel = context.read<PaymentViewModel>();
 
     handleBack() async {
-      if (await productListViewModel.inAppWebViewController!.canGoBack()) {
-        productListViewModel.inAppWebViewController!.goBack();
+      if (await paymentViewModel.inAppWebViewController!.canGoBack()) {
+        paymentViewModel.inAppWebViewController!.goBack();
         return false;
       } else {
         return true;

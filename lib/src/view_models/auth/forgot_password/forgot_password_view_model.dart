@@ -38,6 +38,5 @@ class ForgotPasswordViewModel extends ChangeNotifier {
 
       _changeForgotPasswordState(ViewStateType.error);
     }
-    print(forgotPasswordState);
   }
 }
