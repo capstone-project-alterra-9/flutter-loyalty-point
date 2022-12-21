@@ -40,8 +40,12 @@ class ProductListViewModel extends ChangeNotifier {
           if (length >= 10 && length <= 14) return false;
           break;
 
+        case CategoryProductType.cashout:
+          if (length >= 10 && length <= 14) return false;
+          break;
+
         default:
-          if (length == 0) return false;
+          if (length > 0) return false;
       }
     }
 
