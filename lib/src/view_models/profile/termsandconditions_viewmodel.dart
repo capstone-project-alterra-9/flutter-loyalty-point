@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-class FAQViewModel extends ChangeNotifier {
+class TermsAndConditionsViewModel extends ChangeNotifier {
   void toCustomerService() async {
     await launchUrlString(
       "https://wa.me/6288287112431",

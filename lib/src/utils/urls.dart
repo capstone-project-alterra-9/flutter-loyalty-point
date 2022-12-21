@@ -25,8 +25,14 @@ class Urls {
   static const String createMidtransTransactionPathApi =
       '/auth/transactions/midtrans';
 
-  // transaction history api
+  // history api
   static const String redeemHistoryPath = '/auth/history/method/redeem';
+  static const String redeemDataQuotaHistoryPath =
+      '/auth/history/method/redeem/data-quota';
+  static const String redeemCreditsHistoryPath =
+      '/auth/history/method/redeem/credits'; // not sure
+  static const String redeemEMoneyHistoryPath =
+      '/auth/history/method/redeem/e-money'; // not sure
   static const String transactionHistoryPath = '/auth/history/method/buy';
 
   // users path api

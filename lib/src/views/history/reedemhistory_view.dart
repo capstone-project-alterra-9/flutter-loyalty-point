@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_loyalty_point/src/styles/styles.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/transaction/transaction_model.dart';
@@ -18,7 +19,7 @@ class ReedemHistoryView extends StatelessWidget {
         switch (value.transactionListState) {
           case ViewStateType.loading:
             {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             }
           case ViewStateType.error:
             {
@@ -47,22 +48,24 @@ class ReedemHistoryView extends StatelessWidget {
                             context
                                 .read<HistoryViewModel>()
                                 .toTransactionDetail(
-                                  ArgsTransactionDetailHelper(
-                                    transaction: TransactionModel(
-                                        id: value.redeemList[index].id,
-                                        category:
-                                            value.redeemList[index].category,
-                                        name: value.redeemList[index].name,
-                                        price: value.redeemList[index].price,
-                                        image: value.redeemList[index].image,
-                                        serialNumber: value
-                                            .redeemList[index].serialNumber,
-                                        identifierNumber: value
-                                            .redeemList[index].identifierNumber,
-                                        date: value.redeemList[index].date,
-                                        status: value.redeemList[index].status),
-                                  ),
-                                );
+                                    ArgsTransactionDetailHelper(
+                                      transaction: TransactionModel(
+                                          id: value.redeemList[index].id,
+                                          category:
+                                              value.redeemList[index].category,
+                                          name: value.redeemList[index].name,
+                                          price: value.redeemList[index].price,
+                                          image: value.redeemList[index].image,
+                                          serialNumber: value
+                                              .redeemList[index].serialNumber,
+                                          identifierNumber: value
+                                              .redeemList[index]
+                                              .identifierNumber,
+                                          date: value.redeemList[index].date,
+                                          status:
+                                              value.redeemList[index].status),
+                                    ),
+                                    context);
                           },
                           child: Container(
                             padding: const EdgeInsets.all(14),
@@ -70,7 +73,7 @@ class ReedemHistoryView extends StatelessWidget {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(
                                     color: Colors.grey,
                                     offset: Offset(.5, .5), //(x,y)
@@ -96,7 +99,11 @@ class ReedemHistoryView extends StatelessWidget {
                                                           .category ==
                                                       "credits"
                                                   ? "assets/images/redeem_history.png"
-                                                  : "assets/images/redeem_history.png")),
+                                                  : value.redeemList[index]
+                                                              .category ==
+                                                          "data-quota"
+                                                      ? "assets/images/data-quota_history.png"
+                                                      : "assets/images/redeem_history.png")),
                                         ),
                                       ),
                                       const SizedBox(
@@ -112,8 +119,14 @@ class ReedemHistoryView extends StatelessWidget {
                                           children: [
                                             Text(
                                               value.redeemList[index]
-                                                      .category ??
-                                                  "",
+                                                          .category ==
+                                                      "credits"
+                                                  ? "Credits"
+                                                  : value.redeemList[index]
+                                                              .category ==
+                                                          "data-quota"
+                                                      ? "Data Quota"
+                                                      : "E-Money",
                                               style: GoogleFonts.poppins(
                                                   fontWeight: FontWeight.w500,
                                                   color: Styles.colorBlack400,
@@ -126,7 +139,6 @@ class ReedemHistoryView extends StatelessWidget {
                                               value.redeemList[index].name ??
                                                   "",
                                               style: GoogleFonts.poppins(
-                                                  fontWeight: FontWeight.w500,
                                                   color: Styles.colorBlack400,
                                                   fontSize: 12),
                                             ),
@@ -134,10 +146,14 @@ class ReedemHistoryView extends StatelessWidget {
                                               height: 5,
                                             ),
                                             Text(
-                                              value.redeemList[index].date ??
-                                                  "",
+                                              DateFormat.yMMMd()
+                                                  .format(DateTime.parse(
+                                                    value.redeemList[index]
+                                                            .date ??
+                                                        "",
+                                                  ))
+                                                  .toString(),
                                               style: GoogleFonts.poppins(
-                                                  fontWeight: FontWeight.w500,
                                                   color: Styles.colorBlack400,
                                                   fontSize: 12),
                                             ),
@@ -151,23 +167,23 @@ class ReedemHistoryView extends StatelessWidget {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Text(
                                         "-${value.redeemList[index].price.toString()} Points",
                                         style: GoogleFonts.poppins(
                                             fontWeight: FontWeight.w500,
                                             color: Styles.colorBlack400,
-                                            fontSize: 14),
+                                            fontSize: 13),
                                         textAlign: TextAlign.right,
                                       ),
                                       const SizedBox(
-                                        height: 31,
+                                        height: 18,
                                       ),
                                       Text(
-                                        "Order ID : ID${value.redeemList[index].id![0]}",
+                                        "Order ID : ID${value.redeemList[index].id![0]}00${value.redeemList[index].id!.substring(value.redeemList[index].id!.length - 3).toUpperCase()}",
                                         style: GoogleFonts.poppins(
-                                            fontWeight: FontWeight.w500,
                                             color: Styles.colorBlack400,
                                             fontSize: 12),
                                         textAlign: TextAlign.right,

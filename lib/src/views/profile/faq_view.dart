@@ -2,8 +2,10 @@ import "package:flutter/material.dart";
 import 'package:flutter_loyalty_point/src/views/profile/faqdetail_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../styles/styles.dart';
+import '../../view_models/profile/faq_viewmodel.dart';
 
 class FAQView extends StatelessWidget {
   static const routeName = "/faq";
@@ -22,10 +24,10 @@ class FAQView extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.grey[50],
         actions: [
-          Container(
-            margin: const EdgeInsets.only(right: 15),
-            child: InkWell(
-              onTap: () {},
+          GestureDetector(
+            onTap: context.read<FAQViewModel>().toCustomerService,
+            child: Container(
+              margin: const EdgeInsets.only(right: 15),
               child: SvgPicture.asset("assets/icons/icon_customer_service.svg"),
             ),
           )
@@ -153,7 +155,10 @@ class FAQView extends StatelessWidget {
                   height: 10,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Provider.of<FAQViewModel>(context, listen: false)
+                        .toCustomerService();
+                  },
                   style: Styles.primaryButton.copyWith(
                     minimumSize: const MaterialStatePropertyAll(
                       Size.fromHeight(44),

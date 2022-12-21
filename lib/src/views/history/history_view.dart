@@ -30,6 +30,7 @@ class _HistoryViewState extends State<HistoryView> {
 
   @override
   void initState() {
+    // Provider.of<HistoryViewModel>(context, listen: false).initializeNewest();
     setState(() {
       cbxAll = true;
       cbxCredit = false;
@@ -90,6 +91,10 @@ class _HistoryViewState extends State<HistoryView> {
                                           cbxCashout = false;
                                           radioValue = "Newest";
                                         });
+                                        // Provider.of<HistoryViewModel>(context,
+                                        //         listen: false)
+                                        //     .changeSortStatusState(
+                                        //         SortStatusState.newest);
                                       },
                                       child: const Text(
                                         "Reset",
@@ -143,11 +148,26 @@ class _HistoryViewState extends State<HistoryView> {
                                                   onChanged: (values) {
                                                     setState(() {
                                                       cbxAll = values!;
-                                                      cbxCredit = false;
-                                                      cbxDataQuota = false;
-                                                      cbxEmoney = false;
-                                                      cbxCashout = false;
                                                     });
+                                                    if (cbxAll == true) {
+                                                      setState(
+                                                        () {
+                                                          cbxCredit = false;
+                                                          cbxDataQuota = false;
+                                                          cbxEmoney = false;
+                                                          cbxCashout = false;
+                                                        },
+                                                      );
+                                                    } else {
+                                                      setState(
+                                                        () {
+                                                          cbxCredit = true;
+                                                          cbxDataQuota = false;
+                                                          cbxEmoney = false;
+                                                          cbxCashout = false;
+                                                        },
+                                                      );
+                                                    }
                                                   },
                                                 )
                                               ],
@@ -166,9 +186,10 @@ class _HistoryViewState extends State<HistoryView> {
                                                   ),
                                                 ),
                                                 Checkbox(
-                                                  visualDensity: VisualDensity(
-                                                      horizontal: -4,
-                                                      vertical: -4),
+                                                  visualDensity:
+                                                      const VisualDensity(
+                                                          horizontal: -4,
+                                                          vertical: -4),
                                                   value: cbxCredit,
                                                   activeColor:
                                                       Styles.colorBlack900,
@@ -195,9 +216,10 @@ class _HistoryViewState extends State<HistoryView> {
                                                   ),
                                                 ),
                                                 Checkbox(
-                                                  visualDensity: VisualDensity(
-                                                      horizontal: -4,
-                                                      vertical: -4),
+                                                  visualDensity:
+                                                      const VisualDensity(
+                                                          horizontal: -4,
+                                                          vertical: -4),
                                                   value: cbxDataQuota,
                                                   activeColor:
                                                       Styles.colorBlack900,
@@ -224,9 +246,10 @@ class _HistoryViewState extends State<HistoryView> {
                                                   ),
                                                 ),
                                                 Checkbox(
-                                                  visualDensity: VisualDensity(
-                                                      horizontal: -4,
-                                                      vertical: -4),
+                                                  visualDensity:
+                                                      const VisualDensity(
+                                                          horizontal: -4,
+                                                          vertical: -4),
                                                   value: cbxEmoney,
                                                   activeColor:
                                                       Styles.colorBlack900,
@@ -310,9 +333,10 @@ class _HistoryViewState extends State<HistoryView> {
                                                   ),
                                                 ),
                                                 Radio<String>(
-                                                  visualDensity: VisualDensity(
-                                                      horizontal: -4,
-                                                      vertical: -4),
+                                                  visualDensity:
+                                                      const VisualDensity(
+                                                          horizontal: -4,
+                                                          vertical: -4),
                                                   value: "Newest",
                                                   activeColor:
                                                       Styles.colorBlack900,
@@ -320,6 +344,12 @@ class _HistoryViewState extends State<HistoryView> {
                                                     setState(() {
                                                       radioValue = values ?? "";
                                                     });
+                                                    // Provider.of<HistoryViewModel>(
+                                                    //         context,
+                                                    //         listen: false)
+                                                    //     .changeSortStatusState(
+                                                    //         SortStatusState
+                                                    //             .newest);
                                                   },
                                                   groupValue: radioValue,
                                                 ),
@@ -339,9 +369,10 @@ class _HistoryViewState extends State<HistoryView> {
                                                   ),
                                                 ),
                                                 Radio(
-                                                  visualDensity: VisualDensity(
-                                                      horizontal: -4,
-                                                      vertical: -4),
+                                                  visualDensity:
+                                                      const VisualDensity(
+                                                          horizontal: -4,
+                                                          vertical: -4),
                                                   value: "Oldest",
                                                   activeColor:
                                                       Styles.colorBlack900,
@@ -349,6 +380,12 @@ class _HistoryViewState extends State<HistoryView> {
                                                     setState(() {
                                                       radioValue = values ?? "";
                                                     });
+                                                    // Provider.of<HistoryViewModel>(
+                                                    //         context,
+                                                    //         listen: false)
+                                                    //     .changeSortStatusState(
+                                                    //         SortStatusState
+                                                    //             .oldest);
                                                   },
                                                   groupValue: radioValue,
                                                 )
