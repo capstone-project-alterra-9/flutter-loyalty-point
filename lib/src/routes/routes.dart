@@ -14,6 +14,7 @@ import 'package:flutter_loyalty_point/src/view_models/product_list/product_list_
 import 'package:flutter_loyalty_point/src/view_models/profile/faq_viewmodel.dart';
 import 'package:flutter_loyalty_point/src/view_models/profile/mymembership_viewmodel.dart';
 import 'package:flutter_loyalty_point/src/view_models/profile/profile_viewmodel.dart';
+import 'package:flutter_loyalty_point/src/view_models/profile/termsandconditions_viewmodel.dart';
 import 'package:flutter_loyalty_point/src/view_models/splash/splash_view_model.dart';
 import 'package:flutter_loyalty_point/src/view_models/transaction_detail/transaction_detail_view_model.dart';
 import 'package:flutter_loyalty_point/src/view_models/transaction_status/transaction_status_view_model.dart';
@@ -29,10 +30,12 @@ import 'package:flutter_loyalty_point/src/views/product_list/product_list_view.d
 import 'package:flutter_loyalty_point/src/views/profile/faq_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/faqdetail_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/membership_view.dart';
+import 'package:flutter_loyalty_point/src/views/profile/privacypolicy_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/profile_view.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_product_detail_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_product_list_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_detail_helper.dart';
+import 'package:flutter_loyalty_point/src/views/profile/termsandconditions_view.dart';
 import 'package:flutter_loyalty_point/src/views/splash/splash_view.dart';
 import 'package:flutter_loyalty_point/src/views/transaction_detail/transaction_detail_view.dart';
 import 'package:flutter_loyalty_point/src/views/transaction_status/transaction_status_view.dart';
@@ -171,6 +174,32 @@ class Routes {
             transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return FAQDetailView();
+            },
+          );
+        }
+
+      // terms & conditions
+      case TermsAndConditions.routeName:
+        {
+          return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return ChangeNotifierProvider(
+                  create: (context) => TermsAndConditionsViewModel(),
+                  child: const TermsAndConditions());
+            },
+          );
+        }
+
+      // terms & conditions
+      case PrivacyPolicy.routeName:
+        {
+          return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return const PrivacyPolicy();
             },
           );
         }

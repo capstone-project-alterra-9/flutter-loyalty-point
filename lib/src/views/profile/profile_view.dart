@@ -5,6 +5,8 @@ import 'package:flutter_loyalty_point/src/view_models/profile/profile_viewmodel.
 import 'package:flutter_loyalty_point/src/views/auth/login/login_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/faq_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/membership_view.dart';
+import 'package:flutter_loyalty_point/src/views/profile/privacypolicy_view.dart';
+import 'package:flutter_loyalty_point/src/views/profile/termsandconditions_view.dart';
 import 'package:flutter_loyalty_point/src/views/widgets/bottomnav_widget.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -39,10 +41,10 @@ class _ProfileViewState extends State<ProfileView> {
           elevation: 0,
           automaticallyImplyLeading: false,
           actions: [
-            Container(
-              margin: const EdgeInsets.only(right: 15),
-              child: InkWell(
-                onTap: () {},
+            GestureDetector(
+              onTap: context.read<ProfileViewModel>().toCustomerService,
+              child: Container(
+                margin: const EdgeInsets.only(right: 15),
                 child:
                     SvgPicture.asset("assets/icons/icon_customer_service.svg"),
               ),
@@ -190,8 +192,8 @@ class _ProfileViewState extends State<ProfileView> {
                       ),
                       InkWell(
                         onTap: () {
-                          Provider.of<ProfileViewModel>(context, listen: false)
-                              .showSnackBar(context);
+                          Navigator.of(context)
+                              .pushNamed(TermsAndConditions.routeName);
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -234,8 +236,8 @@ class _ProfileViewState extends State<ProfileView> {
                       ),
                       InkWell(
                         onTap: () {
-                          Provider.of<ProfileViewModel>(context, listen: false)
-                              .showSnackBar(context);
+                          Navigator.of(context)
+                              .pushNamed(PrivacyPolicy.routeName);
                         },
                         child: Container(
                           decoration: BoxDecoration(

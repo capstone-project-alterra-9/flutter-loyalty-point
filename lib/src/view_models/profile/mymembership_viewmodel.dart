@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../models/user/response_get_user_model.dart';
 import '../../models/user/user_model.dart';
@@ -34,5 +35,12 @@ class MyMembershipViewModel extends ChangeNotifier {
       _changeUserState(ViewStateType.error);
       rethrow;
     }
+  }
+
+  void toCustomerService() async {
+    await launchUrlString(
+      "https://wa.me/6288287112431",
+      mode: LaunchMode.externalNonBrowserApplication,
+    );
   }
 }

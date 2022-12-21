@@ -8,6 +8,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../view_models/profile/profile_viewmodel.dart';
+import '../widgets/skelton_widget.dart';
+
 class MembershipView extends StatelessWidget {
   static const routeName = "/membership";
   const MembershipView({super.key});
@@ -16,7 +19,7 @@ class MembershipView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         title: Text(
           "User Level",
           style: GoogleFonts.poppins(
@@ -25,10 +28,10 @@ class MembershipView extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.grey[50],
         actions: [
-          Container(
-            margin: const EdgeInsets.only(right: 15),
-            child: InkWell(
-              onTap: () {},
+          GestureDetector(
+            onTap: context.read<MyMembershipViewModel>().toCustomerService,
+            child: Container(
+              margin: const EdgeInsets.only(right: 15),
               child: SvgPicture.asset("assets/icons/icon_customer_service.svg"),
             ),
           )
@@ -45,11 +48,13 @@ class MembershipView extends StatelessWidget {
               tier = "Silver";
               badge = "assets/images/tier_badge_silver.png";
               limitation = 50000;
-            } else if (costPoints.abs() >= 10000) {
+            }
+            if (costPoints.abs() >= 50000) {
               tier = "Gold";
               badge = "assets/images/tier_badge_gold.png";
               limitation = 100000;
             }
+            print("costPoints: $costPoints");
             return Padding(
               padding: const EdgeInsets.fromLTRB(25, 45, 25, 0),
               child: Column(
@@ -57,10 +62,16 @@ class MembershipView extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset(
-                        badge,
-                        width: 50,
-                      ),
+                      value.userState == ViewStateType.none
+                          ? Image.asset(
+                              badge,
+                              width: 50,
+                            )
+                          : const SkeltonWidget(
+                              width: 50,
+                              height: 50,
+                              borderRadius: 100,
+                            ),
                       const SizedBox(
                         width: 12,
                       ),
@@ -77,12 +88,19 @@ class MembershipView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text(
-                                tier.toUpperCase(),
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 14),
-                                textAlign: TextAlign.left,
-                              ),
+                              value.userState == ViewStateType.none
+                                  ? Text(
+                                      tier.toUpperCase(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14),
+                                      textAlign: TextAlign.left,
+                                    )
+                                  : const SkeltonWidget(
+                                      width: 76,
+                                      height: 26,
+                                      borderRadius: 10,
+                                    ),
                               const SizedBox(
                                 width: 4,
                               ),
@@ -110,7 +128,7 @@ class MembershipView extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                         color: Colors.grey, blurRadius: 2.0)
                                   ]),
@@ -147,7 +165,7 @@ class MembershipView extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                         color: Colors.grey, blurRadius: 2.0)
                                   ]),
@@ -221,8 +239,39 @@ class MembershipView extends StatelessWidget {
                   const SizedBox(
                     height: 12,
                   ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 40, right: 40),
+                    child: value.userState == ViewStateType.none
+                        ? Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(99),
+                                child: LinearProgressIndicator(
+                                  value: costPoints / limitation,
+                                  minHeight: 6,
+                                  color: const Color(0xffD9D9D9),
+                                  valueColor:
+                                      const AlwaysStoppedAnimation<Color>(
+                                    Color.fromARGB(255, 68, 153, 65),
+                                  ),
+                                ),
+                              ),
+                              // Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   children: [
+                              //     CircleAvatar(
+                              //       backgroundColor: Colors.green,
+                              //       radius: 8,
+                              //     )
+                              //   ],
+                              // )
+                            ],
+                          )
+                        : const SkeltonWidget(width: 250, height: 10),
+                  ),
                   const SizedBox(
-                    height: 24,
+                    height: 12,
                   ),
                   const Text(
                     "Redeeming points won’t affect your progress to the next level",
@@ -239,15 +288,15 @@ class MembershipView extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(color: Colors.grey, blurRadius: 2.0)
                           ]),
                       padding: const EdgeInsets.all(14),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Text(
+                        children: const [
+                          Text(
                             "How it works",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -261,7 +310,7 @@ class MembershipView extends StatelessWidget {
                               backgroundImage:
                                   AssetImage("assets/images/howitworks_1.png"),
                             ),
-                            title: const Text(
+                            title: Text(
                               "You will earn 5% points for every spend on JokoMart.",
                               style: TextStyle(
                                   fontSize: 12,
@@ -276,7 +325,7 @@ class MembershipView extends StatelessWidget {
                               backgroundImage:
                                   AssetImage("assets/images/howitworks_1.png"),
                             ),
-                            title: const Text(
+                            title: Text(
                               "Use your points to redeem exciting deals and promotions.",
                               style: TextStyle(
                                   fontSize: 12,
@@ -291,7 +340,7 @@ class MembershipView extends StatelessWidget {
                               backgroundImage:
                                   AssetImage("assets/images/howitworks_1.png"),
                             ),
-                            title: const Text(
+                            title: Text(
                               "Earn enough points and level up to unlock exclusive benefits.",
                               style: TextStyle(
                                   fontSize: 12,
