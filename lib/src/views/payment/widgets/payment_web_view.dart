@@ -9,6 +9,8 @@ class PaymentWebView extends StatelessWidget {
 
     return SliverFillRemaining(
       child: InAppWebView(
+        onUpdateVisitedHistory: (controller, url, androidIsReload) =>
+            paymentViewModel.checkTransactionStatus(),
         onWebViewCreated: (controller) =>
             paymentViewModel.inAppWebViewController = controller,
         initialUrlRequest: URLRequest(
