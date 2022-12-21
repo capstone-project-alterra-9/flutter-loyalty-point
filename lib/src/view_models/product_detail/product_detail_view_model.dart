@@ -89,6 +89,11 @@ class ProductDetailViewModel extends ChangeNotifier {
   }
 
   Future<void> _checkIsUserPointsEnough() async {
+    if (args.purchaseType == PurchaseType.buy) {
+      _changeCheckIsUserPointsEnoughState(ViewStateType.none);
+      return;
+    }
+
     _changeCheckIsUserPointsEnoughState(ViewStateType.loading);
 
     try {
