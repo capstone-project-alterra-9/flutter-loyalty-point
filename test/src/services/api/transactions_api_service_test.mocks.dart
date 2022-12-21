@@ -3,16 +3,20 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
+import 'package:flutter_loyalty_point/src/models/transaction/data_request_create_midtrans_transaction_model.dart'
+    as _i8;
 import 'package:flutter_loyalty_point/src/models/transaction/data_request_create_transaction_model.dart'
-    as _i6;
+    as _i7;
+import 'package:flutter_loyalty_point/src/models/transaction/response_create_midtrans_transaction_model.dart'
+    as _i4;
 import 'package:flutter_loyalty_point/src/models/transaction/response_create_transaction_model.dart'
     as _i3;
 import 'package:flutter_loyalty_point/src/models/transaction/response_get_transaction_list.dart'
     as _i2;
 import 'package:flutter_loyalty_point/src/services/api/transactions_api_service.dart'
-    as _i4;
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -48,23 +52,34 @@ class _FakeResponseCreateTransactionModel_1 extends _i1.SmartFake
         );
 }
 
+class _FakeResponseCreateMidtransTransactionModel_2 extends _i1.SmartFake
+    implements _i4.ResponseCreateMidtransTransactionModel {
+  _FakeResponseCreateMidtransTransactionModel_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [TransactionsAPIService].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTransactionsAPIService extends _i1.Mock
-    implements _i4.TransactionsAPIService {
+    implements _i5.TransactionsAPIService {
   MockTransactionsAPIService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.ResponseGetTransactionListModel>
+  _i6.Future<_i2.ResponseGetTransactionListModel>
       getTransactionHistoryListFromAPI() => (super.noSuchMethod(
             Invocation.method(
               #getTransactionHistoryListFromAPI,
               [],
             ),
-            returnValue: _i5.Future<_i2.ResponseGetTransactionListModel>.value(
+            returnValue: _i6.Future<_i2.ResponseGetTransactionListModel>.value(
                 _FakeResponseGetTransactionListModel_0(
               this,
               Invocation.method(
@@ -72,15 +87,15 @@ class MockTransactionsAPIService extends _i1.Mock
                 [],
               ),
             )),
-          ) as _i5.Future<_i2.ResponseGetTransactionListModel>);
+          ) as _i6.Future<_i2.ResponseGetTransactionListModel>);
   @override
-  _i5.Future<_i2.ResponseGetTransactionListModel>
+  _i6.Future<_i2.ResponseGetTransactionListModel>
       getReedemHistoryListFromAPI() => (super.noSuchMethod(
             Invocation.method(
               #getReedemHistoryListFromAPI,
               [],
             ),
-            returnValue: _i5.Future<_i2.ResponseGetTransactionListModel>.value(
+            returnValue: _i6.Future<_i2.ResponseGetTransactionListModel>.value(
                 _FakeResponseGetTransactionListModel_0(
               this,
               Invocation.method(
@@ -88,17 +103,17 @@ class MockTransactionsAPIService extends _i1.Mock
                 [],
               ),
             )),
-          ) as _i5.Future<_i2.ResponseGetTransactionListModel>);
+          ) as _i6.Future<_i2.ResponseGetTransactionListModel>);
   @override
-  _i5.Future<_i3.ResponseCreateTransactionModel> createTransaction(
-          {required _i6.DataRequestCreateTransactionModel? data}) =>
+  _i6.Future<_i3.ResponseCreateTransactionModel> createTransaction(
+          {required _i7.DataRequestCreateTransactionModel? data}) =>
       (super.noSuchMethod(
         Invocation.method(
           #createTransaction,
           [],
           {#data: data},
         ),
-        returnValue: _i5.Future<_i3.ResponseCreateTransactionModel>.value(
+        returnValue: _i6.Future<_i3.ResponseCreateTransactionModel>.value(
             _FakeResponseCreateTransactionModel_1(
           this,
           Invocation.method(
@@ -107,5 +122,26 @@ class MockTransactionsAPIService extends _i1.Mock
             {#data: data},
           ),
         )),
-      ) as _i5.Future<_i3.ResponseCreateTransactionModel>);
+      ) as _i6.Future<_i3.ResponseCreateTransactionModel>);
+  @override
+  _i6.Future<_i4.ResponseCreateMidtransTransactionModel>
+      createMidtransTransaction(
+              {required _i8.DataRequestCreateMidtransTransactionModel? data}) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #createMidtransTransaction,
+              [],
+              {#data: data},
+            ),
+            returnValue:
+                _i6.Future<_i4.ResponseCreateMidtransTransactionModel>.value(
+                    _FakeResponseCreateMidtransTransactionModel_2(
+              this,
+              Invocation.method(
+                #createMidtransTransaction,
+                [],
+                {#data: data},
+              ),
+            )),
+          ) as _i6.Future<_i4.ResponseCreateMidtransTransactionModel>);
 }

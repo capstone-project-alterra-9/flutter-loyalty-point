@@ -9,9 +9,7 @@ class ProductListFormField extends StatelessWidget {
         context.read<ProductListViewModel>();
 
     if (productListViewModel.args.categoryProductType ==
-            CategoryProductType.other ||
-        productListViewModel.args.categoryProductType ==
-            CategoryProductType.cashout) {
+        CategoryProductType.other) {
       return const SliverToBoxAdapter();
     }
 
@@ -49,6 +47,12 @@ class ProductListFormField extends StatelessWidget {
       case CategoryProductType.eMoney:
         {
           hintFormField = "0000 1111 2222 3333";
+          break;
+        }
+
+      case CategoryProductType.cashout:
+        {
+          hintFormField = "Input your identifier number";
           break;
         }
 

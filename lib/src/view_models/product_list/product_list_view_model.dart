@@ -25,21 +25,27 @@ class ProductListViewModel extends ChangeNotifier {
 
   bool get nextButtonDisabled {
     if (args.productId != null) {
+      int length = identifierNumber.length;
+
       switch (args.categoryProductType) {
         case CategoryProductType.credits:
-          if (identifierNumber.length >= 10) return false;
+          if (length >= 8 && length <= 12) return false;
           break;
 
         case CategoryProductType.dataQuota:
-          if (identifierNumber.length >= 10) return false;
+          if (length >= 8 && length <= 12) return false;
           break;
 
         case CategoryProductType.eMoney:
-          if (identifierNumber.length >= 16) return false;
+          if (length >= 10 && length <= 14) return false;
+          break;
+
+        case CategoryProductType.cashout:
+          if (length >= 10 && length <= 14) return false;
           break;
 
         default:
-          if (identifierNumber.isNotEmpty) return false;
+          if (length > 0) return false;
       }
     }
 

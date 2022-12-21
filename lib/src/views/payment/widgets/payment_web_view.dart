@@ -5,14 +5,16 @@ class PaymentWebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PaymentViewModel productListViewModel = context.read<PaymentViewModel>();
+    PaymentViewModel paymentViewModel = context.read<PaymentViewModel>();
 
     return SliverFillRemaining(
       child: InAppWebView(
+        onUpdateVisitedHistory: (controller, url, androidIsReload) =>
+            paymentViewModel.checkTransactionStatus(),
         onWebViewCreated: (controller) =>
-            productListViewModel.inAppWebViewController = controller,
+            paymentViewModel.inAppWebViewController = controller,
         initialUrlRequest: URLRequest(
-          url: Uri.parse(productListViewModel.args.url),
+          url: Uri.parse(paymentViewModel.args.url),
         ),
       ),
     );

@@ -3,18 +3,22 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
+import 'package:flutter_loyalty_point/src/models/auth/data_request_forgot_password_model.dart'
+    as _i9;
 import 'package:flutter_loyalty_point/src/models/auth/data_request_login_model.dart'
-    as _i7;
+    as _i8;
 import 'package:flutter_loyalty_point/src/models/auth/data_request_register_model.dart'
-    as _i6;
+    as _i7;
+import 'package:flutter_loyalty_point/src/models/auth/response_forgot_password_model.dart'
+    as _i4;
 import 'package:flutter_loyalty_point/src/models/auth/response_login_model.dart'
     as _i3;
 import 'package:flutter_loyalty_point/src/models/auth/response_register_model.dart'
     as _i2;
 import 'package:flutter_loyalty_point/src/services/api/auth_api_service.dart'
-    as _i4;
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -50,24 +54,35 @@ class _FakeResponseLoginModel_1 extends _i1.SmartFake
         );
 }
 
+class _FakeResponseForgotPasswordModel_2 extends _i1.SmartFake
+    implements _i4.ResponseForgotPasswordModel {
+  _FakeResponseForgotPasswordModel_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [AuthAPIService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthAPIService extends _i1.Mock implements _i4.AuthAPIService {
+class MockAuthAPIService extends _i1.Mock implements _i5.AuthAPIService {
   MockAuthAPIService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.ResponseRegisterModel> register(
-          {required _i6.DataRequestRegisterModel? data}) =>
+  _i6.Future<_i2.ResponseRegisterModel> register(
+          {required _i7.DataRequestRegisterModel? data}) =>
       (super.noSuchMethod(
         Invocation.method(
           #register,
           [],
           {#data: data},
         ),
-        returnValue: _i5.Future<_i2.ResponseRegisterModel>.value(
+        returnValue: _i6.Future<_i2.ResponseRegisterModel>.value(
             _FakeResponseRegisterModel_0(
           this,
           Invocation.method(
@@ -76,10 +91,10 @@ class MockAuthAPIService extends _i1.Mock implements _i4.AuthAPIService {
             {#data: data},
           ),
         )),
-      ) as _i5.Future<_i2.ResponseRegisterModel>);
+      ) as _i6.Future<_i2.ResponseRegisterModel>);
   @override
-  _i5.Future<_i3.ResponseLoginModel> login(
-          {required _i7.DataRequestLoginModel? data}) =>
+  _i6.Future<_i3.ResponseLoginModel> login(
+          {required _i8.DataRequestLoginModel? data}) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
@@ -87,7 +102,7 @@ class MockAuthAPIService extends _i1.Mock implements _i4.AuthAPIService {
           {#data: data},
         ),
         returnValue:
-            _i5.Future<_i3.ResponseLoginModel>.value(_FakeResponseLoginModel_1(
+            _i6.Future<_i3.ResponseLoginModel>.value(_FakeResponseLoginModel_1(
           this,
           Invocation.method(
             #login,
@@ -95,5 +110,24 @@ class MockAuthAPIService extends _i1.Mock implements _i4.AuthAPIService {
             {#data: data},
           ),
         )),
-      ) as _i5.Future<_i3.ResponseLoginModel>);
+      ) as _i6.Future<_i3.ResponseLoginModel>);
+  @override
+  _i6.Future<_i4.ResponseForgotPasswordModel> forgotPassword(
+          {required _i9.DataRequestForgotPasswordModel? data}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #forgotPassword,
+          [],
+          {#data: data},
+        ),
+        returnValue: _i6.Future<_i4.ResponseForgotPasswordModel>.value(
+            _FakeResponseForgotPasswordModel_2(
+          this,
+          Invocation.method(
+            #forgotPassword,
+            [],
+            {#data: data},
+          ),
+        )),
+      ) as _i6.Future<_i4.ResponseForgotPasswordModel>);
 }
