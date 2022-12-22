@@ -29,11 +29,11 @@ class ProductListViewModel extends ChangeNotifier {
 
       switch (args.categoryProductType) {
         case CategoryProductType.credits:
-          if (length >= 8 && length <= 12) return false;
+          if (length >= 10 && length <= 14) return false;
           break;
 
         case CategoryProductType.dataQuota:
-          if (length >= 8 && length <= 12) return false;
+          if (length >= 10 && length <= 14) return false;
           break;
 
         case CategoryProductType.eMoney:
