@@ -21,7 +21,8 @@ class ProductListProductCard extends StatelessWidget {
     String background;
     Positioned categoryText;
     Positioned nominalText;
-    int nominalTextLength = image?.length ?? 4;
+    int nominalTextLength =
+        ((image?.length ?? 4) < (4)) ? 4 : (image?.length ?? 4);
 
     CategoryProductType categoryProductType =
         CategoryProductType.fromString(category ?? "");
