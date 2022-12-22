@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:flutter_loyalty_point/src/styles/styles.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
+import 'package:flutter_loyalty_point/src/views/widgets/skelton_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,15 @@ class ReedemHistoryView extends StatelessWidget {
         switch (value.transactionListState) {
           case ViewStateType.loading:
             {
-              return const Center(child: CircularProgressIndicator());
+              return ListView.builder(
+                itemCount: 4,
+                itemBuilder: (context, index) => const SkeltonWidget(
+                  width: double.infinity,
+                  height: 100,
+                  margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
+                  borderRadius: 16,
+                ),
+              );
             }
           case ViewStateType.error:
             {
@@ -198,6 +207,10 @@ class ReedemHistoryView extends StatelessWidget {
                           ),
                         );
                       });
+            }
+          default:
+            {
+              return const SizedBox();
             }
         }
       },

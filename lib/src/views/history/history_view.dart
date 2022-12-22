@@ -147,7 +147,7 @@ class _HistoryViewState extends State<HistoryView> {
                                                     ),
                                                     Checkbox(
                                                       visualDensity:
-                                                          VisualDensity(
+                                                          const VisualDensity(
                                                               horizontal: -4,
                                                               vertical: -4),
                                                       value: cbxAll,
@@ -294,7 +294,7 @@ class _HistoryViewState extends State<HistoryView> {
                                                     ),
                                                     Checkbox(
                                                       visualDensity:
-                                                          VisualDensity(
+                                                          const VisualDensity(
                                                               horizontal: -4,
                                                               vertical: -4),
                                                       value: cbxCashout,

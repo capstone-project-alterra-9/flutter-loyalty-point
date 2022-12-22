@@ -1,10 +1,5 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_loyalty_point/src/services/api/transactions_api_service.dart';
-import 'package:flutter_loyalty_point/src/views/history/history_view.dart';
 
 import '../../models/transaction/response_get_transaction_list.dart';
 import '../../models/transaction/transaction_model.dart';
@@ -53,7 +48,6 @@ class HistoryViewModel extends ChangeNotifier {
       transactionList.clear();
       transactionList.addAll(result.data);
       transactionList.sort((a, b) => b.date!.compareTo(a.date!));
-      print("transaction: ${result.data}");
       _changeTransactionListState(ViewStateType.none);
 
       notifyListeners();
@@ -72,7 +66,6 @@ class HistoryViewModel extends ChangeNotifier {
 
       transactionList.clear();
       transactionList.addAll(result.data);
-      print("transaction: ${result.data}");
       _changeTransactionListState(ViewStateType.none);
       notifyListeners();
     } catch (e) {
@@ -91,7 +84,6 @@ class HistoryViewModel extends ChangeNotifier {
       redeemList.clear();
       redeemList.addAll(result.data);
       redeemList.sort((a, b) => b.date!.compareTo(a.date!));
-      print("result: ${result.data}");
 
       _changeTransactionListState(ViewStateType.none);
       notifyListeners();
@@ -109,7 +101,6 @@ class HistoryViewModel extends ChangeNotifier {
 
       redeemList.clear();
       redeemList.addAll(result.data);
-      print("result: ${result.data}");
 
       _changeTransactionListState(ViewStateType.none);
       notifyListeners();

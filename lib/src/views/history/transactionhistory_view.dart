@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_loyalty_point/src/models/transaction/transaction_model.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_detail_helper.dart';
 import 'package:flutter_loyalty_point/src/view_models/history/history_view_model.dart';
-import 'package:flutter_loyalty_point/src/views/widgets/bottomnav_widget.dart';
-import 'package:flutter_loyalty_point/src/views/transaction_detail/transaction_detail_view.dart';
+import 'package:flutter_loyalty_point/src/views/widgets/skelton_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +25,15 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
         switch (value.transactionListState) {
           case ViewStateType.loading:
             {
-              return const Center(child: CircularProgressIndicator());
+              return ListView.builder(
+                itemCount: 4,
+                itemBuilder: (context, index) => const SkeltonWidget(
+                  width: double.infinity,
+                  height: 100,
+                  margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
+                  borderRadius: 16,
+                ),
+              );
             }
           case ViewStateType.error:
             {
@@ -87,7 +94,7 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(
                                     color: Colors.grey,
                                     offset: Offset(.5, .5), //(x,y)
@@ -204,6 +211,10 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
                           ),
                         );
                       });
+            }
+          default:
+            {
+              return const SizedBox();
             }
         }
       },
