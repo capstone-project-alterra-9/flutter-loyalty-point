@@ -37,4 +37,7 @@ class Urls {
 
   // users path api
   static String getUserPathApi(String id) => '/users/$id';
+
+  //faq path api
+  static const String FAQPath = '/api/faqs';
 }
