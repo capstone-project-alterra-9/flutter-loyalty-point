@@ -27,8 +27,10 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar:
-            const BottomNavWidget(routeName: ProfileView.routeName),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: const BottomNavWidget(
+          routeName: ProfileView.routeName,
+        ),
         appBar: AppBar(
           backgroundColor: Colors.grey[50],
           title: ListTile(

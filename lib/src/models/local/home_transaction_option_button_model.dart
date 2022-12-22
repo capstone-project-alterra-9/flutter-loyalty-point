@@ -27,28 +27,36 @@ class HomeTransactionOptionModel {
 }
 
 class ProductOptionModel {
-  const ProductOptionModel(
-      {required this.name, required this.purchaseType, required this.icon});
+  const ProductOptionModel({
+    required this.name,
+    required this.purchaseType,
+    required this.icon,
+    required this.isActive,
+  });
 
   final CategoryProductType name;
   final PurchaseType purchaseType;
   final String icon;
+  final bool isActive;
 
   static const List<ProductOptionModel> productOptionList = [
     ProductOptionModel(
       name: CategoryProductType.credits,
       purchaseType: PurchaseType.buy,
       icon: "assets/icons/icon_credits.svg",
+      isActive: true,
     ),
     ProductOptionModel(
       name: CategoryProductType.dataQuota,
       purchaseType: PurchaseType.buy,
       icon: "assets/icons/icon_data_quota.svg",
+      isActive: true,
     ),
     ProductOptionModel(
       name: CategoryProductType.eMoney,
       purchaseType: PurchaseType.buy,
       icon: "assets/icons/icon_emoney.svg",
+      isActive: false,
     ),
   ];
 
@@ -57,21 +65,25 @@ class ProductOptionModel {
       name: CategoryProductType.credits,
       purchaseType: PurchaseType.redeem,
       icon: "assets/icons/icon_credits.svg",
+      isActive: true,
     ),
     ProductOptionModel(
       name: CategoryProductType.dataQuota,
       purchaseType: PurchaseType.redeem,
       icon: "assets/icons/icon_data_quota.svg",
+      isActive: true,
     ),
     ProductOptionModel(
       name: CategoryProductType.eMoney,
       purchaseType: PurchaseType.redeem,
       icon: "assets/icons/icon_emoney.svg",
+      isActive: false,
     ),
     ProductOptionModel(
       name: CategoryProductType.cashout,
       purchaseType: PurchaseType.redeem,
       icon: "assets/icons/icon_cashout.svg",
+      isActive: false,
     ),
   ];
 }

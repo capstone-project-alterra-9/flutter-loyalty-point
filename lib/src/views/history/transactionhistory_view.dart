@@ -81,7 +81,9 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
                           },
                           child: Container(
                             padding: const EdgeInsets.all(14),
-                            margin: const EdgeInsets.only(bottom: 20),
+                            margin: index == value.redeemList.length - 1
+                                ? const EdgeInsets.only(bottom: 150)
+                                : const EdgeInsets.only(bottom: 20),
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
