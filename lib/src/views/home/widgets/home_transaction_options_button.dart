@@ -23,14 +23,28 @@ class HomeTransactionOptionsButton extends StatelessWidget {
                     ? const EdgeInsets.only(right: 20)
                     : const EdgeInsets.all(0),
                 child: ElevatedButton(
-                  onPressed: () {
-                    showModalBottomSheet(
+                  onPressed: () async {
+                    ScaffoldFeatureController showSnackbar() =>
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBarWidget(
+                                  title: "Service not available",
+                                  subtitle:
+                                      "Sorry, the service you selected is currently under development",
+                                  snackBarType: SnackBarType.warning)
+                              .build(context),
+                        );
+
+                    String? args = await showModalBottomSheet(
                       context: context,
                       builder: (context) => HomeSheetProductOptionList(
                         productOptionList:
                             homeTransactionOptionList[index].productOptionList,
                       ),
                     );
+
+                    if (args == "notActive") {
+                      showSnackbar();
+                    }
                   },
                   style: Styles.whiteButton.copyWith(
                     shape: MaterialStatePropertyAll(

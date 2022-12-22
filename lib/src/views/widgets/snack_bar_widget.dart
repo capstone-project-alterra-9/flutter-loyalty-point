@@ -96,12 +96,6 @@ class SnackBarWidget extends StatelessWidget {
           ],
         ),
       ),
-      // content: ListTile(
-      //   leading: icon,
-      //   title:
-      //   subtitle:
-      //   trailing: HeroIcon(HeroIcons.xMark),
-      // ),
     );
   }
 }
