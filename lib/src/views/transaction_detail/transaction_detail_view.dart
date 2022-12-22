@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_loyalty_point/src/models/transaction/transaction_model.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_detail_helper.dart';
 import 'package:flutter_loyalty_point/src/view_models/transaction_detail/transaction_detail_view_model.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,7 +16,7 @@ class TransactionDetailView extends StatelessWidget {
         Provider.of<TransactionDetailViewModel>(context).args;
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         title: Text(
           "Transaction Details",
           style: GoogleFonts.poppins(
@@ -35,7 +34,7 @@ class TransactionDetailView extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.grey,
                     offset: Offset(0.0, 1.0), //(x,y)
@@ -54,7 +53,7 @@ class TransactionDetailView extends StatelessWidget {
                             : dataTransaksi.transaction.status == "pending"
                                 ? "Pending"
                                 : "Failed",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(
                         width: 4,
@@ -127,7 +126,7 @@ class TransactionDetailView extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.grey,
                     offset: Offset(0.0, 1.0), //(x,y)
