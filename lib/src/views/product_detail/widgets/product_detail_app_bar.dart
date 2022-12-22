@@ -49,7 +49,10 @@ class ProductDetailAppBar extends StatelessWidget {
                 Positioned categoryText;
                 Positioned nominalText;
                 int topDistance = 0;
-                int nominalTextLength = value.product?.image?.length ?? 4;
+                int nominalTextLength =
+                    ((value.product?.image?.length ?? 4) < (4))
+                        ? 4
+                        : (value.product?.image?.length ?? 4);
 
                 CategoryProductType categoryProductType =
                     CategoryProductType.fromString(
