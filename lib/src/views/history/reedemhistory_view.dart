@@ -49,7 +49,7 @@ class ReedemHistoryView extends StatelessWidget {
                       ),
                     )
                   : ListView.builder(
-                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                       itemCount: value.redeemList.length,
                       itemBuilder: (context, index) {
                         return InkWell(
@@ -193,7 +193,7 @@ class ReedemHistoryView extends StatelessWidget {
                                         height: 18,
                                       ),
                                       Text(
-                                        "Order ID : ID${value.redeemList[index].id![0]}00${value.redeemList[index].id!.substring(value.redeemList[index].id!.length - 3).toUpperCase()}",
+                                        "Order ID : ID${value.redeemList[index].id!.substring(0, 5).toUpperCase()}....",
                                         style: GoogleFonts.poppins(
                                             color: Styles.colorBlack400,
                                             fontSize: 12),
