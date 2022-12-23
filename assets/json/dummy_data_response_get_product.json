@@ -1,11 +1,18 @@
 {
-    "message": "message",
+    "message": "Success get product",
+    "errors": {},
     "data": {
-        "ID": 1,
-        "category": "pulsa",
-        "name": "product name 1",
-        "description": "description product 1",
+        "ID": "139c1d73-629c-43c2-af86-e7f33e87500a",
+        "createdAt": "2022-12-10T17:53:28.431528Z",
+        "updatedAt": "2022-12-13T14:58:25.889684Z",
+        "deletedAt": null,
+        "category": "credits",
+        "redeem": true,
+        "buy": true,
+        "name": "name",
+        "description": "description",
         "price": 10000,
-        "image": "https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80"
+        "stock": 13,
+        "image": "10rb"
     }
 }

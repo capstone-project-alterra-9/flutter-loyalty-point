@@ -1,9 +1,11 @@
 {
-    "message": "message",
+    "message": "succes login",
     "data": {
-        "username": "username",
-        "password": "password",
-        "token": "token",
-        "account": "account"
+        "username": "asepusername",
+        "email": "asep@gmail.com",
+        "password": "testpassword01",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZXhwIjoxNjY3ODA0ODU0fQ.a0L1WTP5nb7llwHOHbvCDZxDdjAAaKMudz-MofQ-fo0",
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZXhwIjoxNjY3ODA0ODU0fQ.a0L1WTP5nb7llwHOHbvCDZxDdjAAaKMudz-MofQ-fo0",
+        "account": "user"
     }
 }

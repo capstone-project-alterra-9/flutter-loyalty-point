@@ -17,6 +17,6 @@ class ResponseGetProductListModel {
     );
   }
 
-  final String message;
-  final List<ProductModel> data;
+  final String? message;
+  final List<ProductModel>? data;
 }

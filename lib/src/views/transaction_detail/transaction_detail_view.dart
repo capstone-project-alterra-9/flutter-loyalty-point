@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_detail_helper.dart';
+import 'package:flutter_loyalty_point/src/view_models/transaction_detail/transaction_detail_view_model.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class TransactionDetailView extends StatelessWidget {
   const TransactionDetailView({super.key});
@@ -8,11 +13,13 @@ class TransactionDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ArgsTransactionDetailHelper dataTransaksi =
+        Provider.of<TransactionDetailViewModel>(context).args;
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         title: Text(
-          "Detail Transaksi",
+          "Transaction Details",
           style: GoogleFonts.poppins(
               fontWeight: FontWeight.w500, color: Colors.black),
         ),
@@ -28,7 +35,7 @@ class TransactionDetailView extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.grey,
                     offset: Offset(0.0, 1.0), //(x,y)
@@ -41,7 +48,14 @@ class TransactionDetailView extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Text("Berhasil"),
+                      Text(
+                        dataTransaksi.transaction.status == "success"
+                            ? "Success"
+                            : dataTransaksi.transaction.status == "pending"
+                                ? "Pending"
+                                : "Failed",
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       const SizedBox(
                         width: 4,
                       ),
@@ -49,7 +63,11 @@ class TransactionDetailView extends StatelessWidget {
                         width: 10,
                         height: 10,
                         decoration: BoxDecoration(
-                            color: Colors.green,
+                            color: dataTransaksi.transaction.status == "success"
+                                ? Colors.green
+                                : dataTransaksi.transaction.status == "pending"
+                                    ? Colors.amber
+                                    : Colors.red,
                             borderRadius: BorderRadius.circular(100)),
                       )
                     ],
@@ -57,16 +75,54 @@ class TransactionDetailView extends StatelessWidget {
                   const SizedBox(
                     height: 9,
                   ),
-                  const Text(
-                    "Tanggal : ",
-                    style: TextStyle(fontWeight: FontWeight.w600),
+                  Row(
+                    children: [
+                      const Text(
+                        "Date:",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        width: 7,
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          DateFormat.yMMMd()
+                              .format(DateTime.parse(
+                                dataTransaksi.transaction.date ?? "",
+                              ))
+                              .toString(),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 9,
                   ),
-                  const Text(
-                    "Order ID : ",
-                    style: TextStyle(fontWeight: FontWeight.w600),
+                  Row(
+                    children: [
+                      const Text(
+                        "Order ID:",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        width: 7,
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: GestureDetector(
+                          onTap: () => Clipboard.setData(
+                            ClipboardData(
+                              text: dataTransaksi.transaction.id.toString(),
+                            ),
+                          ),
+                          child: Text(
+                            dataTransaksi.transaction.id.toString(),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -79,7 +135,7 @@ class TransactionDetailView extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.grey,
                     offset: Offset(0.0, 1.0), //(x,y)
@@ -91,7 +147,7 @@ class TransactionDetailView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const Text(
-                    "Detail transaksi",
+                    "Transaction Details",
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(
@@ -102,25 +158,13 @@ class TransactionDetailView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Serial Number",
+                        "Product Name",
                       ),
-                      const Text(
-                        "12342i928",
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "Nama Produk",
-                      ),
-                      const Text(
-                        "Pulsa 20 Ribu",
+                      Expanded(
+                        child: Text(
+                          dataTransaksi.transaction.name ?? "",
+                          textAlign: TextAlign.right,
+                        ),
                       ),
                     ],
                   ),
@@ -132,10 +176,13 @@ class TransactionDetailView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Nomor Handphone",
+                        "Mobile Number",
                       ),
-                      const Text(
-                        "0822818181",
+                      Expanded(
+                        child: Text(
+                          dataTransaksi.transaction.identifierNumber ?? "",
+                          textAlign: TextAlign.right,
+                        ),
                       ),
                     ],
                   ),
@@ -147,10 +194,13 @@ class TransactionDetailView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Harga",
+                        "Price",
                       ),
-                      const Text(
-                        "750 Poins",
+                      Expanded(
+                        child: Text(
+                          "${dataTransaksi.transaction.price.toString()} Poins",
+                          textAlign: TextAlign.right,
+                        ),
                       ),
                     ],
                   ),
@@ -164,7 +214,11 @@ class TransactionDetailView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(100),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      context
+                          .read<TransactionDetailViewModel>()
+                          .toCustomerService();
+                    },
                     child: Text(
                       "Butuh Bantuan?",
                       style: GoogleFonts.poppins(fontWeight: FontWeight.w500),

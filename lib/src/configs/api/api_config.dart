@@ -1,56 +1,100 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_loyalty_point/src/utils/types/request_method_type.dart';
+import 'package:flutter_loyalty_point/src/app.dart';
+import 'package:flutter_loyalty_point/src/models/auth/response_refresh_token_model.dart';
 import 'package:flutter_loyalty_point/src/utils/urls.dart';
+import 'package:flutter_loyalty_point/src/views/auth/login/login_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class APIConfig {
-  final Dio _dio = Dio(BaseOptions(baseUrl: Urls.baseUrlApi));
+  APIConfig() {
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          final SharedPreferences prefs = await SharedPreferences.getInstance();
+          final String? token = prefs.getString('token');
 
-  Future<Response> request({
-    required RequestMethodType method,
-    required String path,
-    Map<String, dynamic>? data,
-    Map<String, dynamic>? queryParameters,
-    bool withToken = false,
-  }) async {
-    final Map<String, String> headers = {};
+          options.headers.addAll({"Authorization": 'Bearer $token'});
 
-    // add token to headers when need
-    if (withToken) {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final String? token = prefs.getString('token');
+          return handler.next(options);
+        },
+        onError: (e, handler) async {
+          bool isError401 = e.response!.statusCode == 401;
+          bool withToken =
+              e.requestOptions.headers["Authorization"] != "Bearer null";
 
-      headers.addAll({"Authorization": 'Bearer $token'});
-    }
+          if (isError401 && withToken) {
+            bool getNewToken = await _refreshToken();
 
-    // add interceptors
-    _dio.interceptors.add(
-      QueuedInterceptorsWrapper(
-        onError: (e, handler) {
-          if (e.response!.statusCode == 401) {
-            // todo: add refresh token here!
+            if (getNewToken) {
+              return handler.resolve(await _retry(e.requestOptions));
+            }
+
+            MyApp.navigatorKey.currentState!.pushNamedAndRemoveUntil(
+              LoginView.routeName,
+              (route) => false,
+            );
 
             return;
           }
 
-          // send other error responses
           handler.next(e);
         },
       ),
     );
+  }
 
-    // do request to server
-    Future<Response> response = _dio.request(
-      path,
-      data: data,
-      queryParameters: queryParameters,
-      options: Options(
-        method: method.name,
-        headers: headers,
-      ),
-    );
+  final Dio dio = Dio(BaseOptions(baseUrl: Urls.baseUrlApi));
 
-    // return request response
-    return response;
+  @Deprecated("already handled in the interceptors, planned to be removed!")
+  Future<void> addToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? token = prefs.getString('token');
+
+    dio.options.headers.addAll({"Authorization": 'Bearer $token'});
+  }
+
+  Future<bool> _refreshToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    try {
+      final String? refreshToken = prefs.getString('refreshToken');
+
+      Response response = await dio.post(
+        Urls.refreshTokenPathApi,
+        data: {"refreshToken": refreshToken},
+      );
+
+      ResponseRefreshTokenModel result = ResponseRefreshTokenModel.fromJson(
+        response.data,
+      );
+
+      if (result.data?.token != null) {
+        await prefs.setString('token', result.data!.token!);
+      }
+
+      return true;
+    } on DioError {
+      prefs.clear();
+
+      return false;
+    }
+  }
+
+  Future<Response> _retry(RequestOptions requestOptions) async {
+    try {
+      final options = Options(
+        method: requestOptions.method,
+        headers: requestOptions.headers,
+      );
+
+      return dio.request<dynamic>(
+        requestOptions.path,
+        data: requestOptions.data,
+        queryParameters: requestOptions.queryParameters,
+        options: options,
+      );
+    } on DioError {
+      rethrow;
+    }
   }
 }

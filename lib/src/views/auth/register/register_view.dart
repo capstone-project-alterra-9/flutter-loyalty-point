@@ -23,8 +23,6 @@ class _RegisterViewState extends State<RegisterView> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
 
-  bool _obscureText = true;
-
   @override
   void initState() {
     super.initState();
@@ -50,13 +48,12 @@ class _RegisterViewState extends State<RegisterView> {
     return GestureDetector(
       onTapDown: (details) => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: SafeArea(
           child: Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(16.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // text login section
                   const Text(
@@ -94,10 +91,11 @@ class _RegisterViewState extends State<RegisterView> {
                           decoration: Styles.textFieldAuth.copyWith(
                             label: const Text('Username'),
                           ),
-                          validator: (value) =>
-                              value.toString().isValidUsername()
-                                  ? null
-                                  : "Must be at least 3 characters",
+                          validator: (value) => value
+                                  .toString()
+                                  .isValidUsername()
+                              ? null
+                              : "Must be between 8 and 16 alphanumeric characters",
                         ),
                         const SizedBox(height: 20),
 
@@ -109,37 +107,37 @@ class _RegisterViewState extends State<RegisterView> {
                           ),
                           validator: (value) => value.toString().isValidEmail()
                               ? null
-                              : 'Invalid Email!',
+                              : 'Must be at least 8 characters & valid email',
                         ),
                         const SizedBox(height: 15),
 
                         // textfield password
-                        TextFormField(
-                          controller: _passwordController,
-                          keyboardType: TextInputType.text,
-                          obscureText: _obscureText,
-                          decoration: Styles.textFieldAuth.copyWith(
-                            label: const Text('Password'),
-                            suffixIcon: IconButton(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                              ),
-                              splashRadius: 24,
-                              onPressed: () => setState(() {
-                                _obscureText = !_obscureText;
-                              }),
-                              icon: Icon(
-                                _obscureText
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                                color: Styles.colorBlack400,
+                        Consumer<RegisterViewModel>(
+                          builder: (context, value, child) => TextFormField(
+                            controller: _passwordController,
+                            keyboardType: TextInputType.text,
+                            obscureText: value.obscureText,
+                            decoration: Styles.textFieldAuth.copyWith(
+                              label: const Text('Password'),
+                              suffixIcon: IconButton(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                ),
+                                splashRadius: 24,
+                                onPressed: value.changeObscureText,
+                                icon: Icon(
+                                  value.obscureText
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: Styles.colorBlack400,
+                                ),
                               ),
                             ),
+                            validator: (value) =>
+                                value.toString().isValidPassword()
+                                    ? null
+                                    : "Must be at least 8 characters",
                           ),
-                          validator: (value) =>
-                              value.toString().isValidPassword()
-                                  ? null
-                                  : "Must be at least 6 characters",
                         ),
 
                         //  end form section
@@ -151,17 +149,10 @@ class _RegisterViewState extends State<RegisterView> {
                   // button register section
                   Consumer<RegisterViewModel>(
                     builder: (context, value, child) {
-                      switch (value.registerState) {
-                        case ViewStateType.loading:
-                          {
-                            return const Center(
-                              child: CircularProgressIndicator.adaptive(),
-                            );
-                          }
-                        default:
-                          {
-                            return ElevatedButton(
-                              onPressed: () {
+                      return ElevatedButton(
+                        onPressed: value.registerState == ViewStateType.loading
+                            ? null
+                            : () {
                                 if (_formKey.currentState!.validate()) {
                                   Provider.of<RegisterViewModel>(context,
                                           listen: false)
@@ -174,15 +165,13 @@ class _RegisterViewState extends State<RegisterView> {
                                   );
                                 }
                               },
-                              style: Styles.primaryButton.copyWith(
-                                minimumSize: const MaterialStatePropertyAll(
-                                  Size.fromHeight(44),
-                                ),
-                              ),
-                              child: const Text("Register"),
-                            );
-                          }
-                      }
+                        style: Styles.primaryButton.copyWith(
+                          minimumSize: const MaterialStatePropertyAll(
+                            Size.fromHeight(44),
+                          ),
+                        ),
+                        child: const Text("Register"),
+                      );
                     },
                   ),
                   const SizedBox(height: 32),

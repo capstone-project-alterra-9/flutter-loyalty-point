@@ -10,6 +10,6 @@ class ResponseGetProductModel {
     );
   }
 
-  final String message;
-  final ProductModel data;
+  final String? message;
+  final ProductModel? data;
 }

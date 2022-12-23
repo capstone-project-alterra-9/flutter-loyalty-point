@@ -1,31 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_loyalty_point/src/views/widgets/bottomnav_widget.dart';
+import 'package:flutter_loyalty_point/src/models/faq/faq_model.dart';
+import 'package:flutter_loyalty_point/src/styles/styles.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_payment_helper.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_status_helper.dart';
+import 'package:flutter_loyalty_point/src/view_models/auth/forgot_password/forgot_password_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/auth/login/login_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/auth/register/register_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/history/history_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/home/home_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/onboarding/onboarding_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/payment/payment_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/product_detail/product_detail_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/product_list/product_list_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/profile/faq_viewmodel.dart';
+import 'package:flutter_loyalty_point/src/view_models/profile/mymembership_viewmodel.dart';
+import 'package:flutter_loyalty_point/src/view_models/profile/profile_viewmodel.dart';
+import 'package:flutter_loyalty_point/src/view_models/profile/termsandconditions_viewmodel.dart';
+import 'package:flutter_loyalty_point/src/view_models/splash/splash_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/transaction_detail/transaction_detail_view_model.dart';
+import 'package:flutter_loyalty_point/src/view_models/transaction_status/transaction_status_view_model.dart';
+import 'package:flutter_loyalty_point/src/views/auth/forgot_password/forgot_password_view.dart';
+import 'package:flutter_loyalty_point/src/views/auth/login/login_view.dart';
+import 'package:flutter_loyalty_point/src/views/auth/register/register_view.dart';
+import 'package:flutter_loyalty_point/src/views/history/history_view.dart';
+import 'package:flutter_loyalty_point/src/views/home/home_view.dart';
+import 'package:flutter_loyalty_point/src/views/onboarding/onboarding_view.dart';
+import 'package:flutter_loyalty_point/src/views/payment/payment_view.dart';
+import 'package:flutter_loyalty_point/src/views/product_detail/product_detail_view.dart';
+import 'package:flutter_loyalty_point/src/views/product_list/product_list_view.dart';
+import 'package:flutter_loyalty_point/src/views/profile/faq_view.dart';
+import 'package:flutter_loyalty_point/src/views/profile/faqdetail_view.dart';
+import 'package:flutter_loyalty_point/src/views/profile/membership_view.dart';
+import 'package:flutter_loyalty_point/src/views/profile/privacypolicy_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/profile_view.dart';
-import 'package:flutter_loyalty_point/src/views/qr/qr_view.dart';
-import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_detail_helper.dart';
-import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_helper.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_product_detail_helper.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_product_list_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_detail_helper.dart';
+import 'package:flutter_loyalty_point/src/views/profile/termsandconditions_view.dart';
+import 'package:flutter_loyalty_point/src/views/splash/splash_view.dart';
+import 'package:flutter_loyalty_point/src/views/transaction_detail/transaction_detail_view.dart';
+import 'package:flutter_loyalty_point/src/views/transaction_status/transaction_status_view.dart';
 import 'package:provider/provider.dart';
-
-import '../views/auth/login/login_view.dart';
-import '../views/auth/register/register_view.dart';
-import '../views/history/history_view.dart';
-import '../views/home/home_view.dart';
-import '../views/onboarding/onboarding_view.dart';
-import '../views/reedem/reedem_view.dart';
-import '../views/reedem_product_detail/reedem_product_detail_view.dart';
-import '../views/reedem_status/redeem_status_view.dart';
-import '../views/splash/splash_view.dart';
-import '../views/transaction_detail/transaction_detail_view.dart';
-import '../view_models/auth/login/login_view_model.dart';
-import '../view_models/auth/register/register_view_model.dart';
-import '../view_models/history/history_view_model.dart';
-import '../view_models/home/home_view_model.dart';
-import '../view_models/onboarding/onboarding_view_model.dart';
-import '../view_models/reedem/reedem_view_model.dart';
-import '../view_models/reedem_product_detail/reedem_product_detail_view_model.dart';
-import '../view_models/splash/splash_view_model.dart';
-import '../view_models/transaction_detail/transaction_detail_view_model.dart';
 
 class Routes {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -37,10 +52,12 @@ class Routes {
       case LoginView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => LoginViewModel(context),
-                child: LoginView(),
+                child: const LoginView(),
               );
             },
           );
@@ -50,10 +67,27 @@ class Routes {
       case RegisterView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => RegisterViewModel(context),
-                child: RegisterView(),
+                child: const RegisterView(),
+              );
+            },
+          );
+        }
+
+      // auth - forgot password section
+      case ForgotPasswordView.routeName:
+        {
+          return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return ChangeNotifierProvider(
+                create: (context) => ForgotPasswordViewModel(context),
+                child: const ForgotPasswordView(),
               );
             },
           );
@@ -63,10 +97,12 @@ class Routes {
       case HistoryView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
-                create: (context) => HistoryViewModel(context),
-                child: HistoryView(),
+                create: (context) => HistoryViewModel(),
+                child: const HistoryView(),
               );
             },
           );
@@ -76,31 +112,93 @@ class Routes {
       case HomeView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => HomeViewModel(context),
-                child: HomeView(),
+                child: const HomeView(),
               );
             },
           );
         }
 
-      // bottom navigation section
+      // profileview section
       case ProfileView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
-              return ProfileView();
+              return ChangeNotifierProvider(
+                  create: (context) => ProfileViewModel(context),
+                  child: const ProfileView());
             },
           );
         }
 
-      // bottom navigation section
-      case QrView.routeName:
+      // membershipview section
+      case MembershipView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
-              return QrView();
+              return ChangeNotifierProvider(
+                create: (context) => MyMembershipViewModel(),
+                child: const MembershipView(),
+              );
+            },
+          );
+        }
+
+      //faq section (jangan diubah)
+      case FAQView.routeName:
+        {
+          return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return ChangeNotifierProvider(
+                  create: (context) => FAQViewModel(), child: const FAQView());
+            },
+          );
+        }
+
+      // faq detail
+      case FAQDetailView.routeName:
+        {
+          return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return FAQDetailView(faqDetail: settings.arguments as FaqModel);
+            },
+          );
+        }
+
+      // terms & conditions
+      case TermsAndConditions.routeName:
+        {
+          return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return ChangeNotifierProvider(
+                  create: (context) => TermsAndConditionsViewModel(),
+                  child: const TermsAndConditions());
+            },
+          );
+        }
+
+      // terms & conditions
+      case PrivacyPolicy.routeName:
+        {
+          return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return const PrivacyPolicy();
             },
           );
         }
@@ -109,69 +207,96 @@ class Routes {
       case OnboardingView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => OnboardingViewModel(context),
-                child: OnboardingView(),
+                child: const OnboardingView(),
               );
             },
           );
         }
 
-      // reedem section
-      case ReedemView.routeName:
+      // payment section
+      case PaymentView.routeName:
         {
-          ArgsReedemProductHelper args =
-              settings.arguments as ArgsReedemProductHelper;
+          ArgsPaymentHelper args = settings.arguments as ArgsPaymentHelper;
 
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
-                create: (context) => ReedemViewModel(
+                create: (context) => PaymentViewModel(
                   context,
                   args: args,
                 ),
-                child: ReedemView(),
+                child: const PaymentView(),
+              );
+            },
+          );
+        }
+
+      // product list section
+      case ProductListView.routeName:
+        {
+          ArgsProductListHelper args =
+              settings.arguments as ArgsProductListHelper;
+
+          return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return ChangeNotifierProvider(
+                create: (context) => ProductListViewModel(
+                  context,
+                  args: args,
+                ),
+                child: const ProductListView(),
               );
             },
           );
         }
 
       // reedem product detail section
-      case ReedemProductDetailView.routeName:
+      case ProductDetailView.routeName:
         {
-          ArgsReedemProductDetailHelper args =
-              settings.arguments as ArgsReedemProductDetailHelper;
+          ArgsProductDetailHelper args =
+              settings.arguments as ArgsProductDetailHelper;
 
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
-                create: (context) => ReedemProductDetailViewModel(
+                create: (context) => ProductDetailViewModel(
                   context,
                   args: args,
                 ),
-                child: ReedemProductDetailView(),
+                child: const ProductDetailView(),
               );
             },
           );
         }
 
       // reedem status
-      case RedeemStatusView.routeName:
+      case TransactionStatusView.routeName:
         {
-          return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) {
-              return RedeemStatusView();
-            },
-          );
-        }
+          ArgsTransactionStatusHelper args =
+              settings.arguments as ArgsTransactionStatusHelper;
 
-      // reedem status
-      case RedeemStatusView.routeName:
-        {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
-              return RedeemStatusView();
+              return ChangeNotifierProvider(
+                create: (context) => TransactionStatusViewModel(
+                  context,
+                  args: args,
+                ),
+                child: const TransactionStatusView(),
+              );
             },
           );
         }
@@ -180,10 +305,12 @@ class Routes {
       case SplashView.routeName:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => SplashViewModel(context),
-                child: SplashView(),
+                child: const SplashView(),
               );
             },
           );
@@ -196,13 +323,15 @@ class Routes {
               settings.arguments as ArgsTransactionDetailHelper;
 
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => TransactionDetailViewModel(
                   context,
                   args: args,
                 ),
-                child: TransactionDetailView(),
+                child: const TransactionDetailView(),
               );
             },
           );
@@ -212,6 +341,8 @@ class Routes {
       default:
         {
           return PageRouteBuilder(
+            transitionDuration: Styles.animationDuration,
+            transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return const Scaffold(
                 body: Center(

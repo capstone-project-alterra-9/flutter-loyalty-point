@@ -1,19 +1,17 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_detail_helper.dart';
-import 'package:flutter_loyalty_point/src/utils/helper/args_reedem_product_helper.dart';
-import 'package:flutter_loyalty_point/src/utils/types/category_product_type.dart';
-import 'package:flutter_loyalty_point/src/views/history/history_view.dart';
-import 'package:flutter_loyalty_point/src/views/reedem/reedem_view.dart';
-import 'package:flutter_loyalty_point/src/views/reedem_product_detail/reedem_product_detail_view.dart';
-
-import '../../models/product/product_model.dart';
-import '../../models/product/response_get_product_list_model.dart';
-import '../../models/user/response_get_user_model.dart';
-import '../../models/user/user_model.dart';
-import '../../utils/types/view_state_type.dart';
+import 'package:flutter_loyalty_point/src/models/local/home_transaction_option_button_model.dart';
+import 'package:flutter_loyalty_point/src/models/product/product_model.dart';
+import 'package:flutter_loyalty_point/src/models/product/response_get_product_list_model.dart';
+import 'package:flutter_loyalty_point/src/models/user/response_get_user_model.dart';
+import 'package:flutter_loyalty_point/src/models/user/user_model.dart';
+import 'package:flutter_loyalty_point/src/services/api/products_api_service.dart';
+import 'package:flutter_loyalty_point/src/services/api/users_api_service.dart';
+import 'package:flutter_loyalty_point/src/utils/helper/args_product_list_helper.dart';
+import 'package:flutter_loyalty_point/src/utils/types/purchase_type.dart';
+import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
+import 'package:flutter_loyalty_point/src/utils/urls.dart';
+import 'package:flutter_loyalty_point/src/views/product_list/product_list_view.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class HomeViewModel extends ChangeNotifier {
   HomeViewModel(this.context) {
@@ -25,43 +23,28 @@ class HomeViewModel extends ChangeNotifier {
   void _initialize() {
     _setUser();
     _setProductList();
+    _setRedeemList();
   }
 
-  UserModel? get user => _user;
-  UserModel? _user;
+  final List<HomeTransactionOptionModel> homeTransactionOptionList =
+      HomeTransactionOptionModel.homeTransactionOptionList;
 
-  List<ProductModel> get productList => _productList;
-  final List<ProductModel> _productList = [];
-
-  ViewStateType get userState => _userState;
   ViewStateType _userState = ViewStateType.loading;
-
-  ViewStateType get productListState => _productListState;
-  ViewStateType _productListState = ViewStateType.loading;
-
+  ViewStateType get userState => _userState;
   void _changeUserState(ViewStateType state) {
     _userState = state;
     notifyListeners();
   }
 
-  void _changeProductListState(ViewStateType state) {
-    _productListState = state;
-    notifyListeners();
-  }
-
+  UserModel? _user;
+  UserModel? get user => _user;
   void _setUser() async {
     _changeUserState(ViewStateType.loading);
 
     try {
-      final String data = await rootBundle.loadString(
-        'assets/json/dummy_data_response_get_user.json',
-      );
+      final ResponseGetUserModel response = await UsersAPIService().getUser();
 
-      ResponseGetUserModel result = ResponseGetUserModel.fromJson(
-        jsonDecode(data),
-      );
-
-      _user = result.data;
+      _user = response.data;
 
       _changeUserState(ViewStateType.none);
     } catch (e) {
@@ -70,20 +53,30 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 
+  ViewStateType _productListState = ViewStateType.loading;
+  ViewStateType get productListState => _productListState;
+  void _changeProductListState(ViewStateType state) {
+    _productListState = state;
+    notifyListeners();
+  }
+
+  final List<ProductModel> _productList = [];
+  List<ProductModel> get productList => _productList;
   void _setProductList() async {
     _changeProductListState(ViewStateType.loading);
 
     try {
-      final String data = await rootBundle.loadString(
-        'assets/json/dummy_data_response_get_product_list.json',
-      );
-
-      ResponseGetProductListModel result = ResponseGetProductListModel.fromJson(
-        jsonDecode(data),
+      final ResponseGetProductListModel response =
+          await ProductsAPIService().getProducts(
+        path: Urls.getProductsByPurchasePathApi(
+          PurchaseType.buy,
+        ),
       );
 
       productList.clear();
-      productList.addAll(result.data);
+      if (response.data != null) {
+        productList.addAll(response.data!);
+      }
 
       _changeProductListState(ViewStateType.none);
     } catch (e) {
@@ -92,17 +85,48 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 
-  void toReedem(ArgsReedemProductHelper args) => Navigator.pushNamed(
+  ViewStateType _redeemListState = ViewStateType.loading;
+  ViewStateType get redeemListState => _redeemListState;
+  void _changeRedeemListState(ViewStateType state) {
+    _redeemListState = state;
+    notifyListeners();
+  }
+
+  final List<ProductModel> _redeemList = [];
+  List<ProductModel> get redeemList => _redeemList;
+  void _setRedeemList() async {
+    _changeRedeemListState(ViewStateType.loading);
+
+    try {
+      final ResponseGetProductListModel response =
+          await ProductsAPIService().getProducts(
+        path: Urls.getProductsByPurchasePathApi(
+          PurchaseType.redeem,
+        ),
+      );
+
+      redeemList.clear();
+      if (response.data != null) {
+        redeemList.addAll(response.data!);
+      }
+
+      _changeRedeemListState(ViewStateType.none);
+    } catch (e) {
+      _changeRedeemListState(ViewStateType.error);
+      rethrow;
+    }
+  }
+
+  void toProductList(ArgsProductListHelper args) => Navigator.pushNamed(
         context,
-        ReedemView.routeName,
+        ProductListView.routeName,
         arguments: args,
       );
 
-  void toHistory() => Navigator.pushNamed(context, HistoryView.routeName);
-
-  void toReedemProduct(ArgsReedemProductHelper args) => Navigator.pushNamed(
-        context,
-        ReedemView.routeName,
-        arguments: args,
-      );
+  void toCustomerService() async {
+    await launchUrlString(
+      "https://wa.me/6288287112431",
+      mode: LaunchMode.externalNonBrowserApplication,
+    );
+  }
 }
