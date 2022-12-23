@@ -222,7 +222,7 @@ class MembershipView extends StatelessWidget {
                                   fontSize: 15),
                             ),
                             const Text(
-                              "100.000 PTS",
+                              "50.000 PTS",
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Styles.colorBlack200,
@@ -240,11 +240,14 @@ class MembershipView extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 40, right: 40),
                     child: value.userState == ViewStateType.none
                         ? Stack(
+                            alignment: AlignmentDirectional.center,
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(99),
                                 child: LinearProgressIndicator(
-                                  value: costPoints / limitation,
+                                  value: (costPoints.abs()) < 50000
+                                      ? (costPoints / limitation)
+                                      : 50000,
                                   minHeight: 6,
                                   color: const Color(0xffD9D9D9),
                                   valueColor:
@@ -253,16 +256,47 @@ class MembershipView extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              // Row(
-                              //   mainAxisAlignment:
-                              //       MainAxisAlignment.spaceBetween,
-                              //   children: [
-                              //     CircleAvatar(
-                              //       backgroundColor: Colors.green,
-                              //       radius: 8,
-                              //     )
-                              //   ],
-                              // )
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  CircleAvatar(
+                                    backgroundColor: costPoints.abs() > 0
+                                        ? Colors.green
+                                        : Colors.grey,
+                                    radius: 10,
+                                    child: costPoints.abs() > 0
+                                        ? const Icon(
+                                            Icons.check,
+                                            size: 15,
+                                          )
+                                        : const SizedBox(),
+                                  ),
+                                  CircleAvatar(
+                                      backgroundColor: costPoints.abs() >= 20000
+                                          ? Colors.green
+                                          : Colors.grey,
+                                      radius: 10,
+                                      child: costPoints.abs() >= 20000
+                                          ? const Icon(
+                                              Icons.check,
+                                              size: 15,
+                                            )
+                                          : const SizedBox()),
+                                  CircleAvatar(
+                                    backgroundColor: costPoints.abs() >= 50000
+                                        ? Colors.green
+                                        : Colors.grey,
+                                    radius: 10,
+                                    child: costPoints.abs() >= 50000
+                                        ? const Icon(
+                                            Icons.check,
+                                            size: 15,
+                                          )
+                                        : const SizedBox(),
+                                  )
+                                ],
+                              )
                             ],
                           )
                         : const SkeltonWidget(width: 250, height: 10),
