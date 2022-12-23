@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_loyalty_point/src/styles/styles.dart';
 import 'package:flutter_loyalty_point/src/utils/types/view_state_type.dart';
 import 'package:flutter_loyalty_point/src/view_models/profile/mymembership_viewmodel.dart';
@@ -8,7 +6,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../view_models/profile/profile_viewmodel.dart';
 import '../widgets/skelton_widget.dart';
 
 class MembershipView extends StatelessWidget {
@@ -54,7 +51,7 @@ class MembershipView extends StatelessWidget {
               badge = "assets/images/tier_badge_gold.png";
               limitation = 100000;
             }
-            print("costPoints: $costPoints");
+
             return Padding(
               padding: const EdgeInsets.fromLTRB(25, 45, 25, 0),
               child: Column(
@@ -91,7 +88,7 @@ class MembershipView extends StatelessWidget {
                               value.userState == ViewStateType.none
                                   ? Text(
                                       tier.toUpperCase(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14),
                                       textAlign: TextAlign.left,
@@ -202,7 +199,7 @@ class MembershipView extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                         color: Colors.grey, blurRadius: 2.0)
                                   ]),

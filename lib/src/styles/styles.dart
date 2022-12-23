@@ -104,6 +104,33 @@ class Styles {
     ),
   );
 
+  static InputDecoration searchTextInput = InputDecoration(
+    filled: true,
+    fillColor: colorWhite,
+    labelStyle: const TextStyle(color: Styles.colorBlack200),
+    errorStyle: const TextStyle(color: Colors.red),
+    contentPadding: const EdgeInsets.symmetric(
+      horizontal: 24,
+      vertical: 15.5,
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(99),
+      borderSide: const BorderSide(color: Styles.colorBlack100),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(99),
+      borderSide: const BorderSide(color: Styles.colorBlack500),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(99),
+      borderSide: const BorderSide(color: Colors.red),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(99),
+      borderSide: const BorderSide(color: Colors.red),
+    ),
+  );
+
   static const Duration animationDuration = Duration(milliseconds: 200);
 
   static Widget animationBuilder(

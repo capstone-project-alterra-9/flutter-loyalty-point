@@ -58,7 +58,7 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
                       padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                       itemCount: value.transactionList.length,
                       itemBuilder: (context, index) {
-                        return InkWell(
+                        return GestureDetector(
                           onTap: () {
                             context
                                 .read<HistoryViewModel>()
@@ -200,7 +200,7 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
                                         height: 8,
                                       ),
                                       Text(
-                                        "Order ID : ID${value.transactionList[index].id!.substring(0, 5).toUpperCase()}...",
+                                        "Order ID : ${value.transactionList[index].id!.substring(0, 5).toUpperCase()}...",
                                         style: GoogleFonts.poppins(
                                             color: Styles.colorBlack400,
                                             fontSize: 10),

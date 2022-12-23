@@ -117,7 +117,7 @@ class TransactionDetailView extends StatelessWidget {
                             ),
                           ),
                           child: Text(
-                            "ID${dataTransaksi.transaction.id.toString()}",
+                            dataTransaksi.transaction.id.toString(),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -214,7 +214,11 @@ class TransactionDetailView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(100),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      context
+                          .read<TransactionDetailViewModel>()
+                          .toCustomerService();
+                    },
                     child: Text(
                       "Butuh Bantuan?",
                       style: GoogleFonts.poppins(fontWeight: FontWeight.w500),

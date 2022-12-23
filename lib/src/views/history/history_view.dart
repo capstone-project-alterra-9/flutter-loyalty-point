@@ -477,7 +477,7 @@ class _HistoryViewState extends State<HistoryView> {
                 ),
                 Tab(
                   child: Text(
-                    "Reedem",
+                    "Redeem",
                     style: TextStyle(fontWeight: FontWeight.w700),
                   ),
                 ),

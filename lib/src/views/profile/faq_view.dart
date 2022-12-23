@@ -2,14 +2,11 @@ import "package:flutter/material.dart";
 import 'package:flutter_loyalty_point/src/views/profile/faq_widget/generalfaq_widget.dart';
 import 'package:flutter_loyalty_point/src/views/profile/faq_widget/paymentfaq_widget.dart';
 import 'package:flutter_loyalty_point/src/views/profile/faq_widget/transactionstatusfaq_widget.dart';
-import 'package:flutter_loyalty_point/src/views/profile/faqdetail_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../styles/styles.dart';
-import '../../view_models/profile/faq_viewmodel.dart';
 
 class FAQView extends StatefulWidget {
   static const routeName = "/faq";
@@ -35,7 +32,7 @@ class _FAQViewState extends State<FAQView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         title: Text(
           "FAQs",
           style: GoogleFonts.poppins(
@@ -63,19 +60,42 @@ class _FAQViewState extends State<FAQView> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/faq_image.png"),
-                  fit: BoxFit.cover,
+            Stack(
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/faq_image.png"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  width: double.infinity,
+                  height: 225,
+                  padding: const EdgeInsets.all(20),
                 ),
-              ),
-              width: double.infinity,
-              height: 225,
-              padding: const EdgeInsets.all(20),
-            ),
-            Row(
-              children: [],
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: TextFormField(
+                      decoration: InputDecoration(
+                    label: const Text("Apa yang bisa kami bantu?"),
+                    suffixIcon: const Icon(Icons.search),
+                    filled: true,
+                    fillColor: Colors.white,
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 9.5,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(99),
+                      borderSide: const BorderSide(color: Styles.colorGreen600),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(99),
+                      borderSide: const BorderSide(color: Styles.colorGreen800),
+                    ),
+                  )),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 5, 20, 20),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loyalty_point/src/models/faq/faq_model.dart';
 import 'package:flutter_loyalty_point/src/styles/styles.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_payment_helper.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_status_helper.dart';
@@ -12,7 +13,6 @@ import 'package:flutter_loyalty_point/src/view_models/payment/payment_view_model
 import 'package:flutter_loyalty_point/src/view_models/product_detail/product_detail_view_model.dart';
 import 'package:flutter_loyalty_point/src/view_models/product_list/product_list_view_model.dart';
 import 'package:flutter_loyalty_point/src/view_models/profile/faq_viewmodel.dart';
-import 'package:flutter_loyalty_point/src/view_models/profile/generalfaq_viewmodel.dart';
 import 'package:flutter_loyalty_point/src/view_models/profile/mymembership_viewmodel.dart';
 import 'package:flutter_loyalty_point/src/view_models/profile/profile_viewmodel.dart';
 import 'package:flutter_loyalty_point/src/view_models/profile/termsandconditions_viewmodel.dart';
@@ -29,7 +29,6 @@ import 'package:flutter_loyalty_point/src/views/payment/payment_view.dart';
 import 'package:flutter_loyalty_point/src/views/product_detail/product_detail_view.dart';
 import 'package:flutter_loyalty_point/src/views/product_list/product_list_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/faq_view.dart';
-import 'package:flutter_loyalty_point/src/views/profile/faq_widget/generalfaq_widget.dart';
 import 'package:flutter_loyalty_point/src/views/profile/faqdetail_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/membership_view.dart';
 import 'package:flutter_loyalty_point/src/views/profile/privacypolicy_view.dart';
@@ -103,7 +102,7 @@ class Routes {
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => HistoryViewModel(),
-                child: HistoryView(),
+                child: const HistoryView(),
               );
             },
           );
@@ -133,7 +132,7 @@ class Routes {
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                   create: (context) => ProfileViewModel(context),
-                  child: ProfileView());
+                  child: const ProfileView());
             },
           );
         }
@@ -147,7 +146,7 @@ class Routes {
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
                 create: (context) => MyMembershipViewModel(),
-                child: MembershipView(),
+                child: const MembershipView(),
               );
             },
           );
@@ -161,7 +160,7 @@ class Routes {
             transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
               return ChangeNotifierProvider(
-                  create: (context) => FAQViewModel(), child: FAQView());
+                  create: (context) => FAQViewModel(), child: const FAQView());
             },
           );
         }
@@ -173,7 +172,7 @@ class Routes {
             transitionDuration: Styles.animationDuration,
             transitionsBuilder: Styles.animationBuilder,
             pageBuilder: (context, animation, secondaryAnimation) {
-              return FAQDetailView();
+              return FAQDetailView(faqDetail: settings.arguments as FaqModel);
             },
           );
         }

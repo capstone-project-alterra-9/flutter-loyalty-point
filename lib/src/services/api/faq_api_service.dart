@@ -9,7 +9,7 @@ class FAQApiService {
   Future<List<FaqModel>> getFAQListFromAPI() async {
     try {
       Response response = await _apiConfig.dio.get(
-        Urls.FAQPath,
+        Urls.fAQPath,
       );
 
       List<FaqModel> faqList = [];
@@ -24,7 +24,7 @@ class FAQApiService {
   Future<List<FaqModel>> getGeneralFAQListFromAPI() async {
     try {
       final response = await _apiConfig.dio.get(
-        Urls.FAQPath,
+        Urls.fAQPath,
       );
       List<FaqModel> faqModelList = [];
 
@@ -45,7 +45,7 @@ class FAQApiService {
   Future<List<FaqModel>> getTransactionStatusFAQListFromAPI() async {
     try {
       final response = await _apiConfig.dio.get(
-        Urls.FAQPath,
+        Urls.fAQPath,
       );
       List<FaqModel> faqModelList = [];
 
@@ -66,7 +66,7 @@ class FAQApiService {
   Future<List<FaqModel>> getPaymentFAQListFromAPI() async {
     try {
       final response = await _apiConfig.dio.get(
-        Urls.FAQPath,
+        Urls.fAQPath,
       );
       List<FaqModel> faqModelList = [];
 

@@ -52,7 +52,7 @@ class ReedemHistoryView extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                       itemCount: value.redeemList.length,
                       itemBuilder: (context, index) {
-                        return InkWell(
+                        return GestureDetector(
                           onTap: () {
                             context
                                 .read<HistoryViewModel>()
@@ -193,7 +193,7 @@ class ReedemHistoryView extends StatelessWidget {
                                         height: 18,
                                       ),
                                       Text(
-                                        "Order ID : ID${value.redeemList[index].id!.substring(0, 5).toUpperCase()}....",
+                                        "Order ID : ${value.redeemList[index].id!.substring(0, 5).toUpperCase()}....",
                                         style: GoogleFonts.poppins(
                                             color: Styles.colorBlack400,
                                             fontSize: 12),

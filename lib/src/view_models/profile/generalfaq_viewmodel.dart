@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_loyalty_point/src/models/faq/faq_model.dart';
-import 'package:flutter_loyalty_point/src/models/faq/response_get_faq_list_model.dart';
 import 'package:flutter_loyalty_point/src/services/api/faq_api_service.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../utils/types/view_state_type.dart';
 

@@ -1,9 +1,6 @@
 import "package:flutter/material.dart";
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../styles/styles.dart';
 
 class PrivacyPolicy extends StatelessWidget {
   static const routeName = "/privacypolicy";
@@ -13,7 +10,7 @@ class PrivacyPolicy extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         title: Text(
           "Privacy Policy",
           style: GoogleFonts.poppins(
