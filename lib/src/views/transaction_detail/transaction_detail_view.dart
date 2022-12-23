@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_loyalty_point/src/utils/helper/args_transaction_detail_helper.dart';
 import 'package:flutter_loyalty_point/src/view_models/transaction_detail/transaction_detail_view_model.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -109,8 +110,16 @@ class TransactionDetailView extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 2,
-                        child: Text(
-                          "ID${dataTransaksi.transaction.id.toString().substring(0, 8).toUpperCase()}",
+                        child: GestureDetector(
+                          onTap: () => Clipboard.setData(
+                            ClipboardData(
+                              text: dataTransaksi.transaction.id.toString(),
+                            ),
+                          ),
+                          child: Text(
+                            "ID${dataTransaksi.transaction.id.toString()}",
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ),
                     ],
@@ -144,24 +153,6 @@ class TransactionDetailView extends StatelessWidget {
                   const SizedBox(
                     height: 12,
                   ),
-                  // Row(
-                  //   crossAxisAlignment: CrossAxisAlignment.center,
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     const Text(
-                  //       "Serial Number",
-                  //     ),
-                  //     Expanded(
-                  //       child: Text(
-                  //         dataTransaksi.transaction.serialNumber.toString(),
-                  //         textAlign: TextAlign.right,
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                  // const SizedBox(
-                  //   height: 12,
-                  // ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

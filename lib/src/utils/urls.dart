@@ -39,5 +39,5 @@ class Urls {
   static String getUserPathApi(String id) => '/users/$id';
 
   //faq path api
-  static const String FAQPath = '/api/faqs';
+  static const String FAQPath = '/faqs';
 }
